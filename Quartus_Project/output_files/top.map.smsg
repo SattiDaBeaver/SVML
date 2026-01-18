@@ -1,0 +1,3 @@
+Info (10281): Verilog HDL Declaration information at top.sv(14): object "VGA_R" differs only in case from object "vga_r" in the same scope File: C:/Github/SVML/Quartus_Project/top.sv Line: 14
+Info (10281): Verilog HDL Declaration information at top.sv(15): object "VGA_G" differs only in case from object "vga_g" in the same scope File: C:/Github/SVML/Quartus_Project/top.sv Line: 15
+Info (10281): Verilog HDL Declaration information at top.sv(16): object "VGA_B" differs only in case from object "vga_b" in the same scope File: C:/Github/SVML/Quartus_Project/top.sv Line: 16

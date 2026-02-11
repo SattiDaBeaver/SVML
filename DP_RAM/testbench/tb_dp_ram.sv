@@ -22,7 +22,7 @@ module tb_dp_ram;
     always #5 clk = ~clk;
 
     // Instantiate DUT
-    dp_ram_async_read #(
+    dp_ram_sync_read #(
         .DATA_WIDTH(DATA_WIDTH),
         .ADDR_WIDTH(ADDR_WIDTH)
     ) dut (

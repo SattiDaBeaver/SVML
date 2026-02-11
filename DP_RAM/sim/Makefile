@@ -47,6 +47,10 @@ run-wave: wave
 lint:
 	$(VERILATOR) -Wall --sv --lint-only $(SV_SRC)
 
+# ------- GTKWave -------
+gtkwave:
+	gtkwave $(TOP).vcd
+
 # -------- Clean --------
 clean:
 	rm -rf $(OBJ_DIR)
@@ -62,6 +66,7 @@ help:
 	@echo "  make run-wave     Build + run with VCD"
 	@echo "  make lint         Lint-only (fast checks)"
 	@echo "  make clean        Remove build artifacts"
+	@echo "  make gtkwave      View waveform in GTKWave"
 	@echo ""
 	@echo "Variables:"
 	@echo "  TOP=<tb_top>      Set testbench top module"
@@ -72,4 +77,4 @@ help:
 	@echo "  make lint"
 	@echo ""
 
-.PHONY: all build run wave run-wave lint clean help
+.PHONY: all build run wave run-wave lint clean help gtkwave

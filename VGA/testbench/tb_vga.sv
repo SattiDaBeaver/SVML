@@ -50,7 +50,7 @@ module tb_vga;
         rst = 1;
         #100;
         rst = 0;
-        #10000
+        #50000
         $finish();
     end
 

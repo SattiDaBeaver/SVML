@@ -1,4 +1,4 @@
-module VGA_mem #(
+module vga_mem #(
     parameter RES_X = 320,
     parameter RES_Y = 240,
     parameter RES_DIV = 2,
@@ -38,6 +38,7 @@ module VGA_mem #(
     logic [$clog2(RES_Y)-1:0]   mem_y;
     logic [H_BITS-1:0]          vga_x;
     logic [V_BITS-1:0]          vga_y;
+    logic                       vga_active;
 
     // Memory helper wires
     // Port A
@@ -66,9 +67,9 @@ module VGA_mem #(
 
     // VGA output
     // Using 0b00RRGGBB format
-    assign vga_r    = {dout_b[5:4], 2'b00};
-    assign vga_g    = {dout_b[3:2], 2'b00};
-    assign vga_b    = {dout_b[1:0], 2'b00};
+    assign vga_r    = vga_active ? {dout_b[5:4], 2'b00} : 4'b0000;
+    assign vga_g    = vga_active ? {dout_b[3:2], 2'b00} : 4'b0000;
+    assign vga_b    = vga_active ? {dout_b[1:0], 2'b00} : 4'b0000;
 
     // VGA memory assignments
     // Assuming smart synthesizer
@@ -83,7 +84,7 @@ module VGA_mem #(
 
     // Module instantiation
     vga #(
-        .PIXEL_BITS(PIXEL_BITS),
+        .PIXEL_BITS(PIXEL_WIDTH),
         .CLK_DIV(CLK_DIV),
         .H_COUNT_MAX(H_COUNT_MAX),
         .V_COUNT_MAX(V_COUNT_MAX)
@@ -97,10 +98,10 @@ module VGA_mem #(
         .v_sync(v_sync),
         .vga_x(vga_x),
         .vga_y(vga_y),
-        .vga_active()
+        .vga_active(vga_active)
     );
 
-    dp_ram_sync_read #(
+    dp_ram_async_read #(
         .DATA_WIDTH(MEM_WIDTH),
         .MEM_DEPTH(MEM_DEPTH)
     ) RAM (

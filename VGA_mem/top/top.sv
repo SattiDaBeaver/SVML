@@ -34,8 +34,8 @@ module top (
 	logic			v_sync;
 
 	logic			wen;
-	logic [9:0]		mem_x;
-	logic [9:0]		mem_y;
+	logic [7:0]		mem_x;
+	logic [7:0]		mem_y;
 	logic [31:0]	mem_addr;
 	logic [7:0]		din;
 
@@ -43,6 +43,7 @@ module top (
 	assign clk = CLOCK_50;
 	assign rst = ~KEY[0];
 	assign wen = ~KEY[1];
+    assign mem_addr = mem_y * RES_X + mem_x;
 
 	// Assignments
 	assign LEDR = SW;
@@ -52,18 +53,22 @@ module top (
 	assign VGA_HS = h_sync;
 	assign VGA_VS = v_sync;
 
-	always_comb begin
-		din = 0;
-		mem_x = 0;
-		mem_y = 0;
-		case (SW[9:8])
-			2'b00: din = SW[7:0];
-			2'b01: mem_x = SW[7:0];
-			2'b10: mem_y = SW[7:0];
-			default: begin
-				din = SW[7:0];
-			end
-		endcase
+	always_ff @(posedge clk) begin
+		if (rst) begin
+            din   <= 0;
+            mem_x <= 0;
+            mem_y <= 0;
+        end
+        else begin
+            case (SW[9:8])
+                2'b00: din   <= SW[7:0];
+                2'b01: mem_x <= SW[7:0];
+                2'b10: mem_y <= SW[7:0];
+                default: begin
+                    din <= SW[7:0];
+                end
+            endcase
+        end
 	end
 
 

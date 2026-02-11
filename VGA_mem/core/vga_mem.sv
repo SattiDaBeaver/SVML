@@ -1,8 +1,64 @@
 module VGA_mem #(
-    parameter 
+    parameter RES_X = 320,
+    parameter RES_Y = 240,
+    parameter RES_DIV = 2,
+    parameter MEM_WIDTH = 8,
+    parameter MEM_DEPTH = RES_X * RES_Y,
+    parameter ADDR_WIDTH = $clog2(MEM_DEPTH)
+    parameter PIXEL_WIDTH = 4
 ) (
-    input  logic                  clk, 
-    input  logic                  rst,
+    // default wires
+    input  logic                    clk, 
+    input  logic                    rst,
+
+    // memory wires
+    input  logic [ADDR_WIDTH-1:0]   mem_addr,
+    input  logic [MEM_WIDTH-1:0]    d_in,
+    input  logic                    w_en,
+    output logic [MEM_WIDTH-1:0]    d_out, // unused
+
+    // VGA wires
+    output logic [PIXEL_WIDTH-1:0]  vga_r,
+    output logic [PIXEL_WIDTH-1:0]  vga_g,
+    output logic [PIXEL_WIDTH-1:0]  vga_b,
+    output logic                    h_sync,
+    output logic                    v_sync
+);
+
+
+
+// module instantiation
+vga #(
+    .PIXEL_BITS(PIXEL_BITS),
+    .CLK_DIV(CLK_DIV),
+    .H_COUNT_MAX(H_COUNT_MAX),
+    .V_COUNT_MAX(V_COUNT_MAX)
+) dut (
+    .clk(clk),
+    .rst(rst),
+    .vga_r(vga_r),
+    .vga_g(vga_g),
+    .vga_b(vga_b),
+    .h_sync(h_sync),
+    .v_sync(v_sync),
+    .vga_x(vga_x),
+    .vga_y(vga_y),
+    .vga_active(vga_active)
+);
+
+dp_ram_sync_read #(
+    .DATA_WIDTH(DATA_WIDTH),
+    .ADDR_WIDTH(ADDR_WIDTH)
+) dut (
+    .clk(clk),
+    .we_a(we_a),
+    .addr_a(addr_a),
+    .din_a(din_a),
+    .dout_a(dout_a),
+    .we_b(we_b),
+    .addr_b(addr_b),
+    .din_b(din_b),
+    .dout_b(dout_b)
 );
     
 endmodule

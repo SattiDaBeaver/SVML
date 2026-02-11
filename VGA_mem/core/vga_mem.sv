@@ -4,18 +4,18 @@ module VGA_mem #(
     parameter RES_DIV = 2,
     parameter MEM_WIDTH = 8,
     parameter MEM_DEPTH = RES_X * RES_Y,
-    parameter ADDR_WIDTH = $clog2(MEM_DEPTH)
+    parameter ADDR_WIDTH = $clog2(MEM_DEPTH),
     parameter PIXEL_WIDTH = 4
 ) (
-    // default wires
+    // Default wires
     input  logic                    clk, 
     input  logic                    rst,
 
-    // memory wires
+    // Memory wires
     input  logic [ADDR_WIDTH-1:0]   mem_addr,
-    input  logic [MEM_WIDTH-1:0]    d_in,
-    input  logic                    w_en,
-    output logic [MEM_WIDTH-1:0]    d_out, // unused
+    input  logic [MEM_WIDTH-1:0]    din,
+    input  logic                    wen,
+    output logic [MEM_WIDTH-1:0]    dout, // unused
 
     // VGA wires
     output logic [PIXEL_WIDTH-1:0]  vga_r,
@@ -25,41 +25,95 @@ module VGA_mem #(
     output logic                    v_sync
 );
 
+    // Local parameters
+    localparam 
+        CLK_DIV     = 2,
+        H_COUNT_MAX = 800,
+        V_COUNT_MAX = 525,
+        H_BITS      = $clog2(H_COUNT_MAX),
+        V_BITS      = $clog2(V_COUNT_MAX);
 
+    // VGA helper wires
+    logic [$clog2(RES_X)-1:0]   mem_x;
+    logic [$clog2(RES_Y)-1:0]   mem_y;
+    logic [H_BITS-1:0]          vga_x;
+    logic [V_BITS-1:0]          vga_y;
 
-// module instantiation
-vga #(
-    .PIXEL_BITS(PIXEL_BITS),
-    .CLK_DIV(CLK_DIV),
-    .H_COUNT_MAX(H_COUNT_MAX),
-    .V_COUNT_MAX(V_COUNT_MAX)
-) dut (
-    .clk(clk),
-    .rst(rst),
-    .vga_r(vga_r),
-    .vga_g(vga_g),
-    .vga_b(vga_b),
-    .h_sync(h_sync),
-    .v_sync(v_sync),
-    .vga_x(vga_x),
-    .vga_y(vga_y),
-    .vga_active(vga_active)
-);
+    // Memory helper wires
+    // Port A
+    logic                       we_a;
+    logic [ADDR_WIDTH-1:0]      addr_a;
+    logic [MEM_WIDTH-1:0]       din_a;
+    logic [MEM_WIDTH-1:0]       dout_a;
 
-dp_ram_sync_read #(
-    .DATA_WIDTH(DATA_WIDTH),
-    .ADDR_WIDTH(ADDR_WIDTH)
-) dut (
-    .clk(clk),
-    .we_a(we_a),
-    .addr_a(addr_a),
-    .din_a(din_a),
-    .dout_a(dout_a),
-    .we_b(we_b),
-    .addr_b(addr_b),
-    .din_b(din_b),
-    .dout_b(dout_b)
-);
+    // Port B
+    // logic                       we_b;
+    logic [ADDR_WIDTH-1:0]      addr_b;
+    // logic [MEM_WIDTH-1:0]      din_b;
+    logic [MEM_WIDTH-1:0]       dout_b;
+
+    // Internal wires
+    logic [ADDR_WIDTH-1:0]      mem_addr_vga;
+    logic [MEM_WIDTH-1:0]       mem_d_out_vga;    
+
+    // Wire assignment
+    // Memory inputs
+    assign addr_a   = mem_addr;
+    assign din_a    = din;
+    assign we_a     = wen;
+    // Memory output
+    assign dout     = dout_a;
+
+    // VGA output
+    // Using 0b00RRGGBB format
+    assign vga_r    = {dout_b[5:4], 2'b00};
+    assign vga_g    = {dout_b[3:2], 2'b00};
+    assign vga_b    = {dout_b[1:0], 2'b00};
+
+    // VGA memory assignments
+    // Assuming smart synthesizer
+    assign mem_x    = vga_x / RES_DIV; 
+    assign mem_y    = vga_y / RES_DIV;
+    assign addr_b   = mem_x + mem_y * RES_X;
+
+    // // Assuming dumb synthesizer
+    // assign mem_x    = vga_x >> 1;
+    // assign mem_y    = vga_y >> 1;
+    // assign addr_b   = mem_x + (vga_y << 6) + (vga_x << 8);   
+
+    // Module instantiation
+    vga #(
+        .PIXEL_BITS(PIXEL_BITS),
+        .CLK_DIV(CLK_DIV),
+        .H_COUNT_MAX(H_COUNT_MAX),
+        .V_COUNT_MAX(V_COUNT_MAX)
+    ) VGA (
+        .clk(clk),
+        .rst(rst),
+        .vga_r(),
+        .vga_g(),
+        .vga_b(),
+        .h_sync(h_sync),
+        .v_sync(v_sync),
+        .vga_x(vga_x),
+        .vga_y(vga_y),
+        .vga_active()
+    );
+
+    dp_ram_sync_read #(
+        .DATA_WIDTH(MEM_WIDTH),
+        .MEM_DEPTH(MEM_DEPTH)
+    ) RAM (
+        .clk(clk),
+        .we_a(we_a),
+        .addr_a(addr_a),
+        .din_a(din_a),
+        .dout_a(dout_a),
+        .we_b(),
+        .addr_b(addr_b),
+        .din_b(),
+        .dout_b(dout_b)
+    );
     
 endmodule
 
@@ -158,7 +212,8 @@ endmodule
 
 module dp_ram_async_read #(
     parameter DATA_WIDTH = 8,
-    parameter ADDR_WIDTH = 10  // 2^10 = 1024 entries
+    parameter MEM_DEPTH  = 1024,
+    parameter ADDR_WIDTH = $clog2(MEM_DEPTH)  // 2^10 = 1024 entries
 ) (
     input  logic                    clk,
 
@@ -175,7 +230,7 @@ module dp_ram_async_read #(
     output logic [DATA_WIDTH-1:0]   dout_b
 );
 
-    logic [DATA_WIDTH-1:0] mem [0:(1<<ADDR_WIDTH)-1];
+    logic [DATA_WIDTH-1:0] mem [0:MEM_DEPTH-1];
 
     always_ff @(posedge clk) begin
         if (we_a) begin

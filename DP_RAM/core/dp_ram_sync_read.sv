@@ -1,6 +1,7 @@
 module dp_ram_sync_read #(
     parameter DATA_WIDTH = 8,
-    parameter ADDR_WIDTH = 10  // 2^10 = 1024 entries
+    parameter MEM_DEPTH  = 1024,
+    parameter ADDR_WIDTH = $clog2(MEM_DEPTH)  // 2^10 = 1024 entries
 ) (
     input  logic                    clk,
 
@@ -17,7 +18,7 @@ module dp_ram_sync_read #(
     output logic [DATA_WIDTH-1:0]   dout_b
 );
 
-    logic [DATA_WIDTH-1:0] mem [0:(1<<ADDR_WIDTH)-1];
+    logic [DATA_WIDTH-1:0] mem [0:MEM_DEPTH-1];
 
     always_ff @(posedge clk) begin
         if (we_a) begin

@@ -1,8 +1,8 @@
 module tb_dp_ram;
 
     parameter DATA_WIDTH = 8;
-    parameter ADDR_WIDTH = 6;
-    parameter DEPTH = 1 << ADDR_WIDTH;
+    parameter DEPTH = 1000;
+    parameter ADDR_WIDTH = $clog2(DEPTH);
 
     logic clk = 0;
 
@@ -22,9 +22,9 @@ module tb_dp_ram;
     always #5 clk = ~clk;
 
     // Instantiate DUT
-    dp_ram_sync_read #(
+    dp_ram_async_read #(
         .DATA_WIDTH(DATA_WIDTH),
-        .ADDR_WIDTH(ADDR_WIDTH)
+        .MEM_DEPTH(DEPTH)
     ) dut (
         .clk(clk),
         .we_a(we_a),

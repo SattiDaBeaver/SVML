@@ -78,7 +78,11 @@ module tb_vga_uart;
         rx_din = 8'h78;
         uart_send_byte(rx_din);
 
-        #(100000);
+        #(10000);
+        rx_din = 8'h80;
+        uart_send_byte(rx_din);
+
+        #(5000000);
 
         $finish;
     end
@@ -87,8 +91,8 @@ module tb_vga_uart;
     // VCD dumping
     // ----------------------------------------------------------------
     initial begin
-        $dumpfile("vga_mem.vcd");
-        $dumpvars(0, tb_VGA_mem);
+        $dumpfile("tb_vga_uart.vcd");
+        $dumpvars(0, tb_vga_uart);
     end
 
 endmodule

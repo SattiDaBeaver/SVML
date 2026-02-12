@@ -118,6 +118,7 @@ module vga_uart #(
     logic [MEM_WIDTH-1:0]   din;
     logic                   wen;
     logic [MEM_WIDTH-1:0]   dout; // unused
+    logic                   addr_delay;
 
     // UART helper wires
     logic                   rx_din;
@@ -134,6 +135,7 @@ module vga_uart #(
         if (rst) begin
             addr_count <= 0;
             wen        <= 1'b0;
+            addr_delay  <= 1'b0;
         end
         else begin
             wen        <= 1'b0;
@@ -141,6 +143,7 @@ module vga_uart #(
                 if (rx_dout[7] == 1'b1) begin
                     addr_count  <= 0;
                     wen         <= 1'b0;
+                    addr_delay  <= 1'b0;
                 end
                 else begin
                     din         <= rx_dout;
@@ -149,7 +152,13 @@ module vga_uart #(
                         addr_count  <= 0;
                     end
                     else begin
-                        addr_count  <= addr_count + 1;
+                        if (addr_delay == 1'b1) begin
+                            addr_count  <= addr_count + 1;
+                            addr_delay  <= 1'b0;
+                        end
+                        else begin
+                            addr_delay  <= 1'b1;
+                        end
                     end
                 end
             end

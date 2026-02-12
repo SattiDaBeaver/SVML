@@ -179,9 +179,12 @@ VL_ATTR_COLD void Vtb_vga_uart___024root___ctor_var_reset(Vtb_vga_uart___024root
     vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = VL_RAND_RESET_I(32);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__din = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__wen = VL_RAND_RESET_I(1);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__addr_delay = VL_RAND_RESET_I(1);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__vga_active = VL_RAND_RESET_I(1);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_a = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b = VL_RAND_RESET_I(17);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__mem_addr_vga = VL_RAND_RESET_I(17);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__mem_d_out_vga = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__vga_en = VL_RAND_RESET_I(1);

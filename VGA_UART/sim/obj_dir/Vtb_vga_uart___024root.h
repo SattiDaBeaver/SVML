@@ -22,8 +22,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_vga_uart___024root final : public Verilat
     CData/*7:0*/ tb_vga_uart__DOT__rx_din;
     CData/*7:0*/ tb_vga_uart__DOT__DUT__DOT__din;
     CData/*0:0*/ tb_vga_uart__DOT__DUT__DOT__wen;
+    CData/*0:0*/ tb_vga_uart__DOT__DUT__DOT__addr_delay;
     CData/*7:0*/ tb_vga_uart__DOT__DUT__DOT__rx_dout;
     CData/*0:0*/ tb_vga_uart__DOT__DUT__DOT__VGA__DOT__vga_active;
+    CData/*7:0*/ tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_a;
+    CData/*7:0*/ tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b;
     CData/*7:0*/ tb_vga_uart__DOT__DUT__DOT__VGA__DOT__mem_d_out_vga;
     CData/*0:0*/ tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__vga_en;
     CData/*0:0*/ tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count;

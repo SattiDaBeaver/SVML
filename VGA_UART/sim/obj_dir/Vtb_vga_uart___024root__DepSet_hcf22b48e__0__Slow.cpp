@@ -11,12 +11,13 @@ VL_ATTR_COLD void Vtb_vga_uart___024root___eval_initial__TOP(Vtb_vga_uart___024r
     Vtb_vga_uart__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_vga_uart___024root___eval_initial__TOP\n"); );
     // Init
-    VlWide<3>/*95:0*/ __Vtemp_1;
+    VlWide<4>/*127:0*/ __Vtemp_1;
     // Body
     __Vtemp_1[0U] = 0x2e766364U;
-    __Vtemp_1[1U] = 0x5f6d656dU;
-    __Vtemp_1[2U] = 0x766761U;
-    vlSymsp->_vm_contextp__->dumpfile(VL_CVT_PACK_STR_NW(3, __Vtemp_1));
+    __Vtemp_1[1U] = 0x75617274U;
+    __Vtemp_1[2U] = 0x7667615fU;
+    __Vtemp_1[3U] = 0x74625fU;
+    vlSymsp->_vm_contextp__->dumpfile(VL_CVT_PACK_STR_NW(4, __Vtemp_1));
     vlSymsp->_traceDumpOpen();
 }
 

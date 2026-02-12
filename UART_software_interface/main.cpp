@@ -33,18 +33,28 @@ int main (int argc, char* argv[]) {
             // if (y == 0) {
             //     buffer[y][x] = 0x3F;
             // }
+            // buffer[y][x] = 0x3F;
         }
     }
 
     uint8_t pkt[HEIGHT * WIDTH + 1];
+    \
     pkt[0] = 0x80;
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
+            pkt[x + WIDTH * y + 1] = 0x3F;
+        }
+    }
+    uart.write(pkt, size);
+    
+    Sleep(100);
 
+    pkt[0] = 0x80;
     for (int x = 0; x < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++) {
             pkt[x + WIDTH * y + 1] = buffer[y][x];
         }
     }
-
     uart.write(pkt, size);
 
     return 0;

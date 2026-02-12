@@ -154,7 +154,7 @@ module vga_uart #(
                     else begin
                         if (addr_delay == 1'b1) begin
                             addr_count  <= addr_count + 1;
-                            addr_delay  <= 1'b0;
+                            // addr_delay  <= 1'b0;
                         end
                         else begin
                             addr_delay  <= 1'b1;

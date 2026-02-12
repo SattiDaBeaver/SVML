@@ -1,4 +1,4 @@
-module dp_ram_async_read #(
+module dp_ram_sync_read #(
     parameter DATA_WIDTH = 8,
     parameter MEM_DEPTH  = 1024,
     parameter ADDR_WIDTH = $clog2(MEM_DEPTH)  // 2^10 = 1024 entries
@@ -24,17 +24,14 @@ module dp_ram_async_read #(
         if (we_a) begin
             mem[addr_a] <= din_a;
         end
+        dout_a <= mem[addr_a];
     end
 
     always_ff @(posedge clk) begin
         if (we_b) begin
             mem[addr_b] <= din_b;
         end
-    end
-
-    always_comb begin
-        dout_a = mem[addr_a];
-        dout_b = mem[addr_b];
+        dout_b <= mem[addr_b];
     end
 
 endmodule

@@ -15,7 +15,9 @@ module top (
     output logic [3:0] VGA_G,
     output logic [3:0] VGA_B,
     output logic       VGA_HS,
-    output logic       VGA_VS
+    output logic       VGA_VS,
+
+    inout  logic [15:0] ARDUINO_IO
 );
 
 	localparam
@@ -33,57 +35,139 @@ module top (
 	logic			h_sync;
 	logic			v_sync;
 
-	logic			wen;
-	logic [7:0]		mem_x;
-	logic [7:0]		mem_y;
-	logic [31:0]	mem_addr;
-	logic [7:0]		din;
+	logic			rx;
+    logic [31:0]    addr_count;
 
 	// Helper assignments
 	assign clk = CLOCK_50;
 	assign rst = ~KEY[0];
-	assign wen = ~KEY[1];
-    assign mem_addr = mem_y * RES_X + mem_x;
 
 	// Assignments
-	assign LEDR = SW;
+	assign LEDR = addr_count[9:0];
 	assign VGA_R = vga_r;
 	assign VGA_G = vga_g;
 	assign VGA_B = vga_b;
 	assign VGA_HS = h_sync;
 	assign VGA_VS = v_sync;
-
-	always_ff @(posedge clk) begin
-		if (rst) begin
-            din   <= 0;
-            mem_x <= 0;
-            mem_y <= 0;
-        end
-        else begin
-            case (SW[9:8])
-                2'b00: din   <= SW[7:0];
-                2'b01: mem_x <= SW[7:0];
-                2'b10: mem_y <= SW[7:0];
-                default: begin
-                    din <= SW[7:0];
-                end
-            endcase
-        end
-	end
-
+    assign rx     = ARDUINO_IO[0];
 
 	// Module instantiation
+	vga_uart #(
+        .RES_X(RES_X),
+        .RES_Y(RES_Y),
+        .MEM_WIDTH(MEM_WIDTH)
+    ) VGA_UART (
+        .clk(clk),
+        .rst(rst),
+        .rx(rx),
+        .tx(),
+        .vga_r(vga_r),
+        .vga_g(vga_g),
+        .vga_b(vga_b),
+        .h_sync(h_sync),
+        .v_sync(v_sync),
+        .addr_count(addr_count)
+    );
+
+endmodule
+
+module vga_uart #(
+    parameter RES_X = 320,
+    parameter RES_Y = 240,
+    parameter RES_DIV = 2,
+    parameter MEM_WIDTH = 8,
+    parameter MEM_DEPTH = RES_X * RES_Y,
+    parameter ADDR_WIDTH = $clog2(MEM_DEPTH),
+    parameter PIXEL_WIDTH = 4
+) (
+    // Default wires
+    input  logic                    clk, 
+    input  logic                    rst,
+
+    // UART wires
+    input  logic                    rx,
+    output logic                    tx,
+
+    // VGA wires
+    output logic [PIXEL_WIDTH-1:0]  vga_r,
+    output logic [PIXEL_WIDTH-1:0]  vga_g,
+    output logic [PIXEL_WIDTH-1:0]  vga_b,
+    output logic                    h_sync,
+    output logic                    v_sync,
+
+    // Debug memory wires
+    output logic [ADDR_WIDTH-1:0]   addr_count
+);
+
+    // Local parameters
+    localparam 
+        CLK_DIV     = 2,
+        H_COUNT_MAX = 800,
+        V_COUNT_MAX = 525,
+        H_BITS      = $clog2(H_COUNT_MAX),
+        V_BITS      = $clog2(V_COUNT_MAX),
+        CLK_PER_BIT = 50,
+        CLK_BITS    = 8,
+        DATA_WIDTH  = MEM_WIDTH,
+        PARITY_BITS = 0,
+        STOP_BITS   = 1;
+
+    // Helper wires
+    // Memory helper wires
+    logic [ADDR_WIDTH-1:0]  mem_addr;
+    logic [MEM_WIDTH-1:0]   din;
+    logic                   wen;
+    logic [MEM_WIDTH-1:0]   dout; // unused
+
+    // UART helper wires
+    logic                   rx_din;
+    logic [MEM_WIDTH-1:0]   rx_dout;
+    logic                   rx_done;
+
+    // Helper assignments
+    assign rx_din   = rx;
+    assign mem_addr = addr_count;
+
+    // Memory counter wires
+    
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            addr_count <= 0;
+            wen        <= 1'b0;
+        end
+        else begin
+            wen        <= 1'b0;
+            if (rx_done) begin
+                if (rx_dout[7] == 1'b1) begin
+                    addr_count  <= 0;
+                    wen         <= 1'b0;
+                end
+                else begin
+                    din         <= rx_dout;
+                    wen         <= 1'b1;
+                    if (addr_count >= MEM_DEPTH - 1) begin
+                        addr_count  <= 0;
+                    end
+                    else begin
+                        addr_count  <= addr_count + 1;
+                    end
+                end
+            end
+        end
+    end
+
+    // Module instantiation
 	vga_mem #(
         .RES_X(RES_X),
         .RES_Y(RES_Y),
         .MEM_WIDTH(MEM_WIDTH)
-    ) dut (
+    ) VGA (
         .clk(clk),
         .rst(rst),
         .mem_addr(mem_addr),
         .din(din),
         .wen(wen),
-        .dout(),
+        .dout(dout),
         .vga_r(vga_r),
         .vga_g(vga_g),
         .vga_b(vga_b),
@@ -91,8 +175,31 @@ module top (
         .v_sync(v_sync)
     );
 
-endmodule
+    uart_wrapper #(
+        .CLK_BITS(CLK_BITS),
+        .DATA_WIDTH(DATA_WIDTH),
+        .PARITY_BITS(PARITY_BITS),
+        .STOP_BITS(STOP_BITS)
+    ) UART (
+        .clk(clk),
+        .rst(rst),
+        .clk_per_bit(CLK_PER_BIT),
 
+        .TX_dataIn(),
+        .TX_en(),
+
+        .TX_out(),
+        .TX_done(),
+        .TX_busy(),
+
+        .RX_dataIn(rx_din),
+
+        .RX_dataOut(rx_dout),
+        .RX_done(rx_done),
+        .RX_parityError()
+    );
+    
+endmodule
 
 module vga_mem #(
     parameter RES_X = 320,
@@ -197,7 +304,7 @@ module vga_mem #(
         .vga_active(vga_active)
     );
 
-    dp_ram_async_read #(
+    dp_ram_sync_read #(
         .DATA_WIDTH(MEM_WIDTH),
         .MEM_DEPTH(MEM_DEPTH)
     ) RAM (
@@ -305,7 +412,7 @@ module vga #(
 
 endmodule
 
-module dp_ram_async_read #(
+module dp_ram_sync_read #(
     parameter DATA_WIDTH = 8,
     parameter MEM_DEPTH  = 1024,
     parameter ADDR_WIDTH = $clog2(MEM_DEPTH)  // 2^10 = 1024 entries
@@ -331,17 +438,332 @@ module dp_ram_async_read #(
         if (we_a) begin
             mem[addr_a] <= din_a;
         end
+        dout_a <= mem[addr_a];
     end
 
     always_ff @(posedge clk) begin
         if (we_b) begin
             mem[addr_b] <= din_b;
         end
-    end
-
-    always_comb begin
-        dout_a = mem[addr_a];
-        dout_b = mem[addr_b];
+        dout_b <= mem[addr_b];
     end
 
 endmodule
+
+module uart_wrapper #(
+    parameter CLK_BITS     = 8, // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
+    parameter DATA_WIDTH   = 8,
+    parameter PARITY_BITS  = 0,
+    parameter STOP_BITS    = 1
+) (
+    input  logic                    clk,
+    input  logic                    rst,
+
+    input  logic   [CLK_BITS-1:0]   clk_per_bit,
+
+    input  logic   [DATA_WIDTH-1:0] TX_dataIn,
+    input  logic                    TX_en,
+
+    input  logic                    RX_dataIn,
+
+    output logic                    TX_out,
+    output logic                    TX_done,
+    output logic                    TX_busy,
+
+    output logic   [DATA_WIDTH-1:0] RX_dataOut,
+    output logic                    RX_done,
+    output logic                    RX_parityError
+);
+    // UART Transmitter Module
+    UART_TX #(
+        .CLK_BITS(CLK_BITS),
+        .DATA_WIDTH(DATA_WIDTH),
+        .PARITY_BITS(PARITY_BITS),
+        .STOP_BITS(STOP_BITS)
+        ) 
+        UART_TX1 ( 
+        .clk(clk),
+        .rst(rst),
+
+        .clk_per_bit(clk_per_bit),
+        .dataIn(TX_dataIn),
+        .TXen(TX_en),
+
+        .TXout(TX_out),
+        .TXdone(TX_done),
+        .busy(TX_busy)
+    );
+
+    // UART Receiver Module
+    UART_RX #(
+        .CLK_BITS(CLK_BITS),
+        .DATA_WIDTH(DATA_WIDTH),
+        .PARITY_BITS(PARITY_BITS),
+        .STOP_BITS(STOP_BITS)
+        )
+        UART_RX1 (
+        .clk(clk),
+        .rst(rst),
+
+        .clk_per_bit(clk_per_bit),
+        .dataIn(RX_dataIn),
+
+        .RXout(RX_dataOut),
+        .RXdone(RX_done),
+        .parityError(RX_parityError)
+    );
+endmodule
+
+module UART_RX #(
+    parameter CLK_BITS = 8,   // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
+    parameter DATA_WIDTH = 8,
+    parameter STOP_BITS = 2,  // either 1 or 2 stop bits
+    parameter PARITY_BITS = 1,
+    parameter PACKET_SIZE = DATA_WIDTH + STOP_BITS + PARITY_BITS + 1
+    // Total Packet Size = DATA_WIDTH + STOP_BITS + 1 Start Bit + 1 Parity Bit
+) ( 
+    input  logic                                clk,
+    input  logic                                rst,
+
+    input  logic    [CLK_BITS - 1 : 0]          clk_per_bit,
+    input  logic                                dataIn,
+
+    output logic    [DATA_WIDTH - 1 : 0]         RXout,
+    output logic                                RXdone,
+    output logic                                parityError
+);
+
+    localparam indexBits = $clog2(PACKET_SIZE);
+
+    logic   [indexBits - 1 : 0]     index;
+    logic   [CLK_BITS - 1 : 0]      clkCount;
+
+    logic                           regInMeta;
+    logic                           regIn;
+    logic                           parity;
+
+    logic    [DATA_WIDTH - 1 : 0]    dataOut;
+    logic                           dataDone;
+
+    // Remove Problems due to Metastability
+    always_ff @(posedge clk) begin
+        regInMeta <= dataIn;
+        regIn <= regInMeta;
+    end
+
+
+
+    typedef enum logic [1:0] {
+        IDLE,
+        START,
+        RECEIVE,
+        DONE
+    } 
+    state_t;
+
+    state_t state;
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            dataOut <= 0;
+            state <= IDLE;
+            index <= 1'b0;
+            clkCount <= 0;
+            dataDone <= 0;
+        end
+        else begin
+            case (state)
+                IDLE: begin
+                    clkCount <= 0;
+                    index <= 0;
+                    dataOut <= 0;
+                    dataDone <= 0;
+
+                    if (regIn == 1'b0) begin    // Start Condition
+                        state <= START;
+                    end
+                    else begin
+                        state <= IDLE;
+                    end
+                end
+
+                START: begin
+                    if (clkCount == ((clk_per_bit - 1) >> 1)) begin
+                        clkCount <= 0;
+                        state <= RECEIVE;
+                    end
+                    else begin
+                        clkCount <= clkCount + 1;
+                        state <= START;
+                    end
+
+                end
+
+                RECEIVE: begin
+
+                    if (clkCount < clk_per_bit - 1) begin
+                        clkCount <= clkCount + 1;
+                        state <= RECEIVE;
+                    end
+
+                    else begin
+                        clkCount <= 0;
+                        if (index < DATA_WIDTH) begin
+                            dataOut[index] <= regIn;
+                            index <= index + 1;
+                            state <= RECEIVE;
+                        end
+                        else if (index == DATA_WIDTH && PARITY_BITS > 0) begin
+                            parity <= regIn;
+                            state <= DONE;
+                        end
+                        else begin
+                            state <= DONE;
+                        end
+                    end
+                end
+
+                DONE: begin
+                    if (clkCount < clk_per_bit - 1) begin
+                        clkCount <= clkCount + 1;
+                        state <= DONE;
+                    end
+                    else begin
+                        clkCount <= 0;
+                        state <= IDLE;
+                        dataDone <= 1'b1;
+                        index <= 0;
+                        RXout <= dataOut;
+                    end
+                end
+
+                default: begin
+                    state <= IDLE;
+                end
+                
+            endcase
+        end 
+    end
+
+    always_comb begin
+        RXdone = dataDone;
+        if (PARITY_BITS > 0) begin
+            parityError = (^RXout) ^ parity;
+        end
+        else begin
+            parityError = 0;
+        end
+    end
+endmodule
+
+module UART_TX #(
+    parameter CLK_BITS = 8,         // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
+    parameter DATA_WIDTH = 8,
+    parameter STOP_BITS = 1,        // either 1 or 2 stop bits
+    parameter PARITY_BITS = 1,      // can be set to 0
+    parameter PACKET_SIZE = DATA_WIDTH + STOP_BITS + PARITY_BITS + 1 
+    // Total Packet Size = DATA_WIDTH + STOP_BITS + 1 Start Bit + 1 Parity Bit
+) ( 
+    input  logic                                clk,
+    input  logic                                rst,
+
+    input  logic      [CLK_BITS - 1 : 0]        clk_per_bit,
+    input  logic      [DATA_WIDTH - 1 : 0]      dataIn,
+    input  logic                                TXen,
+
+    output logic                                TXout,
+    output logic                                TXdone,
+    output logic                                busy
+);
+
+    localparam indexBits = $clog2(PACKET_SIZE);
+
+    logic   [PACKET_SIZE - 1 : 0]       packet;
+    logic                               parityBit;
+    logic   [indexBits - 1 : 0]         index;
+    logic   [CLK_BITS - 1 : 0]          clkCount;
+
+    typedef enum logic [1:0] {
+        IDLE,
+        TRANSMIT,
+        DONE
+    } 
+    state_t;
+
+    state_t state;
+
+    always_comb begin
+        parityBit = ^dataIn;    // 0 for even number of 1's, 1 for odd number of 1's
+    end
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            TXout       <= 1'b1;
+            state       <= IDLE;
+            busy        <= 1'b0;
+            index       <= 1'b0;
+            clkCount    <= 0;
+            TXdone      <= 0;
+        end
+        else begin
+            case (state)
+                IDLE: begin
+                    TXout       <= 1'b1;
+                    index       <= 1'b0;
+                    clkCount    <= 0;
+                    TXdone      <= 0;
+
+                    if (TXen) begin
+                        if (PARITY_BITS > 0) begin
+                            packet <= {{STOP_BITS{1'b1}}, parityBit, dataIn, 1'b0};
+                        end 
+                        else begin
+                            packet <= {{STOP_BITS{1'b1}}, dataIn, 1'b0};
+                        end
+                        //                ^                         ^
+                        //                |                         |
+                        //              Stop                      Start
+                        busy <= 1'b1;
+                        state <= TRANSMIT;
+                    end
+                    else begin
+                        state <= IDLE;
+                    end
+                end
+
+                TRANSMIT: begin
+                    TXout <= packet[index];
+
+                    if (clkCount < clk_per_bit - 1) begin
+                        clkCount <= clkCount + 1;
+                        state <= TRANSMIT;
+                    end
+
+                    else begin
+                        clkCount <= 0;
+                        if (index == PACKET_SIZE - 1) begin
+                            state <= DONE;
+                        end
+                        else begin
+                            index <= index + 1;
+                            state <= TRANSMIT;
+                        end
+                    end
+                end
+
+                DONE: begin
+                    state       <= IDLE;
+                    busy        <= 1'b0;
+                    TXdone      <= 1'b1;
+                    index       <= 1'b0;
+                    clkCount    <= 0;
+                end
+
+                default: begin
+                    state <= IDLE;
+                end
+            endcase
+        end 
+    end
+endmodule
+

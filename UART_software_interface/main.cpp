@@ -13,7 +13,7 @@ int main (int argc, char* argv[]) {
 
     int baud = 1000000;
 
-    uart.open("COM8", baud);
+    uart.open("COM5", baud);
 
     int size = WIDTH * HEIGHT + 1;
 

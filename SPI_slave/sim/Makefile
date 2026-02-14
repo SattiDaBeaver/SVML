@@ -3,7 +3,7 @@
 # ===============================
 
 # -------- User config --------
-TOP      ?= tb_dp_ram
+TOP      ?= tb_spi_slave
 CORE_DIR ?= ../core
 TB_DIR   ?= ../testbench
 OBJ_DIR  ?= obj_dir

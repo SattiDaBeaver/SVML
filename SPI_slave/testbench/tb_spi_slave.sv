@@ -1,92 +1,83 @@
+`timescale 1ns/100ps
+
 module tb_spi_slave;
 
-    parameter DATA_WIDTH = 8;
-    parameter DEPTH = 1000;
-    parameter ADDR_WIDTH = $clog2(DEPTH);
+    parameter WIDTH = 8;
 
-    logic clk = 0;
+    logic rst;
+    logic sclk;
+    logic cs_n;
+    logic mosi;
+    logic miso;
 
-    // Port A
-    logic we_a;
-    logic [ADDR_WIDTH-1:0] addr_a;
-    logic [DATA_WIDTH-1:0] din_a;
-    logic [DATA_WIDTH-1:0] dout_a;
+    logic load;
+    logic [WIDTH-1:0] din;
+    logic d_valid;
+    logic [WIDTH-1:0] dout;
 
-    // Port B
-    logic we_b;
-    logic [ADDR_WIDTH-1:0] addr_b;
-    logic [DATA_WIDTH-1:0] din_b;
-    logic [DATA_WIDTH-1:0] dout_b;
-
-    // Clock generation
-    always #5 clk = ~clk;
-
-    // Instantiate DUT
-    dp_ram_async_read #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .MEM_DEPTH(DEPTH)
-    ) dut (
-        .clk(clk),
-        .we_a(we_a),
-        .addr_a(addr_a),
-        .din_a(din_a),
-        .dout_a(dout_a),
-        .we_b(we_b),
-        .addr_b(addr_b),
-        .din_b(din_b),
-        .dout_b(dout_b)
+    // DUT
+    spi_slave #(.WIDTH(WIDTH)) dut (
+        .rst(rst),
+        .sclk(sclk),
+        .cs_n(cs_n),
+        .mosi(mosi),
+        .miso(miso),
+        .load(load),
+        .din(din),
+        .d_valid(d_valid),
+        .dout(dout)
     );
 
+    // 45 MHz clock → period ≈ 22.22ns
+    localparam real T = 22.22;
+
+    initial sclk = 0;
+    always #(T/2.0) sclk = ~sclk;
+
+    // Task: send one byte (MSB first)
+    task spi_send_byte(input [7:0] data);
+        integer i;
+        begin
+            for (i = 7; i >= 0; i--) begin
+                mosi = data[i];
+                #(T);   // one full clock cycle
+            end
+        end
+    endtask
+
     initial begin
-        $dumpfile("tb_dp_ram.vcd");
-        $dumpvars(0, tb_dp_ram);
+        $dumpfile("tb_spi_slave.vcd");
+        $dumpvars(0, tb_spi_slave);
+        // Init
+        rst   = 1;
+        cs_n  = 1;
+        mosi  = 0;
+        load  = 0;
+        din   = 8'hA5;  // slave response
 
-        $display("Starting DP RAM test...");
+        #(5*T);
+        rst = 0;
 
-        // Initialize inputs
-        we_a = 0; addr_a = 0; din_a = 0;
-        we_b = 0; addr_b = 0; din_b = 0;
+        // Preload TX
+        load = 1;
+        #(T);
+        load = 0;
 
-        @(posedge clk);
+        // Start transaction
+        cs_n = 0;
 
-        // Write to Port A
-        we_a = 1;
-      	we_b = 1;
-        addr_a = 10'h01;
-      	addr_b = 10'h02;
-        din_a = 8'hAA;
-      	din_b = 8'hBB;
-        @(posedge clk);
-        we_a = 0;
+        // Send byte 0x3C
+        spi_send_byte(8'h3C);
+        spi_send_byte(8'h80);
+        spi_send_byte(8'h36);
+        spi_send_byte(8'h1B);
 
-        // Write to Port B
-        we_b = 1;
-        addr_b = 10'h02;
-        din_b = 8'hBB;
-        @(posedge clk);
-        we_b = 0;
+        #(T);
+        cs_n = 1;
 
-        // Read from both ports
-        addr_a = 10'h01;
-        addr_b = 10'h02;
-        @(posedge clk);
-        $display("Read A: %h (Expected AA), Read B: %h (Expected BB)", dout_a, dout_b);
-		
-      	#10;
-        // Simultaneous write
-        addr_a = 10'h03; din_a = 8'h11; we_a = 1;
-        addr_b = 10'h04; din_b = 8'h22; we_b = 1;
-        @(posedge clk);
-      	@(posedge clk);
-        we_a = 0; we_b = 0;
+        #(5*T);
 
-        // Simultaneous read
-        addr_a = 10'h03;
-        addr_b = 10'h04;
-        @(posedge clk);
-        $display("Read A: %h (Expected 11), Read B: %h (Expected 22)", dout_a, dout_b);
-
-        $display("Test finished.");
+        $display("RX dout = %h", dout);
         $finish;
     end
 

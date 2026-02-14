@@ -9,11 +9,15 @@
 using namespace std;
 
 int main (int argc, char* argv[]) {
+    if (argc > 2) {
+        return -1;
+    }
+
     UART uart;
 
-    int baud = 1000000;
+    int baud = 1000000;    
 
-    uart.open("COM5", baud);
+    uart.open(argv[1], baud);
 
     int size = WIDTH * HEIGHT + 1;
 
@@ -38,7 +42,7 @@ int main (int argc, char* argv[]) {
     }
 
     uint8_t pkt[HEIGHT * WIDTH + 1];
-    \
+    
     pkt[0] = 0x80;
     for (int x = 0; x < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++) {

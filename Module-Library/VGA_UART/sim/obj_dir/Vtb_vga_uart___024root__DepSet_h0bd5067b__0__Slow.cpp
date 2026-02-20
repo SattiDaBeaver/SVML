@@ -82,6 +82,15 @@ VL_ATTR_COLD void Vtb_vga_uart___024root___stl_sequent__TOP__0(Vtb_vga_uart___02
     Vtb_vga_uart__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_vga_uart___024root___stl_sequent__TOP__0\n"); );
     // Body
+    if (vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0 = 0U;
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1 
+            = vlSelf->tb_vga_uart__DOT__addr_count;
+    } else {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0 
+            = vlSelf->tb_vga_uart__DOT__addr_count;
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1 = 0U;
+    }
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__vga_active 
         = ((0x310U > (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count)) 
            & ((0x8fU < (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count)) 
@@ -179,25 +188,39 @@ VL_ATTR_COLD void Vtb_vga_uart___024root___ctor_var_reset(Vtb_vga_uart___024root
     vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = VL_RAND_RESET_I(32);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__din = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__wen = VL_RAND_RESET_I(1);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__swap_buf = VL_RAND_RESET_I(1);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__addr_delay = VL_RAND_RESET_I(1);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer = VL_RAND_RESET_I(1);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch = VL_RAND_RESET_I(1);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__vga_active = VL_RAND_RESET_I(1);
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_a = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b = VL_RAND_RESET_I(17);
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0 = VL_RAND_RESET_I(17);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_a_0 = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b_0 = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1 = VL_RAND_RESET_I(17);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_a_1 = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b_1 = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__mem_addr_vga = VL_RAND_RESET_I(17);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__mem_d_out_vga = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__vga_en = VL_RAND_RESET_I(1);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count = VL_RAND_RESET_I(1);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count = VL_RAND_RESET_I(10);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count = VL_RAND_RESET_I(10);
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__we_b = VL_RAND_RESET_I(1);
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__din_b = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__we_b = VL_RAND_RESET_I(1);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__din_b = VL_RAND_RESET_I(8);
     for (int __Vi0 = 0; __Vi0 < 76800; ++__Vi0) {
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem[__Vi0] = VL_RAND_RESET_I(8);
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem[__Vi0] = VL_RAND_RESET_I(8);
     }
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT____Vlvbound_hc21aa8f5__0 = VL_RAND_RESET_I(8);
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT____Vlvbound_hf1aa6683__0 = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT____Vlvbound_hc21aa8f5__0 = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT____Vlvbound_hf1aa6683__0 = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__we_b = VL_RAND_RESET_I(1);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__din_b = VL_RAND_RESET_I(8);
+    for (int __Vi0 = 0; __Vi0 < 76800; ++__Vi0) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem[__Vi0] = VL_RAND_RESET_I(8);
+    }
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT____Vlvbound_hc21aa8f5__0 = VL_RAND_RESET_I(8);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT____Vlvbound_hf1aa6683__0 = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__TX_dataIn = VL_RAND_RESET_I(8);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__TX_en = VL_RAND_RESET_I(1);
     vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__TX_out = VL_RAND_RESET_I(1);

@@ -78,6 +78,24 @@ module tb_vga_uart;
         rx_din = 8'h78;
         uart_send_byte(rx_din);
 
+        // Send swap 
+        rx_din = 8'h81;
+        uart_send_byte(rx_din);
+
+        // Send sync (MSB=1 resets addr)
+        rx_din = 8'h80;
+        uart_send_byte(rx_din);
+
+        // Send some pixels
+        rx_din = 8'h3F;
+        uart_send_byte(rx_din);
+        rx_din = 8'h30;
+        uart_send_byte(rx_din);
+        rx_din = 8'h0C;
+        uart_send_byte(rx_din);
+        rx_din = 8'h03;
+        uart_send_byte(rx_din);
+
         #(10000);
         rx_din = 8'h80;
         uart_send_byte(rx_din);

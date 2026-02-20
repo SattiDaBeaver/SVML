@@ -18,7 +18,8 @@ module vga #(
     output logic                  v_sync,
     output logic [H_BITS-1:0]     vga_x,
     output logic [V_BITS-1:0]     vga_y,
-    output logic                  vga_active
+    output logic                  vga_active,
+    output logic                  frame_start
 );
 
     // Clock divider (25MHz enable logic)
@@ -87,4 +88,5 @@ module vga #(
     assign vga_x = vga_active ? (h_count - 144) : 0;
     assign vga_y = vga_active ? (v_count - 35) : 0;
 
+    assign frame_start = ((h_count == 0) && (v_count == 0));
 endmodule

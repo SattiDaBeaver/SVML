@@ -117,6 +117,7 @@ module vga_uart #(
     logic [ADDR_WIDTH-1:0]  mem_addr;
     logic [MEM_WIDTH-1:0]   din;
     logic                   wen;
+    logic                   swap_buf;
     logic [MEM_WIDTH-1:0]   dout; // unused
     logic                   addr_delay;
 
@@ -135,15 +136,30 @@ module vga_uart #(
         if (rst) begin
             addr_count <= 0;
             wen        <= 1'b0;
-            addr_delay  <= 1'b0;
+            addr_delay <= 1'b0;
+            swap_buf   <= 1'b0;
         end
         else begin
             wen        <= 1'b0;
+            swap_buf   <= 1'b0;
             if (rx_done) begin
-                if (rx_dout[7] == 1'b1) begin
-                    addr_count  <= 0;
-                    wen         <= 1'b0;
-                    addr_delay  <= 1'b0;
+                if (rx_dout[7] == 1'b1) begin   // control bit
+                    case (rx_dout[6:0])
+                        7'h00: begin
+                            addr_count  <= 0;
+                            wen         <= 1'b0;
+                            addr_delay  <= 1'b0;
+                        end
+                        7'h01: begin
+                            swap_buf    <= 1'b1;
+                        end 
+                        default: begin
+                            addr_count  <= 0;
+                            wen         <= 1'b0;
+                            addr_delay  <= 1'b0;
+                            swap_buf    <= 1'b0;
+                        end
+                    endcase
                 end
                 else begin
                     din         <= rx_dout;
@@ -166,7 +182,7 @@ module vga_uart #(
     end
 
     // Module instantiation
-	vga_mem #(
+	vga_double_buf #(
         .RES_X(RES_X),
         .RES_Y(RES_Y),
         .MEM_WIDTH(MEM_WIDTH)
@@ -176,6 +192,7 @@ module vga_uart #(
         .mem_addr(mem_addr),
         .din(din),
         .wen(wen),
+        .swap_buf(swap_buf),
         .dout(dout),
         .vga_r(vga_r),
         .vga_g(vga_g),
@@ -210,7 +227,7 @@ module vga_uart #(
     
 endmodule
 
-module vga_mem #(
+module vga_double_buf #(
     parameter RES_X = 320,
     parameter RES_Y = 240,
     parameter RES_DIV = 2,
@@ -227,6 +244,7 @@ module vga_mem #(
     input  logic [ADDR_WIDTH-1:0]   mem_addr,
     input  logic [MEM_WIDTH-1:0]    din,
     input  logic                    wen,
+    input  logic                    swap_buf,
     output logic [MEM_WIDTH-1:0]    dout, // unused
 
     // VGA wires
@@ -245,14 +263,20 @@ module vga_mem #(
         H_BITS      = $clog2(H_COUNT_MAX),
         V_BITS      = $clog2(V_COUNT_MAX);
 
+    // Double buffer helper wires
+    logic                       curr_buffer;
+    logic                       swap_latch;
+
     // VGA helper wires
     logic [$clog2(RES_X)-1:0]   mem_x;
     logic [$clog2(RES_Y)-1:0]   mem_y;
     logic [H_BITS-1:0]          vga_x;
     logic [V_BITS-1:0]          vga_y;
     logic                       vga_active;
+    logic                       frame_start;
 
     // Memory helper wires
+    // Memory assignment helpers
     // Port A
     logic                       we_a;
     logic [ADDR_WIDTH-1:0]      addr_a;
@@ -264,6 +288,32 @@ module vga_mem #(
     logic [ADDR_WIDTH-1:0]      addr_b;
     // logic [MEM_WIDTH-1:0]      din_b;
     logic [MEM_WIDTH-1:0]       dout_b;
+
+    // Memory 0
+    // Port A
+    logic                       we_a_0;
+    logic [ADDR_WIDTH-1:0]      addr_a_0;
+    logic [MEM_WIDTH-1:0]       din_a_0;
+    logic [MEM_WIDTH-1:0]       dout_a_0;
+
+    // Port B
+    // logic                       we_b_0;
+    logic [ADDR_WIDTH-1:0]      addr_b_0;
+    // logic [MEM_WIDTH-1:0]      din_b_0;
+    logic [MEM_WIDTH-1:0]       dout_b_0;
+
+    // Memory 1
+    // Port A
+    logic                       we_a_1;
+    logic [ADDR_WIDTH-1:0]      addr_a_1;
+    logic [MEM_WIDTH-1:0]       din_a_1;
+    logic [MEM_WIDTH-1:0]       dout_a_1;
+
+    // Port B
+    // logic                       we_b_1;
+    logic [ADDR_WIDTH-1:0]      addr_b_1;
+    // logic [MEM_WIDTH-1:0]      din_b_1;
+    logic [MEM_WIDTH-1:0]       dout_b_1;
 
     // Internal wires
     logic [ADDR_WIDTH-1:0]      mem_addr_vga;
@@ -292,7 +342,43 @@ module vga_mem #(
     // // Assuming dumb synthesizer
     // assign mem_x    = vga_x >> 1;
     // assign mem_y    = vga_y >> 1;
-    // assign addr_b   = mem_x + (vga_y << 6) + (vga_x << 8);   
+    // assign addr_b   = mem_x + (vga_y << 6) + (vga_x << 8);  
+
+    // Double Buffer MUX
+    // Read mux (combinational)
+    assign dout_a = (curr_buffer == 0) ? dout_a_0 : dout_a_1;
+    assign dout_b = (curr_buffer == 0) ? dout_b_0 : dout_b_1;
+
+    // Write mux (controlled)
+    assign we_a_0   = (curr_buffer == 0) ? we_a : 0;
+    assign din_a_0  = (curr_buffer == 0) ? din_a : 0;
+    assign addr_a_0 = (curr_buffer == 0) ? addr_a : 0;
+
+    assign we_a_1   = (curr_buffer == 1) ? we_a : 0;
+    assign din_a_1  = (curr_buffer == 1) ? din_a : 0;
+    assign addr_a_1 = (curr_buffer == 1) ? addr_a : 0;
+
+    // Port B is always VGA read
+    assign addr_b_0 = addr_b;
+    assign addr_b_1 = addr_b;
+
+    // Swap buffer logic
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            swap_latch  <= 1'b0;
+        end
+        else begin
+            if (swap_buf) begin
+                swap_latch  <= 1'b1;
+            end
+            if (frame_start) begin
+                if (swap_latch) begin
+                    curr_buffer <= curr_buffer ^ 1; // toggle current bugger
+                    swap_latch  <= 1'b0;
+                end
+            end 
+        end
+    end
 
     // Module instantiation
     vga #(
@@ -310,22 +396,38 @@ module vga_mem #(
         .v_sync(v_sync),
         .vga_x(vga_x),
         .vga_y(vga_y),
-        .vga_active(vga_active)
+        .vga_active(vga_active),
+        .frame_start(frame_start)
     );
 
     dp_ram_sync_read #(
         .DATA_WIDTH(MEM_WIDTH),
         .MEM_DEPTH(MEM_DEPTH)
-    ) RAM (
+    ) RAM_0 (
         .clk(clk),
-        .we_a(we_a),
-        .addr_a(addr_a),
-        .din_a(din_a),
-        .dout_a(dout_a),
+        .we_a(we_a_0),
+        .addr_a(addr_a_0),
+        .din_a(din_a_0),
+        .dout_a(dout_a_0),
         .we_b(),
-        .addr_b(addr_b),
+        .addr_b(addr_b_0),
         .din_b(),
-        .dout_b(dout_b)
+        .dout_b(dout_b_0)
+    );
+
+    dp_ram_sync_read #(
+        .DATA_WIDTH(MEM_WIDTH),
+        .MEM_DEPTH(MEM_DEPTH)
+    ) RAM_1 (
+        .clk(clk),
+        .we_a(we_a_1),
+        .addr_a(addr_a_1),
+        .din_a(din_a_1),
+        .dout_a(dout_a_1),
+        .we_b(),
+        .addr_b(addr_b_1),
+        .din_b(),
+        .dout_b(dout_b_1)
     );
     
 endmodule
@@ -350,7 +452,8 @@ module vga #(
     output logic                  v_sync,
     output logic [H_BITS-1:0]     vga_x,
     output logic [V_BITS-1:0]     vga_y,
-    output logic                  vga_active
+    output logic                  vga_active,
+    output logic                  frame_start
 );
 
     // Clock divider (25MHz enable logic)
@@ -419,6 +522,7 @@ module vga #(
     assign vga_x = vga_active ? (h_count - 144) : 0;
     assign vga_y = vga_active ? (v_count - 35) : 0;
 
+    assign frame_start = ((h_count == 0) && (v_count == 0));
 endmodule
 
 module dp_ram_sync_read #(
@@ -775,4 +879,5 @@ module UART_TX #(
         end 
     end
 endmodule
+
 

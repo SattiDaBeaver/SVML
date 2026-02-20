@@ -273,8 +273,8 @@ module vga_double_buf #(
 
     // Double Buffer MUX
     // Read mux (combinational)
-    assign dout_a = (curr_buffer == 0) ? dout_a_0 : dout_a_1;
-    assign dout_b = (curr_buffer == 0) ? dout_b_0 : dout_b_1;
+    assign dout_a = (curr_buffer == 0) ? dout_a_1 : dout_a_0;
+    assign dout_b = (curr_buffer == 0) ? dout_b_1 : dout_b_0;
 
     // Write mux (controlled)
     assign we_a_0   = (curr_buffer == 0) ? we_a : 0;
@@ -293,6 +293,7 @@ module vga_double_buf #(
     always_ff @(posedge clk) begin
         if (rst) begin
             swap_latch  <= 1'b0;
+            curr_buffer <= 1'b0;
         end
         else begin
             if (swap_buf) begin

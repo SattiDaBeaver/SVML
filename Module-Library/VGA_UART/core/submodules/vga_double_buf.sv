@@ -16,6 +16,7 @@ module vga_double_buf #(
     input  logic [MEM_WIDTH-1:0]    din,
     input  logic                    wen,
     input  logic                    swap_buf,
+    input  logic                    swap_done,
     output logic [MEM_WIDTH-1:0]    dout, // unused
 
     // VGA wires
@@ -138,8 +139,10 @@ module vga_double_buf #(
         if (rst) begin
             swap_latch  <= 1'b0;
             curr_buffer <= 1'b0;
+            swap_done   <= 1'b0;
         end
         else begin
+            swap_done   <= 1'b0;
             if (swap_buf) begin
                 swap_latch  <= 1'b1;
             end
@@ -147,6 +150,7 @@ module vga_double_buf #(
                 if (swap_latch) begin
                     curr_buffer <= curr_buffer ^ 1; // toggle current bugger
                     swap_latch  <= 1'b0;
+                    swap_done   <= 1'b1;
                 end
             end 
         end

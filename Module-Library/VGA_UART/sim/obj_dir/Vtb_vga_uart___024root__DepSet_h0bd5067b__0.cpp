@@ -38,6 +38,18 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_uart___024root___eval_initial__TOP__Vtiming__0
     __Vtask_tb_vga_uart__DOT__uart_send_byte__4__data = 0;
     CData/*7:0*/ __Vtask_tb_vga_uart__DOT__uart_send_byte__5__data;
     __Vtask_tb_vga_uart__DOT__uart_send_byte__5__data = 0;
+    CData/*7:0*/ __Vtask_tb_vga_uart__DOT__uart_send_byte__6__data;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__6__data = 0;
+    CData/*7:0*/ __Vtask_tb_vga_uart__DOT__uart_send_byte__7__data;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__7__data = 0;
+    CData/*7:0*/ __Vtask_tb_vga_uart__DOT__uart_send_byte__8__data;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__8__data = 0;
+    CData/*7:0*/ __Vtask_tb_vga_uart__DOT__uart_send_byte__9__data;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__9__data = 0;
+    CData/*7:0*/ __Vtask_tb_vga_uart__DOT__uart_send_byte__10__data;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__10__data = 0;
+    CData/*7:0*/ __Vtask_tb_vga_uart__DOT__uart_send_byte__11__data;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__11__data = 0;
     // Body
     vlSelf->tb_vga_uart__DOT__rx = 1U;
     co_await vlSelf->__VdlySched.delay(0x64ULL, nullptr, 
@@ -352,10 +364,7 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_uart___024root___eval_initial__TOP__Vtiming__0
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "../testbench/tb_vga_uart.sv", 
                                        54);
-    co_await vlSelf->__VdlySched.delay(0x2710ULL, nullptr, 
-                                       "../testbench/tb_vga_uart.sv", 
-                                       81);
-    vlSelf->tb_vga_uart__DOT__rx_din = 0x80U;
+    vlSelf->tb_vga_uart__DOT__rx_din = 0x81U;
     __Vtask_tb_vga_uart__DOT__uart_send_byte__5__data 
         = vlSelf->tb_vga_uart__DOT__rx_din;
     vlSelf->tb_vga_uart__DOT__rx = 0U;
@@ -416,10 +425,379 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_uart___024root___eval_initial__TOP__Vtiming__0
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "../testbench/tb_vga_uart.sv", 
                                        54);
+    vlSelf->tb_vga_uart__DOT__rx_din = 0x80U;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__6__data 
+        = vlSelf->tb_vga_uart__DOT__rx_din;
+    vlSelf->tb_vga_uart__DOT__rx = 0U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       43);
+    vlSelf->tb_vga_uart__DOT__rx = (1U & (IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__6__data));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__6__data) 
+                                          >> 1U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__6__data) 
+                                          >> 2U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__6__data) 
+                                          >> 3U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__6__data) 
+                                          >> 4U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__6__data) 
+                                          >> 5U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__6__data) 
+                                          >> 6U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 7U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__6__data) 
+                                          >> 7U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 8U;
+    vlSelf->tb_vga_uart__DOT__rx = 1U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       53);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       54);
+    vlSelf->tb_vga_uart__DOT__rx_din = 0x3fU;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__7__data 
+        = vlSelf->tb_vga_uart__DOT__rx_din;
+    vlSelf->tb_vga_uart__DOT__rx = 0U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       43);
+    vlSelf->tb_vga_uart__DOT__rx = (1U & (IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__7__data));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__7__data) 
+                                          >> 1U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__7__data) 
+                                          >> 2U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__7__data) 
+                                          >> 3U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__7__data) 
+                                          >> 4U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__7__data) 
+                                          >> 5U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__7__data) 
+                                          >> 6U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 7U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__7__data) 
+                                          >> 7U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 8U;
+    vlSelf->tb_vga_uart__DOT__rx = 1U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       53);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       54);
+    vlSelf->tb_vga_uart__DOT__rx_din = 0x30U;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__8__data 
+        = vlSelf->tb_vga_uart__DOT__rx_din;
+    vlSelf->tb_vga_uart__DOT__rx = 0U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       43);
+    vlSelf->tb_vga_uart__DOT__rx = (1U & (IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__8__data));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__8__data) 
+                                          >> 1U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__8__data) 
+                                          >> 2U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__8__data) 
+                                          >> 3U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__8__data) 
+                                          >> 4U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__8__data) 
+                                          >> 5U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__8__data) 
+                                          >> 6U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 7U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__8__data) 
+                                          >> 7U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 8U;
+    vlSelf->tb_vga_uart__DOT__rx = 1U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       53);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       54);
+    vlSelf->tb_vga_uart__DOT__rx_din = 0xcU;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__9__data 
+        = vlSelf->tb_vga_uart__DOT__rx_din;
+    vlSelf->tb_vga_uart__DOT__rx = 0U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       43);
+    vlSelf->tb_vga_uart__DOT__rx = (1U & (IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__9__data));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__9__data) 
+                                          >> 1U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__9__data) 
+                                          >> 2U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__9__data) 
+                                          >> 3U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__9__data) 
+                                          >> 4U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__9__data) 
+                                          >> 5U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__9__data) 
+                                          >> 6U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 7U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__9__data) 
+                                          >> 7U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 8U;
+    vlSelf->tb_vga_uart__DOT__rx = 1U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       53);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       54);
+    vlSelf->tb_vga_uart__DOT__rx_din = 3U;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__10__data 
+        = vlSelf->tb_vga_uart__DOT__rx_din;
+    vlSelf->tb_vga_uart__DOT__rx = 0U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       43);
+    vlSelf->tb_vga_uart__DOT__rx = (1U & (IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__10__data));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__10__data) 
+                                          >> 1U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__10__data) 
+                                          >> 2U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__10__data) 
+                                          >> 3U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__10__data) 
+                                          >> 4U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__10__data) 
+                                          >> 5U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__10__data) 
+                                          >> 6U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 7U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__10__data) 
+                                          >> 7U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 8U;
+    vlSelf->tb_vga_uart__DOT__rx = 1U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       53);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       54);
+    co_await vlSelf->__VdlySched.delay(0x2710ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       99);
+    vlSelf->tb_vga_uart__DOT__rx_din = 0x80U;
+    __Vtask_tb_vga_uart__DOT__uart_send_byte__11__data 
+        = vlSelf->tb_vga_uart__DOT__rx_din;
+    vlSelf->tb_vga_uart__DOT__rx = 0U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       43);
+    vlSelf->tb_vga_uart__DOT__rx = (1U & (IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__11__data));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__11__data) 
+                                          >> 1U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__11__data) 
+                                          >> 2U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__11__data) 
+                                          >> 3U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__11__data) 
+                                          >> 4U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__11__data) 
+                                          >> 5U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__11__data) 
+                                          >> 6U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 7U;
+    vlSelf->tb_vga_uart__DOT__rx = (1U & ((IData)(__Vtask_tb_vga_uart__DOT__uart_send_byte__11__data) 
+                                          >> 7U));
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       48);
+    vlSelf->tb_vga_uart__DOT__uart_send_byte__Vstatic__i = 8U;
+    vlSelf->tb_vga_uart__DOT__rx = 1U;
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       53);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "../testbench/tb_vga_uart.sv", 
+                                       54);
     co_await vlSelf->__VdlySched.delay(0x4c4b40ULL, 
                                        nullptr, "../testbench/tb_vga_uart.sv", 
-                                       85);
-    VL_FINISH_MT("../testbench/tb_vga_uart.sv", 87, "");
+                                       103);
+    VL_FINISH_MT("../testbench/tb_vga_uart.sv", 105, "");
 }
 
 VL_INLINE_OPT VlCoroutine Vtb_vga_uart___024root___eval_initial__TOP__Vtiming__1(Vtb_vga_uart___024root* vlSelf) {
@@ -451,24 +829,40 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
     __Vdly__tb_vga_uart__DOT__addr_count = 0;
     CData/*0:0*/ __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay;
     __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay = 0;
+    CData/*0:0*/ __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch;
+    __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch = 0;
+    CData/*0:0*/ __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer;
+    __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer = 0;
     CData/*0:0*/ __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count;
     __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count = 0;
     SData/*9:0*/ __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count;
     __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count = 0;
     SData/*9:0*/ __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count;
     __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count = 0;
-    IData/*16:0*/ __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0;
-    __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0 = 0;
-    CData/*7:0*/ __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0;
-    __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0 = 0;
-    CData/*0:0*/ __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0;
-    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0 = 0;
-    IData/*16:0*/ __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1;
-    __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1 = 0;
-    CData/*7:0*/ __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1;
-    __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1 = 0;
-    CData/*0:0*/ __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1;
-    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1 = 0;
+    IData/*16:0*/ __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0;
+    __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0 = 0;
+    CData/*7:0*/ __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0;
+    __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0 = 0;
+    CData/*0:0*/ __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0;
+    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0 = 0;
+    IData/*16:0*/ __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1;
+    __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1 = 0;
+    CData/*7:0*/ __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1;
+    __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1 = 0;
+    CData/*0:0*/ __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1;
+    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1 = 0;
+    IData/*16:0*/ __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0;
+    __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0 = 0;
+    CData/*7:0*/ __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0;
+    __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0 = 0;
+    CData/*0:0*/ __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0;
+    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0 = 0;
+    IData/*16:0*/ __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1;
+    __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1 = 0;
+    CData/*7:0*/ __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1;
+    __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1 = 0;
+    CData/*0:0*/ __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1;
+    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1 = 0;
     CData/*1:0*/ __Vdly__tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_TX1__DOT__state;
     __Vdly__tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_TX1__DOT__state = 0;
     CData/*3:0*/ __Vdly__tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_TX1__DOT__index;
@@ -488,7 +882,8 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
     // Body
     __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count 
         = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count;
-    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1 = 0U;
+    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1 = 0U;
+    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1 = 0U;
     __Vdly__tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_TX1__DOT__packet 
         = vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_TX1__DOT__packet;
     __Vdly__tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_TX1__DOT__clkCount 
@@ -512,47 +907,91 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
     __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay 
         = vlSelf->tb_vga_uart__DOT__DUT__DOT__addr_delay;
     __Vdly__tb_vga_uart__DOT__addr_count = vlSelf->tb_vga_uart__DOT__addr_count;
-    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0 = 0U;
-    if (vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__we_b) {
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT____Vlvbound_hf1aa6683__0 
-            = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__din_b;
+    __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch 
+        = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch;
+    __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer 
+        = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer;
+    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0 = 0U;
+    __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0 = 0U;
+    if (vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__we_b) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT____Vlvbound_hf1aa6683__0 
+            = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__din_b;
         if ((0x12bffU >= vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b)) {
-            __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1 
-                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT____Vlvbound_hf1aa6683__0;
-            __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1 = 1U;
-            __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1 
+            __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1 
+                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT____Vlvbound_hf1aa6683__0;
+            __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1 = 1U;
+            __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1 
                 = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b;
         }
     }
-    if (vlSelf->tb_vga_uart__DOT__DUT__DOT__wen) {
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT____Vlvbound_hc21aa8f5__0 
-            = vlSelf->tb_vga_uart__DOT__DUT__DOT__din;
-        if ((0x12bffU >= vlSelf->tb_vga_uart__DOT__addr_count)) {
-            __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0 
-                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT____Vlvbound_hc21aa8f5__0;
-            __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0 = 1U;
-            __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0 
-                = vlSelf->tb_vga_uart__DOT__addr_count;
+    if (vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__we_b) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT____Vlvbound_hf1aa6683__0 
+            = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__din_b;
+        if ((0x12bffU >= vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b)) {
+            __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1 
+                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT____Vlvbound_hf1aa6683__0;
+            __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1 = 1U;
+            __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1 
+                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b;
         }
     }
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b 
-        = ((0x12bffU >= vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b)
-            ? vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem
-           [vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b]
+    if (((IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer) 
+         & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__wen))) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT____Vlvbound_hc21aa8f5__0 
+            = ((IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer)
+                ? (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__din)
+                : 0U);
+        if ((0x12bffU >= vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1)) {
+            __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0 
+                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT____Vlvbound_hc21aa8f5__0;
+            __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0 = 1U;
+            __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0 
+                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1;
+        }
+    }
+    if (((~ (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer)) 
+         & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__wen))) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT____Vlvbound_hc21aa8f5__0 
+            = ((IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer)
+                ? 0U : (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__din));
+        if ((0x12bffU >= vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0)) {
+            __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0 
+                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT____Vlvbound_hc21aa8f5__0;
+            __Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0 = 1U;
+            __Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0 
+                = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0;
+        }
+    }
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_a_1 
+        = ((0x12bffU >= vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1)
+            ? vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem
+           [vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1]
             : 0U);
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_a 
-        = ((0x12bffU >= vlSelf->tb_vga_uart__DOT__addr_count)
-            ? vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem
-           [vlSelf->tb_vga_uart__DOT__addr_count] : 0U);
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_a_0 
+        = ((0x12bffU >= vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0)
+            ? vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem
+           [vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0]
+            : 0U);
+    if ((0x12bffU >= vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b)) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b_1 
+            = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem
+            [vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b];
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b_0 
+            = vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem
+            [vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b];
+    } else {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b_1 = 0U;
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__dout_b_0 = 0U;
+    }
     if (vlSelf->tb_vga_uart__DOT__rst) {
         __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count = 0U;
         __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count = 0U;
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count 
-            = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count;
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count 
-            = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count;
         __Vdly__tb_vga_uart__DOT__addr_count = 0U;
         __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay = 0U;
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__addr_delay 
+            = __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay;
+        vlSelf->tb_vga_uart__DOT__addr_count = __Vdly__tb_vga_uart__DOT__addr_count;
+        __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch = 0U;
     } else {
         if (vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__vga_en) {
             if ((0x31fU == (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count))) {
@@ -566,35 +1005,62 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
                     = (0x3ffU & ((IData)(1U) + (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count)));
             }
         }
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count 
-            = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count;
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count 
-            = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count;
         if (vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__dataDone) {
             if ((0x80U & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout))) {
-                __Vdly__tb_vga_uart__DOT__addr_count = 0U;
-                __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay = 0U;
+                if ((0U == (0x7fU & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout)))) {
+                    __Vdly__tb_vga_uart__DOT__addr_count = 0U;
+                    __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay = 0U;
+                } else if ((1U != (0x7fU & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout)))) {
+                    __Vdly__tb_vga_uart__DOT__addr_count = 0U;
+                    __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay = 0U;
+                }
             } else if ((0x12bffU <= vlSelf->tb_vga_uart__DOT__addr_count)) {
                 __Vdly__tb_vga_uart__DOT__addr_count = 0U;
             } else if (vlSelf->tb_vga_uart__DOT__DUT__DOT__addr_delay) {
                 __Vdly__tb_vga_uart__DOT__addr_count 
                     = (0x1ffffU & ((IData)(1U) + vlSelf->tb_vga_uart__DOT__addr_count));
-                __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay = 0U;
             } else {
                 __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay = 1U;
             }
         }
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__addr_delay 
+            = __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay;
+        vlSelf->tb_vga_uart__DOT__addr_count = __Vdly__tb_vga_uart__DOT__addr_count;
+        if (vlSelf->tb_vga_uart__DOT__DUT__DOT__swap_buf) {
+            __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch = 1U;
+        }
+        if (((0U == (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count)) 
+             & (0U == (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count)))) {
+            if (vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch) {
+                __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer 
+                    = (1U & (~ (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer)));
+                __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch = 0U;
+            }
+        }
     }
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__addr_delay 
-        = __Vdly__tb_vga_uart__DOT__DUT__DOT__addr_delay;
-    vlSelf->tb_vga_uart__DOT__addr_count = __Vdly__tb_vga_uart__DOT__addr_count;
-    if (__Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0) {
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem[__Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0] 
-            = __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v0;
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch 
+        = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__swap_latch;
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count 
+        = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count;
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count 
+        = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count;
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer 
+        = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer;
+    if (__Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem[__Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0] 
+            = __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v0;
     }
-    if (__Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1) {
-        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem[__Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1] 
-            = __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM__DOT__mem__v1;
+    if (__Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem[__Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1] 
+            = __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_1__DOT__mem__v1;
+    }
+    if (__Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem[__Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0] 
+            = __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v0;
+    }
+    if (__Vdlyvset__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem[__Vdlyvdim0__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1] 
+            = __Vdlyvval__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__RAM_0__DOT__mem__v1;
     }
     if (vlSelf->tb_vga_uart__DOT__rst) {
         vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__TX_out = 1U;
@@ -658,6 +1124,15 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
            & ((0x8fU < (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count)) 
               & ((0x203U > (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count)) 
                  & (0x22U < (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__v_count)))));
+    if (vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__curr_buffer) {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0 = 0U;
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1 
+            = vlSelf->tb_vga_uart__DOT__addr_count;
+    } else {
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_0 
+            = vlSelf->tb_vga_uart__DOT__addr_count;
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_a_1 = 0U;
+    }
     if ((1U & (~ (IData)(vlSelf->tb_vga_uart__DOT__rst)))) {
         if (vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__dataDone) {
             if ((1U & (~ ((IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout) 
@@ -670,6 +1145,7 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
     if (vlSelf->tb_vga_uart__DOT__rst) {
         vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__vga_en = 0U;
         __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count = 0U;
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__swap_buf = 0U;
         vlSelf->tb_vga_uart__DOT__DUT__DOT__wen = 0U;
         __Vdly__tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__dataOut = 0U;
         __Vdly__tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__state = 0U;
@@ -685,11 +1161,22 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
                 = (1U & ((IData)(1U) + (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count)));
             vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__vga_en = 0U;
         }
+        vlSelf->tb_vga_uart__DOT__DUT__DOT__swap_buf = 0U;
         vlSelf->tb_vga_uart__DOT__DUT__DOT__wen = 0U;
         if (vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__dataDone) {
-            vlSelf->tb_vga_uart__DOT__DUT__DOT__wen 
-                = (1U & (~ ((IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout) 
-                            >> 7U)));
+            if ((0x80U & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout))) {
+                if ((0U != (0x7fU & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout)))) {
+                    vlSelf->tb_vga_uart__DOT__DUT__DOT__swap_buf 
+                        = (1U == (0x7fU & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout)));
+                }
+                if ((0U == (0x7fU & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout)))) {
+                    vlSelf->tb_vga_uart__DOT__DUT__DOT__wen = 0U;
+                } else if ((1U != (0x7fU & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__rx_dout)))) {
+                    vlSelf->tb_vga_uart__DOT__DUT__DOT__wen = 0U;
+                }
+            } else {
+                vlSelf->tb_vga_uart__DOT__DUT__DOT__wen = 1U;
+            }
         }
         if ((2U & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__state))) {
             if ((1U & (IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__state))) {
@@ -744,6 +1231,8 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
                     ? 0U : 1U);
         }
     }
+    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count 
+        = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count;
     vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__addr_b 
         = (0x1ffffU & (((IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__vga_active)
                          ? (0x1ffU & (((IData)(vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__h_count) 
@@ -755,8 +1244,6 @@ VL_INLINE_OPT void Vtb_vga_uart___024root___nba_sequent__TOP__0(Vtb_vga_uart___0
                                                      - (IData)(0x23U)) 
                                                     >> 1U))
                                               : 0U))));
-    vlSelf->tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count 
-        = __Vdly__tb_vga_uart__DOT__DUT__DOT__VGA__DOT__VGA__DOT__clk_div_count;
     vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__dataOut 
         = __Vdly__tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__dataOut;
     vlSelf->tb_vga_uart__DOT__DUT__DOT__UART__DOT__UART_RX1__DOT__state 

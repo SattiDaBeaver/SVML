@@ -10,7 +10,6 @@ module tb_spi_slave;
     logic mosi;
     logic miso;
 
-    logic load;
     logic [WIDTH-1:0] din;
     logic d_valid;
     logic [WIDTH-1:0] dout;
@@ -22,7 +21,6 @@ module tb_spi_slave;
         .cs_n(cs_n),
         .mosi(mosi),
         .miso(miso),
-        .load(load),
         .din(din),
         .d_valid(d_valid),
         .dout(dout)
@@ -52,16 +50,13 @@ module tb_spi_slave;
         rst   = 1;
         cs_n  = 1;
         mosi  = 0;
-        load  = 0;
         din   = 8'hA5;  // slave response
 
         #(5*T);
         rst = 0;
 
         // Preload TX
-        load = 1;
         #(T);
-        load = 0;
 
         // Start transaction
         cs_n = 0;
@@ -69,6 +64,9 @@ module tb_spi_slave;
         // Send byte 0x3C
         spi_send_byte(8'h3C);
         spi_send_byte(8'h80);
+        cs_n = 1;
+        #(5*T);
+        cs_n = 0;
         spi_send_byte(8'h36);
         spi_send_byte(8'h1B);
 

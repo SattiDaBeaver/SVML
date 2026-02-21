@@ -1,1 +1,5 @@
+# ignore CPU architecture file
 UART_software_interface/.arch
+
+# ignore all .vcd files
+Module-Library/*/sim/*.vcd

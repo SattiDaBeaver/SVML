@@ -10,7 +10,6 @@ module spi_slave #(
     output logic                miso,
 
     // Data wires
-    input  logic                load,
     input  logic [WIDTH-1:0]    din,
     
     output logic                d_valid,
@@ -21,13 +20,13 @@ module spi_slave #(
     logic [$clog2(WIDTH):0] count;
 
     // Sample MOSI on rising edge
-    always_ff @(posedge sclk or posedge rst) begin
-        if (rst) begin
+    always_ff @(posedge sclk or posedge rst or posedge cs_n) begin
+        if (rst || cs_n) begin
             shift_in    <= 0;
             d_valid     <= 1'b0;
             count       <= 0;
         end
-        else if (!cs_n) begin
+        else begin
             shift_in    <= {shift_in[WIDTH-2:0], mosi};
 
             if (count == WIDTH - 1) begin
@@ -40,10 +39,6 @@ module spi_slave #(
                 count       <= count + 1;
             end
         end
-        else begin
-            count   <= 0;
-            d_valid <= 1'b0;
-        end
     end
   
     // Shift out on falling edge
@@ -55,9 +50,7 @@ module spi_slave #(
             shift_out   <= {shift_out[WIDTH-2:0], 1'b0};
         end
         else begin
-            if (load) begin
-                shift_out   <= din;
-            end
+            shift_out   <= din;
         end
     end
 

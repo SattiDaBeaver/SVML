@@ -18,6 +18,8 @@ void Vtb_spi_slave___024root___eval_initial(Vtb_spi_slave___024root* vlSelf) {
     vlSelf->__Vm_traceActivity[1U] = 1U;
     Vtb_spi_slave___024root___eval_initial__TOP__Vtiming__0(vlSelf);
     Vtb_spi_slave___024root___eval_initial__TOP__Vtiming__1(vlSelf);
+    vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__cs_n__0 
+        = vlSelf->tb_spi_slave__DOT__cs_n;
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__rst__0 
         = vlSelf->tb_spi_slave__DOT__rst;
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__sclk__0 
@@ -33,7 +35,7 @@ VL_INLINE_OPT VlCoroutine Vtb_spi_slave___024root___eval_initial__TOP__Vtiming__
         co_await vlSelf->__VdlySched.delay(0x6fULL, 
                                            nullptr, 
                                            "../testbench/tb_spi_slave.sv", 
-                                           35);
+                                           33);
         vlSelf->tb_spi_slave__DOT__sclk = (1U & (~ (IData)(vlSelf->tb_spi_slave__DOT__sclk)));
     }
 }
@@ -48,26 +50,13 @@ VL_INLINE_OPT void Vtb_spi_slave___024root___nba_sequent__TOP__0(Vtb_spi_slave__
     if (false && vlSelf) {}  // Prevent unused
     Vtb_spi_slave__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_spi_slave___024root___nba_sequent__TOP__0\n"); );
-    // Init
-    CData/*7:0*/ __Vdly__tb_spi_slave__DOT__dut__DOT__shift_out;
-    __Vdly__tb_spi_slave__DOT__dut__DOT__shift_out = 0;
     // Body
-    __Vdly__tb_spi_slave__DOT__dut__DOT__shift_out 
-        = vlSelf->tb_spi_slave__DOT__dut__DOT__shift_out;
-    if (vlSelf->tb_spi_slave__DOT__rst) {
-        __Vdly__tb_spi_slave__DOT__dut__DOT__shift_out = 0U;
-    } else if (vlSelf->tb_spi_slave__DOT__cs_n) {
-        if (vlSelf->tb_spi_slave__DOT__load) {
-            __Vdly__tb_spi_slave__DOT__dut__DOT__shift_out 
-                = vlSelf->tb_spi_slave__DOT__din;
-        }
-    } else {
-        __Vdly__tb_spi_slave__DOT__dut__DOT__shift_out 
-            = (0xfeU & ((IData)(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_out) 
-                        << 1U));
-    }
     vlSelf->tb_spi_slave__DOT__dut__DOT__shift_out 
-        = __Vdly__tb_spi_slave__DOT__dut__DOT__shift_out;
+        = ((IData)(vlSelf->tb_spi_slave__DOT__rst) ? 0U
+            : ((IData)(vlSelf->tb_spi_slave__DOT__cs_n)
+                ? (IData)(vlSelf->tb_spi_slave__DOT__din)
+                : (0xfeU & ((IData)(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_out) 
+                            << 1U))));
 }
 
 VL_INLINE_OPT void Vtb_spi_slave___024root___nba_sequent__TOP__1(Vtb_spi_slave___024root* vlSelf) {
@@ -82,13 +71,10 @@ VL_INLINE_OPT void Vtb_spi_slave___024root___nba_sequent__TOP__1(Vtb_spi_slave__
     // Body
     __Vdly__tb_spi_slave__DOT__dut__DOT__count = vlSelf->tb_spi_slave__DOT__dut__DOT__count;
     __Vdly__tb_spi_slave__DOT__dut__DOT__shift_in = vlSelf->tb_spi_slave__DOT__dut__DOT__shift_in;
-    if (vlSelf->tb_spi_slave__DOT__rst) {
+    if (((IData)(vlSelf->tb_spi_slave__DOT__rst) | (IData)(vlSelf->tb_spi_slave__DOT__cs_n))) {
         __Vdly__tb_spi_slave__DOT__dut__DOT__shift_in = 0U;
         vlSelf->tb_spi_slave__DOT__d_valid = 0U;
         __Vdly__tb_spi_slave__DOT__dut__DOT__count = 0U;
-    } else if (vlSelf->tb_spi_slave__DOT__cs_n) {
-        __Vdly__tb_spi_slave__DOT__dut__DOT__count = 0U;
-        vlSelf->tb_spi_slave__DOT__d_valid = 0U;
     } else {
         __Vdly__tb_spi_slave__DOT__dut__DOT__shift_in 
             = ((0xfeU & ((IData)(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_in) 

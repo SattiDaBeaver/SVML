@@ -1,4 +1,4 @@
-module vga_uart #(
+module vga_spi #(
     parameter RES_X = 320,
     parameter RES_Y = 240,
     parameter RES_DIV = 2,
@@ -11,9 +11,11 @@ module vga_uart #(
     input  logic                    clk, 
     input  logic                    rst,
 
-    // UART wires
-    input  logic                    rx,
-    output logic                    tx,
+    // SPI wires
+    input  logic                    sclk,
+    input  logic                    cs_n,
+    input  logic                    mosi,
+    output logic                    miso,
 
     // VGA wires
     output logic [PIXEL_WIDTH-1:0]  vga_r,
@@ -33,11 +35,8 @@ module vga_uart #(
         V_COUNT_MAX = 525,
         H_BITS      = $clog2(H_COUNT_MAX),
         V_BITS      = $clog2(V_COUNT_MAX),
-        CLK_PER_BIT = 50,
         CLK_BITS    = 8,
-        DATA_WIDTH  = MEM_WIDTH,
-        PARITY_BITS = 0,
-        STOP_BITS   = 1;
+        DATA_WIDTH  = MEM_WIDTH;
 
     // Helper wires
     // Memory helper wires
@@ -49,17 +48,46 @@ module vga_uart #(
     logic [MEM_WIDTH-1:0]   dout; // unused
     logic                   addr_delay;
 
-    // UART helper wires
-    logic                   rx_din;
-    logic [MEM_WIDTH-1:0]   rx_dout;
-    logic                   rx_done;
+    // SPI helper wires
+    logic [MEM_WIDTH-1:0]   din_spi; // unused
+    logic                   d_valid_spi;
+    logic [MEM_WIDTH-1:0]   dout_spi;
+
+    // SPI clock domain crossing sync wires
+    logic                   toggle_spi;
+    logic                   sync1;
+    logic                   sync2;
+    logic                   sync3;
+    logic                   d_valid_sync;
 
     // Helper assignments
-    assign rx_din   = rx;
     assign mem_addr = addr_count;
 
-    // Memory counter wires
+    // SPI logic
+    // SPI domain: toggle on each valid
+    always_ff @(posedge d_valid_spi or posedge rst) begin
+        if (rst) toggle_spi <= 0;
+        else     toggle_spi <= ~toggle_spi;
+    end
+
+    // Sys clock domain: 2FF sync
+    always_ff @(posedge clk) begin
+        sync1 <= toggle_spi;
+        sync2 <= sync1;
+        sync3 <= sync2;
+    end
+
+    // Edge detect = new data arrived
+    assign d_valid_sync = sync2 ^ sync3;
     
+    /* Pixel logic
+    -  pixel[7] == 1        => control bit
+        -  pixel[0] == 1    => swap buffer
+        -  else             => align counter
+    -  else                 => pixel in RGB
+        -  0b00RRGGBB       => format (6-bits)
+    */ 
+
     always_ff @(posedge clk) begin
         if (rst) begin
             addr_count <= 0;
@@ -70,9 +98,9 @@ module vga_uart #(
         else begin
             wen        <= 1'b0;
             swap_buf   <= 1'b0;
-            if (rx_done) begin
-                if (rx_dout[7] == 1'b1) begin   // control bit
-                    case (rx_dout[6:0])
+            if (d_valid_sync) begin
+                if (dout_spi[7] == 1'b1) begin   // control bit
+                    case (dout_spi[6:0])
                         7'h00: begin
                             addr_count  <= 0;
                             wen         <= 1'b0;
@@ -90,7 +118,7 @@ module vga_uart #(
                     endcase
                 end
                 else begin
-                    din         <= rx_dout;
+                    din         <= dout_spi;
                     wen         <= 1'b1;
                     if (addr_count >= MEM_DEPTH - 1) begin
                         addr_count  <= 0;
@@ -113,7 +141,7 @@ module vga_uart #(
 	vga_double_buf #(
         .RES_X(RES_X),
         .RES_Y(RES_Y),
-        .MEM_WIDTH(MEM_WIDTH)
+        .MEM_WIDTH(DATA_WIDTH)
     ) VGA (
         .clk(clk),
         .rst(rst),
@@ -130,28 +158,17 @@ module vga_uart #(
         .v_sync(v_sync)
     );
 
-    uart_wrapper #(
-        .CLK_BITS(CLK_BITS),
-        .DATA_WIDTH(DATA_WIDTH),
-        .PARITY_BITS(PARITY_BITS),
-        .STOP_BITS(STOP_BITS)
-    ) UART (
-        .clk(clk),
+    spi_slave #(
+        .WIDTH(MEM_WIDTH)
+        ) SPI (
         .rst(rst),
-        .clk_per_bit(CLK_PER_BIT),
-
-        .TX_dataIn(),
-        .TX_en(),
-
-        .TX_out(),
-        .TX_done(),
-        .TX_busy(),
-
-        .RX_dataIn(rx_din),
-
-        .RX_dataOut(rx_dout),
-        .RX_done(rx_done),
-        .RX_parityError()
+        .sclk(sclk),
+        .cs_n(cs_n),
+        .mosi(mosi),
+        .miso(miso),
+        .din(din_spi),
+        .d_valid(d_valid_spi),
+        .dout(dout_spi)
     );
     
 endmodule
@@ -497,320 +514,63 @@ module dp_ram_sync_read #(
 
 endmodule
 
-module uart_wrapper #(
-    parameter CLK_BITS     = 8, // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
-    parameter DATA_WIDTH   = 8,
-    parameter PARITY_BITS  = 0,
-    parameter STOP_BITS    = 1
+module spi_slave #(
+    parameter WIDTH = 8
 ) (
-    input  logic                    clk,
-    input  logic                    rst,
+    input  logic                rst,
 
-    input  logic   [CLK_BITS-1:0]   clk_per_bit,
+    // SPI wires
+    input  logic                sclk,
+    input  logic                cs_n,
+    input  logic                mosi,
+    output logic                miso,
 
-    input  logic   [DATA_WIDTH-1:0] TX_dataIn,
-    input  logic                    TX_en,
-
-    input  logic                    RX_dataIn,
-
-    output logic                    TX_out,
-    output logic                    TX_done,
-    output logic                    TX_busy,
-
-    output logic   [DATA_WIDTH-1:0] RX_dataOut,
-    output logic                    RX_done,
-    output logic                    RX_parityError
+    // Data wires
+    input  logic [WIDTH-1:0]    din,
+    
+    output logic                d_valid,
+    output logic [WIDTH-1:0]    dout
 );
-    // UART Transmitter Module
-    UART_TX #(
-        .CLK_BITS(CLK_BITS),
-        .DATA_WIDTH(DATA_WIDTH),
-        .PARITY_BITS(PARITY_BITS),
-        .STOP_BITS(STOP_BITS)
-        ) 
-        UART_TX1 ( 
-        .clk(clk),
-        .rst(rst),
+    logic [WIDTH-1:0]       shift_in;
+    logic [WIDTH-1:0]       shift_out;
+    logic [$clog2(WIDTH):0] count;
 
-        .clk_per_bit(clk_per_bit),
-        .dataIn(TX_dataIn),
-        .TXen(TX_en),
+    // Sample MOSI on rising edge
+    always_ff @(posedge sclk or posedge rst or posedge cs_n) begin
+        if (rst || cs_n) begin
+            shift_in    <= 0;
+            d_valid     <= 1'b0;
+            count       <= 0;
+        end
+        else begin
+            shift_in    <= {shift_in[WIDTH-2:0], mosi};
 
-        .TXout(TX_out),
-        .TXdone(TX_done),
-        .busy(TX_busy)
-    );
-
-    // UART Receiver Module
-    UART_RX #(
-        .CLK_BITS(CLK_BITS),
-        .DATA_WIDTH(DATA_WIDTH),
-        .PARITY_BITS(PARITY_BITS),
-        .STOP_BITS(STOP_BITS)
-        )
-        UART_RX1 (
-        .clk(clk),
-        .rst(rst),
-
-        .clk_per_bit(clk_per_bit),
-        .dataIn(RX_dataIn),
-
-        .RXout(RX_dataOut),
-        .RXdone(RX_done),
-        .parityError(RX_parityError)
-    );
-endmodule
-
-module UART_RX #(
-    parameter CLK_BITS = 8,   // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
-    parameter DATA_WIDTH = 8,
-    parameter STOP_BITS = 2,  // either 1 or 2 stop bits
-    parameter PARITY_BITS = 1,
-    parameter PACKET_SIZE = DATA_WIDTH + STOP_BITS + PARITY_BITS + 1
-    // Total Packet Size = DATA_WIDTH + STOP_BITS + 1 Start Bit + 1 Parity Bit
-) ( 
-    input  logic                                clk,
-    input  logic                                rst,
-
-    input  logic    [CLK_BITS - 1 : 0]          clk_per_bit,
-    input  logic                                dataIn,
-
-    output logic    [DATA_WIDTH - 1 : 0]         RXout,
-    output logic                                RXdone,
-    output logic                                parityError
-);
-
-    localparam indexBits = $clog2(PACKET_SIZE);
-
-    logic   [indexBits - 1 : 0]     index;
-    logic   [CLK_BITS - 1 : 0]      clkCount;
-
-    logic                           regInMeta;
-    logic                           regIn;
-    logic                           parity;
-
-    logic    [DATA_WIDTH - 1 : 0]    dataOut;
-    logic                           dataDone;
-
-    // Remove Problems due to Metastability
-    always_ff @(posedge clk) begin
-        regInMeta <= dataIn;
-        regIn <= regInMeta;
+            if (count == WIDTH - 1) begin
+                dout        <= {shift_in[WIDTH-2:0], mosi};
+                d_valid     <= 1'b1;
+                count       <= 0;
+            end
+            else begin
+                d_valid     <= 1'b0;
+                count       <= count + 1;
+            end
+        end
     end
-
-
-
-    typedef enum logic [1:0] {
-        IDLE,
-        START,
-        RECEIVE,
-        DONE
-    } 
-    state_t;
-
-    state_t state;
-
-    always_ff @(posedge clk) begin
+  
+    // Shift out on falling edge
+    always_ff @(negedge sclk or posedge rst) begin
         if (rst) begin
-            dataOut <= 0;
-            state <= IDLE;
-            index <= 1'b0;
-            clkCount <= 0;
-            dataDone <= 0;
+            shift_out   <= 0;
+        end
+        else if (!cs_n) begin
+            shift_out   <= {shift_out[WIDTH-2:0], 1'b0};
         end
         else begin
-            case (state)
-                IDLE: begin
-                    clkCount <= 0;
-                    index <= 0;
-                    dataOut <= 0;
-                    dataDone <= 0;
-
-                    if (regIn == 1'b0) begin    // Start Condition
-                        state <= START;
-                    end
-                    else begin
-                        state <= IDLE;
-                    end
-                end
-
-                START: begin
-                    if (clkCount == ((clk_per_bit - 1) >> 1)) begin
-                        clkCount <= 0;
-                        state <= RECEIVE;
-                    end
-                    else begin
-                        clkCount <= clkCount + 1;
-                        state <= START;
-                    end
-
-                end
-
-                RECEIVE: begin
-
-                    if (clkCount < clk_per_bit - 1) begin
-                        clkCount <= clkCount + 1;
-                        state <= RECEIVE;
-                    end
-
-                    else begin
-                        clkCount <= 0;
-                        if (index < DATA_WIDTH) begin
-                            dataOut[index] <= regIn;
-                            index <= index + 1;
-                            state <= RECEIVE;
-                        end
-                        else if (index == DATA_WIDTH && PARITY_BITS > 0) begin
-                            parity <= regIn;
-                            state <= DONE;
-                        end
-                        else begin
-                            state <= DONE;
-                        end
-                    end
-                end
-
-                DONE: begin
-                    if (clkCount < clk_per_bit - 1) begin
-                        clkCount <= clkCount + 1;
-                        state <= DONE;
-                    end
-                    else begin
-                        clkCount <= 0;
-                        state <= IDLE;
-                        dataDone <= 1'b1;
-                        index <= 0;
-                        RXout <= dataOut;
-                    end
-                end
-
-                default: begin
-                    state <= IDLE;
-                end
-                
-            endcase
-        end 
-    end
-
-    always_comb begin
-        RXdone = dataDone;
-        if (PARITY_BITS > 0) begin
-            parityError = (^RXout) ^ parity;
-        end
-        else begin
-            parityError = 0;
+            shift_out   <= din;
         end
     end
-endmodule
 
-module UART_TX #(
-    parameter CLK_BITS = 8,         // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
-    parameter DATA_WIDTH = 8,
-    parameter STOP_BITS = 1,        // either 1 or 2 stop bits
-    parameter PARITY_BITS = 1,      // can be set to 0
-    parameter PACKET_SIZE = DATA_WIDTH + STOP_BITS + PARITY_BITS + 1 
-    // Total Packet Size = DATA_WIDTH + STOP_BITS + 1 Start Bit + 1 Parity Bit
-) ( 
-    input  logic                                clk,
-    input  logic                                rst,
-
-    input  logic      [CLK_BITS - 1 : 0]        clk_per_bit,
-    input  logic      [DATA_WIDTH - 1 : 0]      dataIn,
-    input  logic                                TXen,
-
-    output logic                                TXout,
-    output logic                                TXdone,
-    output logic                                busy
-);
-
-    localparam indexBits = $clog2(PACKET_SIZE);
-
-    logic   [PACKET_SIZE - 1 : 0]       packet;
-    logic                               parityBit;
-    logic   [indexBits - 1 : 0]         index;
-    logic   [CLK_BITS - 1 : 0]          clkCount;
-
-    typedef enum logic [1:0] {
-        IDLE,
-        TRANSMIT,
-        DONE
-    } 
-    state_t;
-
-    state_t state;
-
-    always_comb begin
-        parityBit = ^dataIn;    // 0 for even number of 1's, 1 for odd number of 1's
-    end
-
-    always_ff @(posedge clk) begin
-        if (rst) begin
-            TXout       <= 1'b1;
-            state       <= IDLE;
-            busy        <= 1'b0;
-            index       <= 1'b0;
-            clkCount    <= 0;
-            TXdone      <= 0;
-        end
-        else begin
-            case (state)
-                IDLE: begin
-                    TXout       <= 1'b1;
-                    index       <= 1'b0;
-                    clkCount    <= 0;
-                    TXdone      <= 0;
-
-                    if (TXen) begin
-                        if (PARITY_BITS > 0) begin
-                            packet <= {{STOP_BITS{1'b1}}, parityBit, dataIn, 1'b0};
-                        end 
-                        else begin
-                            packet <= {{STOP_BITS{1'b1}}, dataIn, 1'b0};
-                        end
-                        //                ^                         ^
-                        //                |                         |
-                        //              Stop                      Start
-                        busy <= 1'b1;
-                        state <= TRANSMIT;
-                    end
-                    else begin
-                        state <= IDLE;
-                    end
-                end
-
-                TRANSMIT: begin
-                    TXout <= packet[index];
-
-                    if (clkCount < clk_per_bit - 1) begin
-                        clkCount <= clkCount + 1;
-                        state <= TRANSMIT;
-                    end
-
-                    else begin
-                        clkCount <= 0;
-                        if (index == PACKET_SIZE - 1) begin
-                            state <= DONE;
-                        end
-                        else begin
-                            index <= index + 1;
-                            state <= TRANSMIT;
-                        end
-                    end
-                end
-
-                DONE: begin
-                    state       <= IDLE;
-                    busy        <= 1'b0;
-                    TXdone      <= 1'b1;
-                    index       <= 1'b0;
-                    clkCount    <= 0;
-                end
-
-                default: begin
-                    state <= IDLE;
-                end
-            endcase
-        end 
-    end
+    assign miso = shift_out[WIDTH-1];
+    
 endmodule
 

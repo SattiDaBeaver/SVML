@@ -11,6 +11,7 @@ using namespace std;
 void update_frame(uint8_t buffer [][WIDTH], UART* uart);
 void cool_design(uint8_t buffer [][WIDTH]);
 void fill_screen(uint8_t buffer [][WIDTH], uint8_t color);
+void swap(UART* uart);
 
 class Ball {
     public:
@@ -56,7 +57,7 @@ int main (int argc, char* argv[]) {
     }
 
     UART uart;
-    int baud = 1000000;    
+    int baud = 2000000;    
     uart.open(argv[1], baud);
 
     uint8_t buffer[HEIGHT][WIDTH];
@@ -64,6 +65,7 @@ int main (int argc, char* argv[]) {
     fill_screen(buffer, 0x00);
     cool_design(buffer);
     update_frame(buffer, &uart);
+    swap(&uart);
 
     Ball barr[5] = {Ball(12, 24, 12, 24),
                     Ball(111, 24, -15, 20),
@@ -71,19 +73,72 @@ int main (int argc, char* argv[]) {
                     Ball(230, 24, -30, -24),
                     Ball(124, 24, 30, 10)};
 
-
+    int rad = 5;
+    int drad = 3;
+    // return 0;
     while(1) {
-        fill_screen(buffer, 0x00);
-
-        for (int i = 0; i < 5; i++) {
-            barr[i].update_ball();
-            int x = barr[i].x;
-            int y = barr[i].y;
-            buffer[y][x] = 0x3F;
+        rad += drad;
+        if (rad > 50) {
+            rad = 50;
+            drad *= -1;
         }
+        else if (rad < 5) {
+            rad = 5;
+            drad *= -1;
+        }
+        for (int x = 0; x < WIDTH; x++) {
+            for (int y = 0; y < HEIGHT; y++) {
+                int dx = x - WIDTH / 2;
+                int dy = y - HEIGHT / 2;
 
+                
+                if (sqrt(dx*dx + dy*dy) < rad) {
+                    buffer[y][x] = (x + y) % 0x3F;
+                }
+                else {
+                    buffer[y][x] = ((WIDTH - x) + y) % 0x3F;
+                }
+            }
+        }
         update_frame(buffer, &uart);
-        Sleep(100);
+        swap(&uart);
+
+        Sleep(10);
+
+        //-------------------------------
+
+        // fill_screen(buffer, 0x3F);
+        // for (int i = 0; i < 5; i++) {
+        //     barr[i].update_ball();
+        //     int x = barr[i].x;
+        //     int y = barr[i].y;
+        //     buffer[y][x] = 0x00;
+        // }
+        
+        // update_frame(buffer, &uart);
+        // swap(&uart);
+        // Sleep(10);
+
+        //------------------------------------------
+        // // TEST GOD BLESS
+        // char c;
+        // std::cin >> c;
+
+        // if (c == 's') {
+        //     swap(&uart);
+        // }
+        // else if (c == 'b') {
+        //     fill_screen(buffer, 0x00);
+        //     update_frame(buffer, &uart);
+        // }
+        // else if (c == 'w') {
+        //     fill_screen(buffer, 0x3F);
+        //     update_frame(buffer, &uart);
+        // }
+        // else if (c == 'd') {
+        //     cool_design(buffer);
+        //     update_frame(buffer, &uart);
+        // }
     }
     
     Sleep(100);
@@ -120,4 +175,9 @@ void cool_design(uint8_t buffer [][WIDTH]) {
 
 void fill_screen(uint8_t buffer [][WIDTH], uint8_t color) {
     memset(buffer, color, HEIGHT * WIDTH);
+}
+
+void swap(UART* uart) {
+    uint8_t packet = 0x81;
+    uart->write(&packet, 1);
 }

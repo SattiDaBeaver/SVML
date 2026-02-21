@@ -3,39 +3,111 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'CLOCK_50'
-Slack : -7.970
-TNS   : -2453.169
+Slack : -7.605
+TNS   : -2323.884
+
+Type  : Slow 1200mV 85C Model Setup 'ARDUINO_IO[0]'
+Slack : -1.374
+TNS   : -12.199
+
+Type  : Slow 1200mV 85C Model Setup 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : -0.204
+TNS   : -0.204
 
 Type  : Slow 1200mV 85C Model Hold 'CLOCK_50'
-Slack : 0.342
+Slack : 0.341
 TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'ARDUINO_IO[0]'
+Slack : 0.378
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : 0.792
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ARDUINO_IO[0]'
+Slack : -3.210
+TNS   : -31.270
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'CLOCK_50'
 Slack : -3.000
-TNS   : -1237.911
+TNS   : -1193.015
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : -1.403
+TNS   : -1.403
 
 Type  : Slow 1200mV 0C Model Setup 'CLOCK_50'
-Slack : -7.212
-TNS   : -2217.529
+Slack : -6.890
+TNS   : -2103.977
+
+Type  : Slow 1200mV 0C Model Setup 'ARDUINO_IO[0]'
+Slack : -1.212
+TNS   : -10.332
+
+Type  : Slow 1200mV 0C Model Setup 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : -0.105
+TNS   : -0.105
 
 Type  : Slow 1200mV 0C Model Hold 'CLOCK_50'
 Slack : 0.307
 TNS   : 0.000
 
+Type  : Slow 1200mV 0C Model Hold 'ARDUINO_IO[0]'
+Slack : 0.339
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : 0.725
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ARDUINO_IO[0]'
+Slack : -3.210
+TNS   : -31.270
+
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
 Slack : -3.000
-TNS   : -1197.327
+TNS   : -1152.431
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : -1.403
+TNS   : -1.403
 
 Type  : Fast 1200mV 0C Model Setup 'CLOCK_50'
-Slack : -2.914
-TNS   : -823.776
+Slack : -2.776
+TNS   : -780.630
+
+Type  : Fast 1200mV 0C Model Setup 'ARDUINO_IO[0]'
+Slack : -0.030
+TNS   : -0.240
+
+Type  : Fast 1200mV 0C Model Setup 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : 0.519
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'CLOCK_50'
-Slack : 0.150
+Slack : 0.149
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'ARDUINO_IO[0]'
+Slack : 0.166
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : 0.322
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
 Slack : -3.000
-TNS   : -598.814
+TNS   : -565.745
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ARDUINO_IO[0]'
+Slack : -3.000
+TNS   : -26.634
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'vga_spi:VGA_SPI|spi_slave:SPI|d_valid'
+Slack : -1.000
+TNS   : -1.000
 
 ------------------------------------------------------------

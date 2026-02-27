@@ -15,6 +15,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_spi_slave___024root final : public Verila
   public:
 
     // DESIGN SPECIFIC STATE
+    CData/*0:0*/ tb_spi_slave__DOT__clk;
     CData/*0:0*/ tb_spi_slave__DOT__rst;
     CData/*0:0*/ tb_spi_slave__DOT__sclk;
     CData/*0:0*/ tb_spi_slave__DOT__cs_n;
@@ -23,18 +24,27 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_spi_slave___024root final : public Verila
     CData/*0:0*/ tb_spi_slave__DOT__d_valid;
     CData/*7:0*/ tb_spi_slave__DOT__dout;
     CData/*7:0*/ tb_spi_slave__DOT__dut__DOT__shift_in;
-    CData/*7:0*/ tb_spi_slave__DOT__dut__DOT__shift_out;
     CData/*3:0*/ tb_spi_slave__DOT__dut__DOT__count;
+    CData/*7:0*/ tb_spi_slave__DOT__dut__DOT__captured;
+    CData/*0:0*/ tb_spi_slave__DOT__dut__DOT__toggle;
+    CData/*7:0*/ tb_spi_slave__DOT__dut__DOT__shift_out;
+    CData/*0:0*/ tb_spi_slave__DOT__dut__DOT__sync1;
+    CData/*0:0*/ tb_spi_slave__DOT__dut__DOT__sync2;
+    CData/*0:0*/ tb_spi_slave__DOT__dut__DOT__sync3;
+    CData/*7:0*/ __Vdly__tb_spi_slave__DOT__dut__DOT__shift_in;
+    CData/*3:0*/ __Vdly__tb_spi_slave__DOT__dut__DOT__count;
+    CData/*0:0*/ __Vdly__tb_spi_slave__DOT__dut__DOT__toggle;
+    CData/*0:0*/ __Vtrigprevexpr___TOP__tb_spi_slave__DOT__clk__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_spi_slave__DOT__cs_n__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_spi_slave__DOT__rst__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_spi_slave__DOT__sclk__0;
     CData/*0:0*/ __VactContinue;
-    IData/*31:0*/ tb_spi_slave__DOT__spi_send_byte__Vstatic__i;
     IData/*31:0*/ __VactIterCount;
-    VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
     VlDelayScheduler __VdlySched;
-    VlTriggerVec<3> __VactTriggered;
-    VlTriggerVec<3> __VnbaTriggered;
+    VlTriggerScheduler __VtrigSched_h473059c7__0;
+    VlTriggerVec<4> __VactTriggered;
+    VlTriggerVec<4> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtb_spi_slave__Syms* const vlSymsp;

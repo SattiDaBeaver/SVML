@@ -30,258 +30,562 @@ VL_INLINE_OPT VlCoroutine Vtb_spi_slave___024root___eval_initial__TOP__Vtiming__
     vlSelf->tb_spi_slave__DOT__rst = 1U;
     vlSelf->tb_spi_slave__DOT__cs_n = 1U;
     vlSelf->tb_spi_slave__DOT__mosi = 0U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__din = 0xa5U;
-    co_await vlSelf->__VdlySched.delay(0x457ULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
-                                       55);
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       61);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       61);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       61);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       61);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       61);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->tb_spi_slave__DOT__rst = 0U;
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
-                                       59);
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       63);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       63);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->tb_spi_slave__DOT__cs_n = 0U;
     __Vtask_tb_spi_slave__DOT__spi_send_byte__0__data = 0x3cU;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__0__data) 
                                              >> 7U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__0__data) 
                                              >> 6U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__0__data) 
                                              >> 5U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__0__data) 
                                              >> 4U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__0__data) 
                                              >> 3U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__0__data) 
                                              >> 2U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__0__data) 
                                              >> 1U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 0U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & (IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__0__data));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 0xffffffffU;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     __Vtask_tb_spi_slave__DOT__spi_send_byte__1__data = 0x80U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__1__data) 
                                              >> 7U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__1__data) 
                                              >> 6U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__1__data) 
                                              >> 5U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__1__data) 
                                              >> 4U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__1__data) 
                                              >> 3U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__1__data) 
                                              >> 2U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__1__data) 
                                              >> 1U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 0U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & (IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__1__data));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 0xffffffffU;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__cs_n = 1U;
-    co_await vlSelf->__VdlySched.delay(0x457ULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
-                                       68);
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       71);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->tb_spi_slave__DOT__cs_n = 0U;
     __Vtask_tb_spi_slave__DOT__spi_send_byte__2__data = 0x36U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__2__data) 
                                              >> 7U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__2__data) 
                                              >> 6U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__2__data) 
                                              >> 5U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__2__data) 
                                              >> 4U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__2__data) 
                                              >> 3U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__2__data) 
                                              >> 2U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__2__data) 
                                              >> 1U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 0U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & (IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__2__data));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 0xffffffffU;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     __Vtask_tb_spi_slave__DOT__spi_send_byte__3__data = 0x1bU;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__3__data) 
                                              >> 7U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 6U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__3__data) 
                                              >> 6U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 5U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__3__data) 
                                              >> 5U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 4U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__3__data) 
                                              >> 4U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 3U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__3__data) 
                                              >> 3U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 2U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__3__data) 
                                              >> 2U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & ((IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__3__data) 
                                              >> 1U));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 0U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__mosi = (1U & (IData)(__Vtask_tb_spi_slave__DOT__spi_send_byte__3__data));
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
+                                       39);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 1U;
+    co_await vlSelf->__VdlySched.delay(0x7a120ULL, 
+                                       nullptr, "../testbench/tb_spi_slave.sv", 
                                        41);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_spi_slave__DOT__spi_send_byte__Vstatic__i = 0xffffffffU;
-    co_await vlSelf->__VdlySched.delay(0xdeULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
-                                       73);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->tb_spi_slave__DOT__sclk = 0U;
     vlSelf->tb_spi_slave__DOT__cs_n = 1U;
-    co_await vlSelf->__VdlySched.delay(0x457ULL, nullptr, 
-                                       "../testbench/tb_spi_slave.sv", 
-                                       76);
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    VL_WRITEF("RX dout = %x\n",8,vlSelf->tb_spi_slave__DOT__dout);
-    VL_FINISH_MT("../testbench/tb_spi_slave.sv", 79, "");
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    co_await vlSelf->__VtrigSched_h473059c7__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_spi_slave.clk)", 
+                                                       "../testbench/tb_spi_slave.sv", 
+                                                       79);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    VL_WRITEF("[%0t] Final dout = 0x%02x\n",64,VL_TIME_UNITED_Q(1000),
+              -9,8,(IData)(vlSelf->tb_spi_slave__DOT__dout));
+    VL_FINISH_MT("../testbench/tb_spi_slave.sv", 82, "");
     vlSelf->__Vm_traceActivity[2U] = 1U;
 }
 
@@ -294,17 +598,21 @@ void Vtb_spi_slave___024root___eval_triggers__act(Vtb_spi_slave___024root* vlSel
     Vtb_spi_slave__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_spi_slave___024root___eval_triggers__act\n"); );
     // Body
-    vlSelf->__VactTriggered.set(0U, ((((IData)(vlSelf->tb_spi_slave__DOT__cs_n) 
+    vlSelf->__VactTriggered.set(0U, ((IData)(vlSelf->tb_spi_slave__DOT__clk) 
+                                     & (~ (IData)(vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__clk__0))));
+    vlSelf->__VactTriggered.set(1U, ((((IData)(vlSelf->tb_spi_slave__DOT__cs_n) 
                                        & (~ (IData)(vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__cs_n__0))) 
                                       | ((IData)(vlSelf->tb_spi_slave__DOT__rst) 
                                          & (~ (IData)(vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__rst__0)))) 
                                      | ((IData)(vlSelf->tb_spi_slave__DOT__sclk) 
                                         & (~ (IData)(vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__sclk__0)))));
-    vlSelf->__VactTriggered.set(1U, (((IData)(vlSelf->tb_spi_slave__DOT__rst) 
+    vlSelf->__VactTriggered.set(2U, (((IData)(vlSelf->tb_spi_slave__DOT__rst) 
                                       & (~ (IData)(vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__rst__0))) 
                                      | ((~ (IData)(vlSelf->tb_spi_slave__DOT__sclk)) 
                                         & (IData)(vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__sclk__0))));
-    vlSelf->__VactTriggered.set(2U, vlSelf->__VdlySched.awaitingCurrentTime());
+    vlSelf->__VactTriggered.set(3U, vlSelf->__VdlySched.awaitingCurrentTime());
+    vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__clk__0 
+        = vlSelf->tb_spi_slave__DOT__clk;
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__cs_n__0 
         = vlSelf->tb_spi_slave__DOT__cs_n;
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__rst__0 

@@ -1,5 +1,5 @@
 Timing Analyzer report for top
-Fri Feb 20 23:18:59 2026
+Fri Feb 27 17:51:26 2026
 Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
 
 
@@ -92,14 +92,15 @@ on the Quartus Prime software download page.
 ; Number detected on machine ; 20          ;
 ; Maximum allowed            ; 14          ;
 ;                            ;             ;
-; Average used               ; 1.78        ;
+; Average used               ; 1.73        ;
 ; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   6.0%      ;
-;     Processor 3            ;   6.0%      ;
-;     Processors 4-14        ;   6.0%      ;
+;     Processor 2            ;   5.6%      ;
+;     Processor 3            ;   5.6%      ;
+;     Processor 4            ;   5.6%      ;
+;     Processors 5-14        ;   5.6%      ;
 +----------------------------+-------------+
 
 
@@ -119,9 +120,9 @@ on the Quartus Prime software download page.
 +------------+-----------------+---------------------------------------+---------------------------------------------------------------+
 ; Fmax       ; Restricted Fmax ; Clock Name                            ; Note                                                          ;
 +------------+-----------------+---------------------------------------+---------------------------------------------------------------+
-; 116.21 MHz ; 116.21 MHz      ; CLOCK_50                              ;                                                               ;
-; 421.23 MHz ; 237.53 MHz      ; ARDUINO_IO[0]                         ; limit due to minimum period restriction (max I/O toggle rate) ;
-; 830.56 MHz ; 416.15 MHz      ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; limit due to minimum period restriction (tmin)                ;
+; 111.27 MHz ; 111.27 MHz      ; CLOCK_50                              ;                                                               ;
+; 510.2 MHz  ; 237.53 MHz      ; ARDUINO_IO[0]                         ; limit due to minimum period restriction (max I/O toggle rate) ;
+; 834.72 MHz ; 416.15 MHz      ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; limit due to minimum period restriction (tmin)                ;
 +------------+-----------------+---------------------------------------+---------------------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -131,9 +132,9 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------------------------+--------+---------------+
 ; Clock                                 ; Slack  ; End Point TNS ;
 +---------------------------------------+--------+---------------+
-; CLOCK_50                              ; -7.605 ; -2323.884     ;
-; ARDUINO_IO[0]                         ; -1.374 ; -12.199       ;
-; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -0.204 ; -0.204        ;
+; CLOCK_50                              ; -7.987 ; -2361.710     ;
+; ARDUINO_IO[0]                         ; -0.960 ; -9.196        ;
+; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -0.198 ; -0.198        ;
 +---------------------------------------+--------+---------------+
 
 
@@ -142,9 +143,9 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------------------------+-------+---------------+
 ; Clock                                 ; Slack ; End Point TNS ;
 +---------------------------------------+-------+---------------+
-; CLOCK_50                              ; 0.341 ; 0.000         ;
+; CLOCK_50                              ; 0.342 ; 0.000         ;
 ; ARDUINO_IO[0]                         ; 0.378 ; 0.000         ;
-; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 0.792 ; 0.000         ;
+; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 0.798 ; 0.000         ;
 +---------------------------------------+-------+---------------+
 
 
@@ -166,7 +167,7 @@ No paths to report.
 ; Clock                                 ; Slack  ; End Point TNS ;
 +---------------------------------------+--------+---------------+
 ; ARDUINO_IO[0]                         ; -3.210 ; -31.270       ;
-; CLOCK_50                              ; -3.000 ; -1193.015     ;
+; CLOCK_50                              ; -3.000 ; -1194.418     ;
 ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -1.403 ; -1.403        ;
 +---------------------------------------+--------+---------------+
 
@@ -183,9 +184,9 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +------------+-----------------+---------------------------------------+---------------------------------------------------------------+
 ; Fmax       ; Restricted Fmax ; Clock Name                            ; Note                                                          ;
 +------------+-----------------+---------------------------------------+---------------------------------------------------------------+
-; 126.74 MHz ; 126.74 MHz      ; CLOCK_50                              ;                                                               ;
-; 452.08 MHz ; 237.53 MHz      ; ARDUINO_IO[0]                         ; limit due to minimum period restriction (max I/O toggle rate) ;
-; 904.98 MHz ; 416.15 MHz      ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; limit due to minimum period restriction (tmin)                ;
+; 121.39 MHz ; 121.39 MHz      ; CLOCK_50                              ;                                                               ;
+; 559.6 MHz  ; 237.53 MHz      ; ARDUINO_IO[0]                         ; limit due to minimum period restriction (max I/O toggle rate) ;
+; 909.09 MHz ; 416.15 MHz      ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; limit due to minimum period restriction (tmin)                ;
 +------------+-----------------+---------------------------------------+---------------------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -195,9 +196,9 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------------------------+--------+---------------+
 ; Clock                                 ; Slack  ; End Point TNS ;
 +---------------------------------------+--------+---------------+
-; CLOCK_50                              ; -6.890 ; -2103.977     ;
-; ARDUINO_IO[0]                         ; -1.212 ; -10.332       ;
-; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -0.105 ; -0.105        ;
+; CLOCK_50                              ; -7.238 ; -2137.764     ;
+; ARDUINO_IO[0]                         ; -0.787 ; -7.365        ;
+; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -0.100 ; -0.100        ;
 +---------------------------------------+--------+---------------+
 
 
@@ -208,7 +209,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------------------------+-------+---------------+
 ; CLOCK_50                              ; 0.307 ; 0.000         ;
 ; ARDUINO_IO[0]                         ; 0.339 ; 0.000         ;
-; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 0.725 ; 0.000         ;
+; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 0.730 ; 0.000         ;
 +---------------------------------------+-------+---------------+
 
 
@@ -230,7 +231,7 @@ No paths to report.
 ; Clock                                 ; Slack  ; End Point TNS ;
 +---------------------------------------+--------+---------------+
 ; ARDUINO_IO[0]                         ; -3.210 ; -31.270       ;
-; CLOCK_50                              ; -3.000 ; -1152.431     ;
+; CLOCK_50                              ; -3.000 ; -1153.834     ;
 ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -1.403 ; -1.403        ;
 +---------------------------------------+--------+---------------+
 
@@ -247,9 +248,9 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +---------------------------------------+--------+---------------+
 ; Clock                                 ; Slack  ; End Point TNS ;
 +---------------------------------------+--------+---------------+
-; CLOCK_50                              ; -2.776 ; -780.630      ;
-; ARDUINO_IO[0]                         ; -0.030 ; -0.240        ;
-; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 0.519  ; 0.000         ;
+; CLOCK_50                              ; -2.964 ; -796.268      ;
+; ARDUINO_IO[0]                         ; 0.178  ; 0.000         ;
+; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 0.522  ; 0.000         ;
 +---------------------------------------+--------+---------------+
 
 
@@ -260,7 +261,7 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +---------------------------------------+-------+---------------+
 ; CLOCK_50                              ; 0.149 ; 0.000         ;
 ; ARDUINO_IO[0]                         ; 0.166 ; 0.000         ;
-; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 0.322 ; 0.000         ;
+; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 0.325 ; 0.000         ;
 +---------------------------------------+-------+---------------+
 
 
@@ -281,8 +282,8 @@ No paths to report.
 +---------------------------------------+--------+---------------+
 ; Clock                                 ; Slack  ; End Point TNS ;
 +---------------------------------------+--------+---------------+
-; CLOCK_50                              ; -3.000 ; -565.745      ;
-; ARDUINO_IO[0]                         ; -3.000 ; -26.634       ;
+; CLOCK_50                              ; -3.000 ; -566.785      ;
+; ARDUINO_IO[0]                         ; -3.000 ; -26.322       ;
 ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -1.000 ; -1.000        ;
 +---------------------------------------+--------+---------------+
 
@@ -299,14 +300,14 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +----------------------------------------+-----------+-------+----------+---------+---------------------+
 ; Clock                                  ; Setup     ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +----------------------------------------+-----------+-------+----------+---------+---------------------+
-; Worst-case Slack                       ; -7.605    ; 0.149 ; N/A      ; N/A     ; -3.210              ;
-;  ARDUINO_IO[0]                         ; -1.374    ; 0.166 ; N/A      ; N/A     ; -3.210              ;
-;  CLOCK_50                              ; -7.605    ; 0.149 ; N/A      ; N/A     ; -3.000              ;
-;  vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -0.204    ; 0.322 ; N/A      ; N/A     ; -1.403              ;
-; Design-wide TNS                        ; -2336.287 ; 0.0   ; 0.0      ; 0.0     ; -1225.688           ;
-;  ARDUINO_IO[0]                         ; -12.199   ; 0.000 ; N/A      ; N/A     ; -31.270             ;
-;  CLOCK_50                              ; -2323.884 ; 0.000 ; N/A      ; N/A     ; -1193.015           ;
-;  vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -0.204    ; 0.000 ; N/A      ; N/A     ; -1.403              ;
+; Worst-case Slack                       ; -7.987    ; 0.149 ; N/A      ; N/A     ; -3.210              ;
+;  ARDUINO_IO[0]                         ; -0.960    ; 0.166 ; N/A      ; N/A     ; -3.210              ;
+;  CLOCK_50                              ; -7.987    ; 0.149 ; N/A      ; N/A     ; -3.000              ;
+;  vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -0.198    ; 0.325 ; N/A      ; N/A     ; -1.403              ;
+; Design-wide TNS                        ; -2371.104 ; 0.0   ; 0.0      ; 0.0     ; -1227.091           ;
+;  ARDUINO_IO[0]                         ; -9.196    ; 0.000 ; N/A      ; N/A     ; -31.270             ;
+;  CLOCK_50                              ; -2361.710 ; 0.000 ; N/A      ; N/A     ; -1194.418           ;
+;  vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; -0.198    ; 0.000 ; N/A      ; N/A     ; -1.403              ;
 +----------------------------------------+-----------+-------+----------+---------+---------------------+
 
 
@@ -381,6 +382,7 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; VGA_B[3]       ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; VGA_HS         ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; VGA_VS         ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
+; ARDUINO_IO[3]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; ARDUINO_IO[4]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; ARDUINO_IO[5]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; ARDUINO_IO[6]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
@@ -396,7 +398,6 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; ARDUINO_IO[0]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; ARDUINO_IO[1]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; ARDUINO_IO[2]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
-; ARDUINO_IO[3]  ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 ; ~ALTERA_TDO~   ; 2.5 V        ; 0 in              ; 0 H/in                  ; 0 F/in                  ; short         ; -                   ; open           ; open             ; open   ; 0 in             ; 0 H/in                 ; 0 F/in                 ; short        ; open          ; open            ; open  ; 0 V                 ; -                  ; n/a           ; n/a             ; n/a         ;
 +----------------+--------------+-------------------+-------------------------+-------------------------+---------------+---------------------+----------------+------------------+--------+------------------+------------------------+------------------------+--------------+---------------+-----------------+-------+---------------------+--------------------+---------------+-----------------+-------------+
 
@@ -406,7 +407,6 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +---------------------+-----------------------+-----------------+-----------------+
 ; Pin                 ; I/O Standard          ; 10-90 Rise Time ; 90-10 Fall Time ;
 +---------------------+-----------------------+-----------------+-----------------+
-; SW[0]               ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; SW[1]               ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; SW[2]               ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; SW[3]               ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
@@ -417,6 +417,7 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; SW[8]               ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; SW[9]               ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; KEY[1]              ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; ARDUINO_IO[3]       ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; ARDUINO_IO[4]       ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; ARDUINO_IO[5]       ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; ARDUINO_IO[6]       ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
@@ -432,9 +433,9 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; ARDUINO_IO[0]       ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; ARDUINO_IO[1]       ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; ARDUINO_IO[2]       ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
-; ARDUINO_IO[3]       ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; CLOCK_50            ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; KEY[0]              ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
+; SW[0]               ; 2.5 V                 ; 2000 ps         ; 2000 ps         ;
 ; ~ALTERA_TMS~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
 ; ~ALTERA_TCK~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
 ; ~ALTERA_TDI~        ; 2.5 V Schmitt Trigger ; 2000 ps         ; 2000 ps         ;
@@ -516,6 +517,7 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; VGA_B[3]       ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0871 V           ; 0.291 V                              ; 0.138 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0871 V          ; 0.291 V                             ; 0.138 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
 ; VGA_HS         ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0859 V           ; 0.289 V                              ; 0.136 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0859 V          ; 0.289 V                             ; 0.136 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
 ; VGA_VS         ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0871 V           ; 0.291 V                              ; 0.138 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0871 V          ; 0.291 V                             ; 0.138 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
+; ARDUINO_IO[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0871 V           ; 0.291 V                              ; 0.138 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0871 V          ; 0.291 V                             ; 0.138 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0871 V           ; 0.291 V                              ; 0.138 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0871 V          ; 0.291 V                             ; 0.138 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.26e-09 V                   ; 2.4 V               ; -0.0783 V           ; 0.157 V                              ; 0.167 V                              ; 4.55e-10 s                  ; 4.33e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.26e-09 V                  ; 2.4 V              ; -0.0783 V          ; 0.157 V                             ; 0.167 V                             ; 4.55e-10 s                 ; 4.33e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[6]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.26e-09 V                   ; 2.4 V               ; -0.0783 V           ; 0.157 V                              ; 0.167 V                              ; 4.55e-10 s                  ; 4.33e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.26e-09 V                  ; 2.4 V              ; -0.0783 V          ; 0.157 V                             ; 0.167 V                             ; 4.55e-10 s                 ; 4.33e-10 s                 ; No                        ; Yes                       ;
@@ -531,7 +533,6 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; ARDUINO_IO[0]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0871 V           ; 0.291 V                              ; 0.138 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0871 V          ; 0.291 V                             ; 0.138 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0859 V           ; 0.289 V                              ; 0.136 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0859 V          ; 0.289 V                             ; 0.136 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0871 V           ; 0.291 V                              ; 0.138 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0871 V          ; 0.291 V                             ; 0.138 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
-; ARDUINO_IO[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 8.25e-09 V                   ; 2.41 V              ; -0.0871 V           ; 0.291 V                              ; 0.138 V                              ; 3.15e-10 s                  ; 4.16e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 8.25e-09 V                  ; 2.41 V             ; -0.0871 V          ; 0.291 V                             ; 0.138 V                             ; 3.15e-10 s                 ; 4.16e-10 s                 ; No                        ; Yes                       ;
 ; ~ALTERA_TDO~   ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.39e-08 V                   ; 2.39 V              ; -0.0409 V           ; 0.211 V                              ; 0.121 V                              ; 4.7e-10 s                   ; 5.93e-10 s                  ; No                         ; Yes                        ; 2.32 V                      ; 1.39e-08 V                  ; 2.39 V             ; -0.0409 V          ; 0.211 V                             ; 0.121 V                             ; 4.7e-10 s                  ; 5.93e-10 s                 ; No                        ; Yes                       ;
 +----------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
@@ -607,6 +608,7 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; VGA_B[3]       ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0508 V           ; 0.153 V                              ; 0.187 V                              ; 4.63e-10 s                  ; 4.49e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0508 V          ; 0.153 V                             ; 0.187 V                             ; 4.63e-10 s                 ; 4.49e-10 s                 ; Yes                       ; Yes                       ;
 ; VGA_HS         ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.049 V            ; 0.154 V                              ; 0.186 V                              ; 4.63e-10 s                  ; 4.5e-10 s                   ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.049 V           ; 0.154 V                             ; 0.186 V                             ; 4.63e-10 s                 ; 4.5e-10 s                  ; Yes                       ; Yes                       ;
 ; VGA_VS         ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0508 V           ; 0.153 V                              ; 0.187 V                              ; 4.63e-10 s                  ; 4.49e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0508 V          ; 0.153 V                             ; 0.187 V                             ; 4.63e-10 s                 ; 4.49e-10 s                 ; Yes                       ; Yes                       ;
+; ARDUINO_IO[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0508 V           ; 0.153 V                              ; 0.187 V                              ; 4.63e-10 s                  ; 4.49e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0508 V          ; 0.153 V                             ; 0.187 V                             ; 4.63e-10 s                 ; 4.49e-10 s                 ; Yes                       ; Yes                       ;
 ; ARDUINO_IO[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0508 V           ; 0.153 V                              ; 0.187 V                              ; 4.63e-10 s                  ; 4.49e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0508 V          ; 0.153 V                             ; 0.187 V                             ; 4.63e-10 s                 ; 4.49e-10 s                 ; Yes                       ; Yes                       ;
 ; ARDUINO_IO[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0459 V           ; 0.201 V                              ; 0.093 V                              ; 4.9e-10 s                   ; 5.83e-10 s                  ; Yes                        ; No                         ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0459 V          ; 0.201 V                             ; 0.093 V                             ; 4.9e-10 s                  ; 5.83e-10 s                 ; Yes                       ; No                        ;
 ; ARDUINO_IO[6]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0459 V           ; 0.201 V                              ; 0.093 V                              ; 4.9e-10 s                   ; 5.83e-10 s                  ; Yes                        ; No                         ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0459 V          ; 0.201 V                             ; 0.093 V                             ; 4.9e-10 s                  ; 5.83e-10 s                 ; Yes                       ; No                        ;
@@ -622,7 +624,6 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; ARDUINO_IO[0]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0508 V           ; 0.153 V                              ; 0.187 V                              ; 4.63e-10 s                  ; 4.49e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0508 V          ; 0.153 V                             ; 0.187 V                             ; 4.63e-10 s                 ; 4.49e-10 s                 ; Yes                       ; Yes                       ;
 ; ARDUINO_IO[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.049 V            ; 0.154 V                              ; 0.186 V                              ; 4.63e-10 s                  ; 4.5e-10 s                   ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.049 V           ; 0.154 V                             ; 0.186 V                             ; 4.63e-10 s                 ; 4.5e-10 s                  ; Yes                       ; Yes                       ;
 ; ARDUINO_IO[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0508 V           ; 0.153 V                              ; 0.187 V                              ; 4.63e-10 s                  ; 4.49e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0508 V          ; 0.153 V                             ; 0.187 V                             ; 4.63e-10 s                 ; 4.49e-10 s                 ; Yes                       ; Yes                       ;
-; ARDUINO_IO[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.16e-06 V                   ; 2.37 V              ; -0.0508 V           ; 0.153 V                              ; 0.187 V                              ; 4.63e-10 s                  ; 4.49e-10 s                  ; Yes                        ; Yes                        ; 2.32 V                      ; 1.16e-06 V                  ; 2.37 V             ; -0.0508 V          ; 0.153 V                             ; 0.187 V                             ; 4.63e-10 s                 ; 4.49e-10 s                 ; Yes                       ; Yes                       ;
 ; ~ALTERA_TDO~   ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.32 V                       ; 1.97e-06 V                   ; 2.36 V              ; -0.0173 V           ; 0.144 V                              ; 0.094 V                              ; 6.44e-10 s                  ; 7.2e-10 s                   ; No                         ; Yes                        ; 2.32 V                      ; 1.97e-06 V                  ; 2.36 V             ; -0.0173 V          ; 0.144 V                             ; 0.094 V                             ; 6.44e-10 s                 ; 7.2e-10 s                  ; No                        ; Yes                       ;
 +----------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
@@ -698,6 +699,7 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; VGA_B[3]       ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; VGA_HS         ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; VGA_VS         ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
+; ARDUINO_IO[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[4]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[5]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.77 V              ; -0.0485 V           ; 0.289 V                              ; 0.058 V                              ; 2.81e-10 s                  ; 3.04e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.77 V             ; -0.0485 V          ; 0.289 V                             ; 0.058 V                             ; 2.81e-10 s                 ; 3.04e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[6]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.77 V              ; -0.0485 V           ; 0.289 V                              ; 0.058 V                              ; 2.81e-10 s                  ; 3.04e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.77 V             ; -0.0485 V          ; 0.289 V                             ; 0.058 V                             ; 2.81e-10 s                 ; 3.04e-10 s                 ; No                        ; Yes                       ;
@@ -713,7 +715,6 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; ARDUINO_IO[0]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[1]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.95e-08 V                   ; 2.78 V              ; -0.0452 V           ; 0.248 V                              ; 0.108 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.95e-08 V                  ; 2.78 V             ; -0.0452 V          ; 0.248 V                             ; 0.108 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; ARDUINO_IO[2]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
-; ARDUINO_IO[3]  ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 9.94e-08 V                   ; 2.78 V              ; -0.0444 V           ; 0.25 V                               ; 0.107 V                              ; 2.67e-10 s                  ; 2.75e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 9.94e-08 V                  ; 2.78 V             ; -0.0444 V          ; 0.25 V                              ; 0.107 V                             ; 2.67e-10 s                 ; 2.75e-10 s                 ; No                        ; Yes                       ;
 ; ~ALTERA_TDO~   ; 2.5 V        ; 0 s                 ; 0 s                 ; 2.62 V                       ; 1.68e-07 V                   ; 2.73 V              ; -0.0395 V           ; 0.361 V                              ; 0.109 V                              ; 3.11e-10 s                  ; 4.41e-10 s                  ; No                         ; Yes                        ; 2.62 V                      ; 1.68e-07 V                  ; 2.73 V             ; -0.0395 V          ; 0.361 V                             ; 0.109 V                             ; 3.11e-10 s                 ; 4.41e-10 s                 ; No                        ; Yes                       ;
 +----------------+--------------+---------------------+---------------------+------------------------------+------------------------------+---------------------+---------------------+--------------------------------------+--------------------------------------+-----------------------------+-----------------------------+----------------------------+----------------------------+-----------------------------+-----------------------------+--------------------+--------------------+-------------------------------------+-------------------------------------+----------------------------+----------------------------+---------------------------+---------------------------+
 
@@ -724,8 +725,8 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; From Clock                            ; To Clock                              ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------------------------+---------------------------------------+----------+----------+----------+----------+
 ; ARDUINO_IO[0]                         ; ARDUINO_IO[0]                         ; 59       ; 0        ; 0        ; 0        ;
-; ARDUINO_IO[0]                         ; CLOCK_50                              ; 182      ; 0        ; 0        ; 0        ;
-; CLOCK_50                              ; CLOCK_50                              ; 379071   ; 0        ; 0        ; 0        ;
+; ARDUINO_IO[0]                         ; CLOCK_50                              ; 184      ; 0        ; 0        ; 0        ;
+; CLOCK_50                              ; CLOCK_50                              ; 379073   ; 0        ; 0        ; 0        ;
 ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; CLOCK_50                              ; 1        ; 0        ; 0        ; 0        ;
 ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 1        ; 0        ; 0        ; 0        ;
 +---------------------------------------+---------------------------------------+----------+----------+----------+----------+
@@ -738,8 +739,8 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 ; From Clock                            ; To Clock                              ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------------------------+---------------------------------------+----------+----------+----------+----------+
 ; ARDUINO_IO[0]                         ; ARDUINO_IO[0]                         ; 59       ; 0        ; 0        ; 0        ;
-; ARDUINO_IO[0]                         ; CLOCK_50                              ; 182      ; 0        ; 0        ; 0        ;
-; CLOCK_50                              ; CLOCK_50                              ; 379071   ; 0        ; 0        ; 0        ;
+; ARDUINO_IO[0]                         ; CLOCK_50                              ; 184      ; 0        ; 0        ; 0        ;
+; CLOCK_50                              ; CLOCK_50                              ; 379073   ; 0        ; 0        ; 0        ;
 ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; CLOCK_50                              ; 1        ; 0        ; 0        ; 0        ;
 ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; vga_spi:VGA_SPI|spi_slave:SPI|d_valid ; 1        ; 0        ; 0        ; 0        ;
 +---------------------------------------+---------------------------------------+----------+----------+----------+----------+
@@ -765,10 +766,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 3     ; 3    ;
-; Unconstrained Input Port Paths  ; 93    ; 93   ;
-; Unconstrained Output Ports      ; 18    ; 18   ;
-; Unconstrained Output Port Paths ; 294   ; 294  ;
+; Unconstrained Input Ports       ; 4     ; 4    ;
+; Unconstrained Input Port Paths  ; 96    ; 96   ;
+; Unconstrained Output Ports      ; 17    ; 17   ;
+; Unconstrained Output Port Paths ; 293   ; 293  ;
 +---------------------------------+-------+------+
 
 
@@ -788,9 +789,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------+--------------------------------------------------------------------------------------+
 ; Input Port    ; Comment                                                                              ;
 +---------------+--------------------------------------------------------------------------------------+
+; ARDUINO_IO[0] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; ARDUINO_IO[1] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ARDUINO_IO[2] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; KEY[0]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW[0]         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +---------------+--------------------------------------------------------------------------------------+
 
 
@@ -806,7 +808,6 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; LEDR[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; LEDR[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; LEDR[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; LEDR[8]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; LEDR[9]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; VGA_B[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -825,9 +826,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------+--------------------------------------------------------------------------------------+
 ; Input Port    ; Comment                                                                              ;
 +---------------+--------------------------------------------------------------------------------------+
+; ARDUINO_IO[0] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; ARDUINO_IO[1] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; ARDUINO_IO[2] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; KEY[0]        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; SW[0]         ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +---------------+--------------------------------------------------------------------------------------+
 
 
@@ -843,7 +845,6 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; LEDR[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; LEDR[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; LEDR[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; LEDR[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; LEDR[8]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; LEDR[9]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; VGA_B[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -863,7 +864,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
-    Info: Processing started: Fri Feb 20 23:18:56 2026
+    Info: Processing started: Fri Feb 27 17:51:22 2026
 Info: Command: quartus_sta top -c top
 Info: qsta_default_script.tcl version: #1
 Warning (20013): Ignored 185 assignments for entity "DE10_Lite" -- entity does not exist in design
@@ -1068,25 +1069,25 @@ Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1200mV 85C Model
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -7.605
+Info (332146): Worst-case setup slack is -7.987
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -7.605           -2323.884 CLOCK_50 
-    Info (332119):    -1.374             -12.199 ARDUINO_IO[0] 
-    Info (332119):    -0.204              -0.204 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
-Info (332146): Worst-case hold slack is 0.341
+    Info (332119):    -7.987           -2361.710 CLOCK_50 
+    Info (332119):    -0.960              -9.196 ARDUINO_IO[0] 
+    Info (332119):    -0.198              -0.198 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
+Info (332146): Worst-case hold slack is 0.342
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.341               0.000 CLOCK_50 
+    Info (332119):     0.342               0.000 CLOCK_50 
     Info (332119):     0.378               0.000 ARDUINO_IO[0] 
-    Info (332119):     0.792               0.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
+    Info (332119):     0.798               0.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -3.210
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):    -3.210             -31.270 ARDUINO_IO[0] 
-    Info (332119):    -3.000           -1193.015 CLOCK_50 
+    Info (332119):    -3.000           -1194.418 CLOCK_50 
     Info (332119):    -1.403              -1.403 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
 Info (332114): Report Metastability: Found 2 synchronizer chains.
     Info (332114): Design MTBF is not calculated because the design doesn't meet its timing requirements.
@@ -1095,59 +1096,59 @@ Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -6.890
+Info (332146): Worst-case setup slack is -7.238
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -6.890           -2103.977 CLOCK_50 
-    Info (332119):    -1.212             -10.332 ARDUINO_IO[0] 
-    Info (332119):    -0.105              -0.105 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
+    Info (332119):    -7.238           -2137.764 CLOCK_50 
+    Info (332119):    -0.787              -7.365 ARDUINO_IO[0] 
+    Info (332119):    -0.100              -0.100 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
 Info (332146): Worst-case hold slack is 0.307
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.307               0.000 CLOCK_50 
     Info (332119):     0.339               0.000 ARDUINO_IO[0] 
-    Info (332119):     0.725               0.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
+    Info (332119):     0.730               0.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -3.210
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):    -3.210             -31.270 ARDUINO_IO[0] 
-    Info (332119):    -3.000           -1152.431 CLOCK_50 
+    Info (332119):    -3.000           -1153.834 CLOCK_50 
     Info (332119):    -1.403              -1.403 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
 Info (332114): Report Metastability: Found 2 synchronizer chains.
     Info (332114): Design MTBF is not calculated because the design doesn't meet its timing requirements.
 Info: Analyzing Fast 1200mV 0C Model
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -2.776
+Info (332146): Worst-case setup slack is -2.964
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.776            -780.630 CLOCK_50 
-    Info (332119):    -0.030              -0.240 ARDUINO_IO[0] 
-    Info (332119):     0.519               0.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
+    Info (332119):    -2.964            -796.268 CLOCK_50 
+    Info (332119):     0.178               0.000 ARDUINO_IO[0] 
+    Info (332119):     0.522               0.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
 Info (332146): Worst-case hold slack is 0.149
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.149               0.000 CLOCK_50 
     Info (332119):     0.166               0.000 ARDUINO_IO[0] 
-    Info (332119):     0.322               0.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
+    Info (332119):     0.325               0.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -3.000
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -3.000            -565.745 CLOCK_50 
-    Info (332119):    -3.000             -26.634 ARDUINO_IO[0] 
+    Info (332119):    -3.000            -566.785 CLOCK_50 
+    Info (332119):    -3.000             -26.322 ARDUINO_IO[0] 
     Info (332119):    -1.000              -1.000 vga_spi:VGA_SPI|spi_slave:SPI|d_valid 
 Info (332114): Report Metastability: Found 2 synchronizer chains.
     Info (332114): Design MTBF is not calculated because the design doesn't meet its timing requirements.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 191 warnings
-    Info: Peak virtual memory: 5004 megabytes
-    Info: Processing ended: Fri Feb 20 23:18:59 2026
-    Info: Elapsed time: 00:00:03
+    Info: Peak virtual memory: 5005 megabytes
+    Info: Processing ended: Fri Feb 27 17:51:26 2026
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:04
 
 

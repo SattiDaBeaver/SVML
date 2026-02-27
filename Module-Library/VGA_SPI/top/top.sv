@@ -39,26 +39,28 @@ module top (
 
     // SPI wires
     // Physical pins: ARDUINO_IO[3:0]
-    //   IO[0] = SCLK
-    //   IO[1] = CS_N
-    //   IO[2] = MOSI
-    //   IO[3] = MISO
-    logic        sclk;
-    logic        cs_n;
-    logic        mosi;
-    logic        miso;
+    //   IO[0]  = SCLK
+	 //   IO[1]  = MOSI
+	 //   IO[2]  = MISO
+    //   ~SW[0] = CS_N // currently LOW
+    
+    logic                   sclk;
+    logic                   cs_n;
+    logic                   mosi;
+    logic                   miso;
+    logic [MEM_WIDTH-1:0]   spi_dout_debug;
 
     assign sclk            = ARDUINO_IO[0];
-    assign cs_n            = ARDUINO_IO[1];
-    assign mosi            = ARDUINO_IO[2];
-    assign ARDUINO_IO[3]   = miso;
+    assign mosi            = ARDUINO_IO[1];
+	assign ARDUINO_IO[2]   = miso;
+    assign cs_n            = ~SW[0];
 
     // Helper assignments
     assign clk = CLOCK_50;
     assign rst = ~KEY[0];
 
     // Assignments
-    assign LEDR  = addr_count[9:0];
+    assign LEDR  = {sclk, mosi, spi_dout_debug};
     assign VGA_R = vga_r;
     assign VGA_G = vga_g;
     assign VGA_B = vga_b;
@@ -82,7 +84,8 @@ module top (
         .vga_b(vga_b),
         .h_sync(h_sync),
         .v_sync(v_sync),
-        .addr_count(addr_count)
+        .addr_count(addr_count),
+        .spi_dout_debug(spi_dout_debug)
     );
 
 endmodule
@@ -114,7 +117,8 @@ module vga_spi #(
     output logic                    v_sync,
 
     // Debug memory wires
-    output logic [ADDR_WIDTH-1:0]   addr_count
+    output logic [ADDR_WIDTH-1:0]   addr_count,
+    output logic [MEM_WIDTH-1:0]    spi_dout_debug
 );
 
     // Local parameters
@@ -151,6 +155,7 @@ module vga_spi #(
 
     // Helper assignments
     assign mem_addr = addr_count;
+    assign spi_dout_debug = din;
 
     // SPI logic
     // SPI domain: toggle on each valid

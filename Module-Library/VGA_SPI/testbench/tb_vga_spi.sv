@@ -1,10 +1,10 @@
-`timescale 1ns/1ns
+`timescale 1ns/1ps
 
 module tb_vga_spi;
 
     // Parameters
     localparam CLK_PERIOD  = 20;   // 50MHz
-    localparam SCLK_PERIOD = 45;   // 25MHz (well under 45MHz limit)
+    localparam SCLK_PERIOD = 100;   // 25MHz (well under 45MHz limit)
     localparam MEM_WIDTH   = 8;
     localparam RES_X       = 320;
     localparam RES_Y       = 240;
@@ -75,7 +75,7 @@ module tb_vga_spi;
     initial begin
         // Init
         rst  = 1;
-        cs_n = 1;
+        cs_n = 0;
         mosi = 0;
         sclk = 0;
         repeat(4) @(posedge clk);

@@ -32,22 +32,27 @@ void Vtb_spi_slave___024root__trace_chg_0_sub_0(Vtb_spi_slave___024root* vlSelf,
         bufp->chgCData(oldp+4,(vlSelf->tb_spi_slave__DOT__din),8);
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[3U])) {
-        bufp->chgBit(oldp+5,(vlSelf->tb_spi_slave__DOT__d_valid));
-        bufp->chgCData(oldp+6,(vlSelf->tb_spi_slave__DOT__dout),8);
-        bufp->chgBit(oldp+7,(vlSelf->tb_spi_slave__DOT__dut__DOT__sync1));
-        bufp->chgBit(oldp+8,(vlSelf->tb_spi_slave__DOT__dut__DOT__sync2));
-        bufp->chgBit(oldp+9,(vlSelf->tb_spi_slave__DOT__dut__DOT__sync3));
+        bufp->chgBit(oldp+5,((1U & ((IData)(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_out) 
+                                    >> 7U))));
+        bufp->chgCData(oldp+6,(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_out),8);
+        bufp->chgBit(oldp+7,(vlSelf->tb_spi_slave__DOT__dut__DOT__cs_n_prev));
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[4U])) {
-        bufp->chgCData(oldp+10,(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_in),8);
-        bufp->chgCData(oldp+11,(vlSelf->tb_spi_slave__DOT__dut__DOT__count),4);
-        bufp->chgCData(oldp+12,(vlSelf->tb_spi_slave__DOT__dut__DOT__captured),8);
-        bufp->chgBit(oldp+13,(vlSelf->tb_spi_slave__DOT__dut__DOT__toggle));
+        bufp->chgBit(oldp+8,(vlSelf->tb_spi_slave__DOT__d_valid));
+        bufp->chgCData(oldp+9,(vlSelf->tb_spi_slave__DOT__dout),8);
+        bufp->chgBit(oldp+10,(vlSelf->tb_spi_slave__DOT__dut__DOT__toggle_sync1));
+        bufp->chgBit(oldp+11,(vlSelf->tb_spi_slave__DOT__dut__DOT__toggle_sync2));
+        bufp->chgBit(oldp+12,(vlSelf->tb_spi_slave__DOT__dut__DOT__toggle_sync3));
+        bufp->chgCData(oldp+13,(vlSelf->tb_spi_slave__DOT__dut__DOT__captured_sync1),8);
+        bufp->chgCData(oldp+14,(vlSelf->tb_spi_slave__DOT__dut__DOT__captured_sync2),8);
     }
-    bufp->chgBit(oldp+14,(vlSelf->tb_spi_slave__DOT__clk));
-    bufp->chgBit(oldp+15,((1U & ((IData)(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_out) 
-                                 >> 7U))));
-    bufp->chgCData(oldp+16,(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_out),8);
+    if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[5U])) {
+        bufp->chgCData(oldp+15,(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_in),8);
+        bufp->chgCData(oldp+16,(vlSelf->tb_spi_slave__DOT__dut__DOT__bit_count),4);
+        bufp->chgCData(oldp+17,(vlSelf->tb_spi_slave__DOT__dut__DOT__captured_data),8);
+        bufp->chgBit(oldp+18,(vlSelf->tb_spi_slave__DOT__dut__DOT__data_ready_toggle));
+    }
+    bufp->chgBit(oldp+19,(vlSelf->tb_spi_slave__DOT__clk));
 }
 
 void Vtb_spi_slave___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
@@ -62,4 +67,5 @@ void Vtb_spi_slave___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unus
     vlSymsp->TOP.__Vm_traceActivity[2U] = 0U;
     vlSymsp->TOP.__Vm_traceActivity[3U] = 0U;
     vlSymsp->TOP.__Vm_traceActivity[4U] = 0U;
+    vlSymsp->TOP.__Vm_traceActivity[5U] = 0U;
 }

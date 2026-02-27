@@ -25,7 +25,8 @@ module vga_spi #(
     output logic                    v_sync,
 
     // Debug memory wires
-    output logic [ADDR_WIDTH-1:0]   addr_count
+    output logic [ADDR_WIDTH-1:0]   addr_count,
+    output logic [MEM_WIDTH-1:0]    spi_dout_debug
 );
 
     // Local parameters
@@ -53,33 +54,11 @@ module vga_spi #(
     logic                   d_valid_spi;
     logic [MEM_WIDTH-1:0]   dout_spi;
 
-    // SPI clock domain crossing sync wires
-    logic                   toggle_spi;
-    logic                   sync1;
-    logic                   sync2;
-    logic                   sync3;
-    logic                   d_valid_sync;
-
     // Helper assignments
-    assign mem_addr = addr_count;
+    assign mem_addr         = addr_count;
+    assign spi_dout_debug   = din;
+    assign din_spi          = 8'h00;
 
-    // SPI logic
-    // SPI domain: toggle on each valid
-    always_ff @(posedge d_valid_spi or posedge rst) begin
-        if (rst) toggle_spi <= 0;
-        else     toggle_spi <= ~toggle_spi;
-    end
-
-    // Sys clock domain: 2FF sync
-    always_ff @(posedge clk) begin
-        sync1 <= toggle_spi;
-        sync2 <= sync1;
-        sync3 <= sync2;
-    end
-
-    // Edge detect = new data arrived
-    assign d_valid_sync = sync2 ^ sync3;
-    
     /* Pixel logic
     -  pixel[7] == 1        => control bit
         -  pixel[0] == 1    => swap buffer
@@ -98,7 +77,7 @@ module vga_spi #(
         else begin
             wen        <= 1'b0;
             swap_buf   <= 1'b0;
-            if (d_valid_sync) begin
+            if (d_valid_spi) begin
                 if (dout_spi[7] == 1'b1) begin   // control bit
                     case (dout_spi[6:0])
                         7'h00: begin
@@ -161,6 +140,7 @@ module vga_spi #(
     spi_slave #(
         .WIDTH(MEM_WIDTH)
         ) SPI (
+        .clk(clk),
         .rst(rst),
         .sclk(sclk),
         .cs_n(cs_n),
@@ -517,60 +497,129 @@ endmodule
 module spi_slave #(
     parameter WIDTH = 8
 ) (
-    input  logic                rst,
+    input  logic             clk,      // system clock (50 MHz)
+    input  logic             rst,      // active high reset
 
     // SPI wires
-    input  logic                sclk,
-    input  logic                cs_n,
-    input  logic                mosi,
-    output logic                miso,
+    input  logic             sclk,     // SPI clock (up to 45 MHz)
+    input  logic             cs_n,     // chip select (active low)
+    input  logic             mosi,     // master out slave in
+    output logic             miso,     // master in slave out
 
     // Data wires
-    input  logic [WIDTH-1:0]    din,
-    
-    output logic                d_valid,
-    output logic [WIDTH-1:0]    dout
+    input  logic [WIDTH-1:0] din,      // data to send to master
+    output logic             d_valid,  // pulse in sys clk domain when new data received
+    output logic [WIDTH-1:0] dout      // received data (stable in sys clk domain)
 );
+
+    //==========================================================================
+    // SPI Clock Domain - Shift In (MOSI)
+    //==========================================================================
     logic [WIDTH-1:0]       shift_in;
-    logic [WIDTH-1:0]       shift_out;
-    logic [$clog2(WIDTH):0] count;
+    logic [$clog2(WIDTH):0] bit_count;
+    logic [WIDTH-1:0]       captured_data;
+    logic                   data_ready_toggle;
 
-    // Sample MOSI on rising edge
-    always_ff @(posedge sclk or posedge rst or posedge cs_n) begin
-        if (rst || cs_n) begin
-            shift_in    <= 0;
-            d_valid     <= 1'b0;
-            count       <= 0;
-        end
-        else begin
-            shift_in    <= {shift_in[WIDTH-2:0], mosi};
-
-            if (count == WIDTH - 1) begin
-                dout        <= {shift_in[WIDTH-2:0], mosi};
-                d_valid     <= 1'b1;
-                count       <= 0;
-            end
-            else begin
-                d_valid     <= 1'b0;
-                count       <= count + 1;
+    always_ff @(posedge sclk or posedge rst) begin
+        if (rst) begin
+            shift_in          <= '0;
+            bit_count         <= '0;
+            data_ready_toggle <= '0;
+            captured_data     <= '0;
+        end else begin
+            if (cs_n) begin
+                // CS inactive - reset counter
+                bit_count <= '0;
+            end else begin
+                // CS active - shift in data
+                shift_in <= {shift_in[WIDTH-2:0], mosi};
+                
+                if (bit_count == WIDTH - 1) begin
+                    // Received full byte
+                    captured_data     <= {shift_in[WIDTH-2:0], mosi};
+                    data_ready_toggle <= ~data_ready_toggle;
+                    bit_count         <= '0;
+                end else begin
+                    bit_count <= bit_count + 1;
+                end
             end
         end
     end
-  
-    // Shift out on falling edge
+
+    //==========================================================================
+    // SPI Clock Domain - Shift Out (MISO) on falling edge
+    //==========================================================================
+    logic [WIDTH-1:0] shift_out;
+    logic             cs_n_prev;
+    
     always_ff @(negedge sclk or posedge rst) begin
         if (rst) begin
-            shift_out   <= 0;
-        end
-        else if (!cs_n) begin
-            shift_out   <= {shift_out[WIDTH-2:0], 1'b0};
-        end
-        else begin
-            shift_out   <= din;
+            shift_out <= '0;
+            cs_n_prev <= 1'b1;
+        end else begin
+            cs_n_prev <= cs_n;
+            
+            // Detect falling edge of cs_n (start of transaction)
+            if (!cs_n && cs_n_prev) begin
+                // Load new data at start of transaction
+                shift_out <= din;
+            end else if (!cs_n) begin
+                // Shift out during transaction
+                shift_out <= {shift_out[WIDTH-2:0], 1'b0};
+            end
         end
     end
 
     assign miso = shift_out[WIDTH-1];
-    
-endmodule
 
+    //==========================================================================
+    // Clock Domain Crossing - Toggle Synchronizer
+    //==========================================================================
+    logic toggle_sync1, toggle_sync2, toggle_sync3;
+
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            toggle_sync1 <= '0;
+            toggle_sync2 <= '0;
+            toggle_sync3 <= '0;
+        end else begin
+            toggle_sync1 <= data_ready_toggle;
+            toggle_sync2 <= toggle_sync1;
+            toggle_sync3 <= toggle_sync2;
+        end
+    end
+
+    //==========================================================================
+    // Clock Domain Crossing - Data Synchronization
+    //==========================================================================
+    logic [WIDTH-1:0] captured_sync1, captured_sync2;
+    
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            captured_sync1 <= '0;
+            captured_sync2 <= '0;
+        end else begin
+            captured_sync1 <= captured_data;
+            captured_sync2 <= captured_sync1;
+        end
+    end
+
+    //==========================================================================
+    // System Clock Domain - Edge Detection and Output
+    //==========================================================================
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            dout    <= '0;
+            d_valid <= 1'b0;
+        end else begin
+            if (toggle_sync2 ^ toggle_sync3) begin
+                // New data available
+                dout    <= captured_sync2;
+                d_valid <= 1'b1;
+            end else begin
+                d_valid <= 1'b0;
+            end
+        end
+    end
+
+endmodule

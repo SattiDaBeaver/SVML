@@ -57,7 +57,7 @@ module top (
         .RES_Y(RES_Y),
         .MEM_WIDTH(MEM_WIDTH)
     ) VGA_UART (
-        .clk(clk),
+        .clk(CLOCK_50),
         .rst(rst),
         .rx(rx),
         .tx(),
@@ -68,7 +68,6 @@ module top (
         .v_sync(v_sync),
         .addr_count(addr_count)
     );
-
 endmodule
 
 module vga_uart #(

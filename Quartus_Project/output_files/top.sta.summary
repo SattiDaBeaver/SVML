@@ -3,12 +3,12 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'CLOCK_50'
-Slack : -7.907
-TNS   : -2301.881
+Slack : -7.986
+TNS   : -2344.241
 
 Type  : Slow 1200mV 85C Model Setup 'ARDUINO_IO[0]'
-Slack : -1.237
-TNS   : -13.698
+Slack : -1.141
+TNS   : -11.120
 
 Type  : Slow 1200mV 85C Model Hold 'CLOCK_50'
 Slack : 0.342
@@ -24,18 +24,18 @@ TNS   : -31.270
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'CLOCK_50'
 Slack : -3.000
-TNS   : -1228.090
+TNS   : -1205.642
 
 Type  : Slow 1200mV 0C Model Setup 'CLOCK_50'
-Slack : -7.097
-TNS   : -2073.400
+Slack : -7.173
+TNS   : -2115.160
 
 Type  : Slow 1200mV 0C Model Setup 'ARDUINO_IO[0]'
-Slack : -1.065
-TNS   : -11.547
+Slack : -0.952
+TNS   : -8.970
 
 Type  : Slow 1200mV 0C Model Hold 'CLOCK_50'
-Slack : 0.308
+Slack : 0.306
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'ARDUINO_IO[0]'
@@ -48,30 +48,30 @@ TNS   : -31.270
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
 Slack : -3.000
-TNS   : -1187.506
+TNS   : -1165.058
 
 Type  : Fast 1200mV 0C Model Setup 'CLOCK_50'
-Slack : -2.869
-TNS   : -756.736
+Slack : -2.926
+TNS   : -781.923
 
 Type  : Fast 1200mV 0C Model Setup 'ARDUINO_IO[0]'
-Slack : 0.049
+Slack : 0.079
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'CLOCK_50'
-Slack : 0.150
+Slack : 0.087
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'ARDUINO_IO[0]'
-Slack : 0.166
+Slack : 0.157
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
 Slack : -3.000
-TNS   : -591.657
+TNS   : -574.977
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ARDUINO_IO[0]'
 Slack : -3.000
-TNS   : -26.073
+TNS   : -26.489
 
 ------------------------------------------------------------

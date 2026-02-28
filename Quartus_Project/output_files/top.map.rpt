@@ -1,5 +1,5 @@
 Analysis & Synthesis report for top
-Sat Feb 28 00:50:25 2026
+Sat Feb 28 18:36:27 2026
 Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
 
 
@@ -66,15 +66,15 @@ on the Quartus Prime software download page.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Feb 28 00:50:25 2026           ;
+; Analysis & Synthesis Status        ; Successful - Sat Feb 28 18:36:27 2026           ;
 ; Quartus Prime Version              ; 24.1std.0 Build 1077 03/04/2025 SC Lite Edition ;
 ; Revision Name                      ; top                                             ;
 ; Top-level Entity Name              ; top                                             ;
 ; Family                             ; MAX 10                                          ;
-; Total logic elements               ; 365                                             ;
-;     Total combinational functions  ; 313                                             ;
-;     Dedicated logic registers      ; 106                                             ;
-; Total registers                    ; 106                                             ;
+; Total logic elements               ; 346                                             ;
+;     Total combinational functions  ; 310                                             ;
+;     Dedicated logic registers      ; 90                                              ;
+; Total registers                    ; 90                                              ;
 ; Total pins                         ; 95                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 921,600                                         ;
@@ -179,13 +179,12 @@ on the Quartus Prime software download page.
 ; Number detected on machine ; 20          ;
 ; Maximum allowed            ; 14          ;
 ;                            ;             ;
-; Average used               ; 1.01        ;
+; Average used               ; 1.00        ;
 ; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
-;     Processors 3-14        ;   0.0%      ;
+;     Processors 2-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -215,20 +214,20 @@ on the Quartus Prime software download page.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 365            ;
+; Estimated Total logic elements              ; 346            ;
 ;                                             ;                ;
-; Total combinational functions               ; 313            ;
+; Total combinational functions               ; 310            ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 154            ;
-;     -- 3 input functions                    ; 47             ;
+;     -- 4 input functions                    ; 150            ;
+;     -- 3 input functions                    ; 48             ;
 ;     -- <=2 input functions                  ; 112            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 249            ;
+;     -- normal mode                          ; 246            ;
 ;     -- arithmetic mode                      ; 64             ;
 ;                                             ;                ;
-; Total registers                             ; 106            ;
-;     -- Dedicated logic registers            ; 106            ;
+; Total registers                             ; 90             ;
+;     -- Dedicated logic registers            ; 90             ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
 ; I/O pins                                    ; 95             ;
@@ -237,9 +236,9 @@ on the Quartus Prime software download page.
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ;                                             ;                ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 206            ;
-; Total fan-out                               ; 4926           ;
-; Average fan-out                             ; 6.61           ;
+; Maximum fan-out                             ; 190            ;
+; Total fan-out                               ; 4857           ;
+; Average fan-out                             ; 6.69           ;
 +---------------------------------------------+----------------+
 
 
@@ -248,9 +247,9 @@ on the Quartus Prime software download page.
 +-------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
 ; Compilation Hierarchy Node                      ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                                                                   ; Entity Name      ; Library Name ;
 +-------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------------------------------------------------------------------------------------------------------------------------+------------------+--------------+
-; |top                                            ; 313 (1)             ; 106 (0)                   ; 921600      ; 0          ; 0            ; 0       ; 0         ; 95   ; 0            ; 0          ; |top                                                                                                                                  ; top              ; work         ;
-;    |vga_spi:VGA_SPI|                            ; 312 (32)            ; 106 (26)                  ; 921600      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|vga_spi:VGA_SPI                                                                                                                  ; vga_spi          ; work         ;
-;       |spi_slave:SPI|                           ; 10 (10)             ; 48 (48)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|vga_spi:VGA_SPI|spi_slave:SPI                                                                                                    ; spi_slave        ; work         ;
+; |top                                            ; 310 (0)             ; 90 (0)                    ; 921600      ; 0          ; 0            ; 0       ; 0         ; 95   ; 0            ; 0          ; |top                                                                                                                                  ; top              ; work         ;
+;    |vga_spi:VGA_SPI|                            ; 310 (32)            ; 90 (26)                   ; 921600      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|vga_spi:VGA_SPI                                                                                                                  ; vga_spi          ; work         ;
+;       |spi_slave:SPI|                           ; 8 (8)               ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|vga_spi:VGA_SPI|spi_slave:SPI                                                                                                    ; spi_slave        ; work         ;
 ;       |vga_double_buf:VGA|                      ; 270 (97)            ; 32 (2)                    ; 921600      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|vga_spi:VGA_SPI|vga_double_buf:VGA                                                                                               ; vga_double_buf   ; work         ;
 ;          |dp_ram_sync_read:RAM_0|               ; 50 (0)              ; 4 (0)                     ; 460800      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|vga_spi:VGA_SPI|vga_double_buf:VGA|dp_ram_sync_read:RAM_0                                                                        ; dp_ram_sync_read ; work         ;
 ;             |altsyncram:mem_rtl_0|              ; 50 (0)              ; 4 (0)                     ; 460800      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top|vga_spi:VGA_SPI|vga_double_buf:VGA|dp_ram_sync_read:RAM_0|altsyncram:mem_rtl_0                                                   ; altsyncram       ; work         ;
@@ -309,12 +308,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 106   ;
+; Total registers                              ; 90    ;
 ; Number of registers using Synchronous Clear  ; 42    ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 48    ;
+; Number of registers using Asynchronous Clear ; 32    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 67    ;
+; Number of registers using Clock Enable       ; 60    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -334,10 +333,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------+
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |top|vga_spi:VGA_SPI|spi_slave:SPI|bit_count[1]            ;
 ; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |top|vga_spi:VGA_SPI|vga_double_buf:VGA|vga:VGA|h_count[1] ;
 ; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |top|vga_spi:VGA_SPI|vga_double_buf:VGA|vga:VGA|v_count[9] ;
-; 6:1                ; 17 bits   ; 68 LEs        ; 17 LEs               ; 51 LEs                 ; Yes        ; |top|vga_spi:VGA_SPI|mem_addr[1]                           ;
+; 6:1                ; 17 bits   ; 68 LEs        ; 17 LEs               ; 51 LEs                 ; Yes        ; |top|vga_spi:VGA_SPI|mem_addr[5]                           ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |top|vga_spi:VGA_SPI|vga_double_buf:VGA|vga_b[3]           ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------+
 
@@ -664,28 +662,28 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 95                          ;
-; cycloneiii_ff         ; 106                         ;
-;     CLR               ; 24                          ;
+; cycloneiii_ff         ; 90                          ;
+;     CLR               ; 15                          ;
 ;     ENA               ; 6                           ;
-;     ENA CLR           ; 24                          ;
+;     ENA CLR           ; 17                          ;
 ;     ENA SCLR          ; 37                          ;
 ;     SCLR              ; 5                           ;
 ;     plain             ; 10                          ;
 ; cycloneiii_io_obuf    ; 16                          ;
-; cycloneiii_lcell_comb ; 316                         ;
+; cycloneiii_lcell_comb ; 313                         ;
 ;     arith             ; 64                          ;
 ;         2 data inputs ; 53                          ;
 ;         3 data inputs ; 11                          ;
-;     normal            ; 252                         ;
+;     normal            ; 249                         ;
 ;         0 data inputs ; 2                           ;
-;         1 data inputs ; 9                           ;
-;         2 data inputs ; 51                          ;
-;         3 data inputs ; 36                          ;
-;         4 data inputs ; 154                         ;
+;         1 data inputs ; 10                          ;
+;         2 data inputs ; 50                          ;
+;         3 data inputs ; 37                          ;
+;         4 data inputs ; 150                         ;
 ; cycloneiii_ram_block  ; 120                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 6.80                        ;
-; Average LUT depth     ; 3.28                        ;
+; Average LUT depth     ; 3.35                        ;
 +-----------------------+-----------------------------+
 
 
@@ -694,7 +692,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -704,7 +702,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
-    Info: Processing started: Sat Feb 28 00:50:14 2026
+    Info: Processing started: Sat Feb 28 18:36:19 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off top -c top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
@@ -749,7 +747,8 @@ Warning (10230): Verilog HDL assignment warning at top.sv(545): truncated value 
 Warning (10230): Verilog HDL assignment warning at top.sv(546): truncated value with size 32 to match size of target (10) File: C:/Github/SVML/Quartus_Project/top.sv Line: 546
 Info (12128): Elaborating entity "dp_ram_sync_read" for hierarchy "vga_spi:VGA_SPI|vga_double_buf:VGA|dp_ram_sync_read:RAM_0" File: C:/Github/SVML/Quartus_Project/top.sv Line: 439
 Info (12128): Elaborating entity "spi_slave" for hierarchy "vga_spi:VGA_SPI|spi_slave:SPI" File: C:/Github/SVML/Quartus_Project/top.sv Line: 244
-Warning (10230): Verilog HDL assignment warning at top.sv(635): truncated value with size 32 to match size of target (4) File: C:/Github/SVML/Quartus_Project/top.sv Line: 635
+Warning (10036): Verilog HDL or VHDL warning at top.sv(680): object "captured_sync2" assigned a value but never read File: C:/Github/SVML/Quartus_Project/top.sv Line: 680
+Warning (10230): Verilog HDL assignment warning at top.sv(629): truncated value with size 32 to match size of target (4) File: C:/Github/SVML/Quartus_Project/top.sv Line: 629
 Info (276014): Found 2 instances of uninferred RAM logic
     Info (276007): RAM logic "vga_spi:VGA_SPI|vga_double_buf:VGA|dp_ram_sync_read:RAM_0|mem" is uninferred due to asynchronous read logic File: C:/Github/SVML/Quartus_Project/top.sv Line: 571
     Info (276007): RAM logic "vga_spi:VGA_SPI|vga_double_buf:VGA|dp_ram_sync_read:RAM_1|mem" is uninferred due to asynchronous read logic File: C:/Github/SVML/Quartus_Project/top.sv Line: 571
@@ -1122,17 +1121,17 @@ Warning (21074): Design contains 10 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[8]" File: C:/Github/SVML/Quartus_Project/top.sv Line: 2
     Warning (15610): No output dependent on input pin "SW[9]" File: C:/Github/SVML/Quartus_Project/top.sv Line: 2
     Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Github/SVML/Quartus_Project/top.sv Line: 3
-Info (21057): Implemented 585 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 566 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 13 input pins
     Info (21059): Implemented 66 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 370 logic cells
+    Info (21061): Implemented 351 logic cells
     Info (21064): Implemented 120 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 339 warnings
-    Info: Peak virtual memory: 4968 megabytes
-    Info: Processing ended: Sat Feb 28 00:50:25 2026
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:17
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 340 warnings
+    Info: Peak virtual memory: 4945 megabytes
+    Info: Processing ended: Sat Feb 28 18:36:27 2026
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:16
 
 
 +------------------------------------------+

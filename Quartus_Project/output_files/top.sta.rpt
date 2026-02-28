@@ -1,5 +1,5 @@
 Timing Analyzer report for top
-Fri Feb 27 20:58:33 2026
+Sat Feb 28 00:51:22 2026
 Quartus Prime Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
 
 
@@ -92,15 +92,15 @@ on the Quartus Prime software download page.
 ; Number detected on machine ; 20          ;
 ; Maximum allowed            ; 14          ;
 ;                            ;             ;
-; Average used               ; 2.15        ;
+; Average used               ; 1.50        ;
 ; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   8.9%      ;
-;     Processor 3            ;   8.9%      ;
-;     Processor 4            ;   8.9%      ;
-;     Processors 5-14        ;   8.9%      ;
+;     Processor 2            ;   3.9%      ;
+;     Processor 3            ;   3.9%      ;
+;     Processor 4            ;   3.9%      ;
+;     Processors 5-14        ;   3.9%      ;
 +----------------------------+-------------+
 
 
@@ -119,8 +119,8 @@ on the Quartus Prime software download page.
 +------------+-----------------+---------------+---------------------------------------------------------------+
 ; Fmax       ; Restricted Fmax ; Clock Name    ; Note                                                          ;
 +------------+-----------------+---------------+---------------------------------------------------------------+
-; 114.06 MHz ; 114.06 MHz      ; CLOCK_50      ;                                                               ;
-; 467.07 MHz ; 237.53 MHz      ; ARDUINO_IO[0] ; limit due to minimum period restriction (max I/O toggle rate) ;
+; 112.27 MHz ; 112.27 MHz      ; CLOCK_50      ;                                                               ;
+; 447.03 MHz ; 237.53 MHz      ; ARDUINO_IO[0] ; limit due to minimum period restriction (max I/O toggle rate) ;
 +------------+-----------------+---------------+---------------------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -130,8 +130,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------+--------+---------------+
 ; Clock         ; Slack  ; End Point TNS ;
 +---------------+--------+---------------+
-; CLOCK_50      ; -7.767 ; -2303.986     ;
-; ARDUINO_IO[0] ; -1.141 ; -9.615        ;
+; CLOCK_50      ; -7.907 ; -2301.881     ;
+; ARDUINO_IO[0] ; -1.237 ; -13.698       ;
 +---------------+--------+---------------+
 
 
@@ -140,7 +140,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------+-------+---------------+
 ; Clock         ; Slack ; End Point TNS ;
 +---------------+-------+---------------+
-; CLOCK_50      ; 0.343 ; 0.000         ;
+; CLOCK_50      ; 0.342 ; 0.000         ;
 ; ARDUINO_IO[0] ; 0.378 ; 0.000         ;
 +---------------+-------+---------------+
 
@@ -179,8 +179,8 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +------------+-----------------+---------------+---------------------------------------------------------------+
 ; Fmax       ; Restricted Fmax ; Clock Name    ; Note                                                          ;
 +------------+-----------------+---------------+---------------------------------------------------------------+
-; 123.78 MHz ; 123.78 MHz      ; CLOCK_50      ;                                                               ;
-; 512.03 MHz ; 237.53 MHz      ; ARDUINO_IO[0] ; limit due to minimum period restriction (max I/O toggle rate) ;
+; 123.5 MHz  ; 123.5 MHz       ; CLOCK_50      ;                                                               ;
+; 484.26 MHz ; 237.53 MHz      ; ARDUINO_IO[0] ; limit due to minimum period restriction (max I/O toggle rate) ;
 +------------+-----------------+---------------+---------------------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -190,8 +190,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------+--------+---------------+
 ; Clock         ; Slack  ; End Point TNS ;
 +---------------+--------+---------------+
-; CLOCK_50      ; -7.079 ; -2085.451     ;
-; ARDUINO_IO[0] ; -0.953 ; -7.769        ;
+; CLOCK_50      ; -7.097 ; -2073.400     ;
+; ARDUINO_IO[0] ; -1.065 ; -11.547       ;
 +---------------+--------+---------------+
 
 
@@ -239,8 +239,8 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +---------------+--------+---------------+
 ; Clock         ; Slack  ; End Point TNS ;
 +---------------+--------+---------------+
-; CLOCK_50      ; -2.807 ; -762.626      ;
-; ARDUINO_IO[0] ; 0.078  ; 0.000         ;
+; CLOCK_50      ; -2.869 ; -756.736      ;
+; ARDUINO_IO[0] ; 0.049  ; 0.000         ;
 +---------------+--------+---------------+
 
 
@@ -250,7 +250,7 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 ; Clock         ; Slack ; End Point TNS ;
 +---------------+-------+---------------+
 ; CLOCK_50      ; 0.150 ; 0.000         ;
-; ARDUINO_IO[0] ; 0.157 ; 0.000         ;
+; ARDUINO_IO[0] ; 0.166 ; 0.000         ;
 +---------------+-------+---------------+
 
 
@@ -271,8 +271,8 @@ No paths to report.
 +---------------+--------+-------------------------+
 ; Clock         ; Slack  ; End Point TNS           ;
 +---------------+--------+-------------------------+
-; CLOCK_50      ; -3.000 ; -591.527                ;
-; ARDUINO_IO[0] ; -3.000 ; -26.041                 ;
+; CLOCK_50      ; -3.000 ; -591.657                ;
+; ARDUINO_IO[0] ; -3.000 ; -26.073                 ;
 +---------------+--------+-------------------------+
 
 
@@ -288,12 +288,12 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +------------------+-----------+-------+----------+---------+---------------------+
 ; Clock            ; Setup     ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +------------------+-----------+-------+----------+---------+---------------------+
-; Worst-case Slack ; -7.767    ; 0.150 ; N/A      ; N/A     ; -3.210              ;
-;  ARDUINO_IO[0]   ; -1.141    ; 0.157 ; N/A      ; N/A     ; -3.210              ;
-;  CLOCK_50        ; -7.767    ; 0.150 ; N/A      ; N/A     ; -3.000              ;
-; Design-wide TNS  ; -2313.601 ; 0.0   ; 0.0      ; 0.0     ; -1259.36            ;
-;  ARDUINO_IO[0]   ; -9.615    ; 0.000 ; N/A      ; N/A     ; -31.270             ;
-;  CLOCK_50        ; -2303.986 ; 0.000 ; N/A      ; N/A     ; -1228.090           ;
+; Worst-case Slack ; -7.907    ; 0.150 ; N/A      ; N/A     ; -3.210              ;
+;  ARDUINO_IO[0]   ; -1.237    ; 0.166 ; N/A      ; N/A     ; -3.210              ;
+;  CLOCK_50        ; -7.907    ; 0.150 ; N/A      ; N/A     ; -3.000              ;
+; Design-wide TNS  ; -2315.579 ; 0.0   ; 0.0      ; 0.0     ; -1259.36            ;
+;  ARDUINO_IO[0]   ; -13.698   ; 0.000 ; N/A      ; N/A     ; -31.270             ;
+;  CLOCK_50        ; -2301.881 ; 0.000 ; N/A      ; N/A     ; -1228.090           ;
 +------------------+-----------+-------+----------+---------+---------------------+
 
 
@@ -710,7 +710,7 @@ Design MTBF is not calculated because the design doesn't meet its timing require
 +---------------+---------------+----------+----------+----------+----------+
 ; From Clock    ; To Clock      ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------+---------------+----------+----------+----------+----------+
-; ARDUINO_IO[0] ; ARDUINO_IO[0] ; 60       ; 0        ; 0        ; 0        ;
+; ARDUINO_IO[0] ; ARDUINO_IO[0] ; 72       ; 0        ; 0        ; 0        ;
 ; ARDUINO_IO[0] ; CLOCK_50      ; 9        ; 0        ; 0        ; 0        ;
 ; CLOCK_50      ; CLOCK_50      ; 379262   ; 0        ; 0        ; 0        ;
 +---------------+---------------+----------+----------+----------+----------+
@@ -722,7 +722,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------+---------------+----------+----------+----------+----------+
 ; From Clock    ; To Clock      ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------+---------------+----------+----------+----------+----------+
-; ARDUINO_IO[0] ; ARDUINO_IO[0] ; 60       ; 0        ; 0        ; 0        ;
+; ARDUINO_IO[0] ; ARDUINO_IO[0] ; 72       ; 0        ; 0        ; 0        ;
 ; ARDUINO_IO[0] ; CLOCK_50      ; 9        ; 0        ; 0        ; 0        ;
 ; CLOCK_50      ; CLOCK_50      ; 379262   ; 0        ; 0        ; 0        ;
 +---------------+---------------+----------+----------+----------+----------+
@@ -849,7 +849,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 24.1std.0 Build 1077 03/04/2025 SC Lite Edition
-    Info: Processing started: Fri Feb 27 20:58:31 2026
+    Info: Processing started: Sat Feb 28 00:51:17 2026
 Info: Command: quartus_sta top -c top
 Info: qsta_default_script.tcl version: #1
 Warning (20013): Ignored 185 assignments for entity "DE10_Lite" -- entity does not exist in design
@@ -1053,15 +1053,15 @@ Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1200mV 85C Model
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -7.767
+Info (332146): Worst-case setup slack is -7.907
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -7.767           -2303.986 CLOCK_50 
-    Info (332119):    -1.141              -9.615 ARDUINO_IO[0] 
-Info (332146): Worst-case hold slack is 0.343
+    Info (332119):    -7.907           -2301.881 CLOCK_50 
+    Info (332119):    -1.237             -13.698 ARDUINO_IO[0] 
+Info (332146): Worst-case hold slack is 0.342
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.343               0.000 CLOCK_50 
+    Info (332119):     0.342               0.000 CLOCK_50 
     Info (332119):     0.378               0.000 ARDUINO_IO[0] 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
@@ -1077,11 +1077,11 @@ Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -7.079
+Info (332146): Worst-case setup slack is -7.097
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -7.079           -2085.451 CLOCK_50 
-    Info (332119):    -0.953              -7.769 ARDUINO_IO[0] 
+    Info (332119):    -7.097           -2073.400 CLOCK_50 
+    Info (332119):    -1.065             -11.547 ARDUINO_IO[0] 
 Info (332146): Worst-case hold slack is 0.308
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
@@ -1099,31 +1099,31 @@ Info (332114): Report Metastability: Found 9 synchronizer chains.
 Info: Analyzing Fast 1200mV 0C Model
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -2.807
+Info (332146): Worst-case setup slack is -2.869
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.807            -762.626 CLOCK_50 
-    Info (332119):     0.078               0.000 ARDUINO_IO[0] 
+    Info (332119):    -2.869            -756.736 CLOCK_50 
+    Info (332119):     0.049               0.000 ARDUINO_IO[0] 
 Info (332146): Worst-case hold slack is 0.150
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.150               0.000 CLOCK_50 
-    Info (332119):     0.157               0.000 ARDUINO_IO[0] 
+    Info (332119):     0.166               0.000 ARDUINO_IO[0] 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -3.000
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -3.000            -591.527 CLOCK_50 
-    Info (332119):    -3.000             -26.041 ARDUINO_IO[0] 
+    Info (332119):    -3.000            -591.657 CLOCK_50 
+    Info (332119):    -3.000             -26.073 ARDUINO_IO[0] 
 Info (332114): Report Metastability: Found 9 synchronizer chains.
     Info (332114): Design MTBF is not calculated because the design doesn't meet its timing requirements.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 191 warnings
     Info: Peak virtual memory: 5005 megabytes
-    Info: Processing ended: Fri Feb 27 20:58:33 2026
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Sat Feb 28 00:51:22 2026
+    Info: Elapsed time: 00:00:05
     Info: Total CPU time (on all processors): 00:00:04
 
 

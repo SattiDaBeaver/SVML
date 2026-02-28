@@ -38,6 +38,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_spi_slave___024root final : public Verila
     CData/*3:0*/ __Vdly__tb_spi_slave__DOT__dut__DOT__bit_count;
     CData/*0:0*/ __Vdly__tb_spi_slave__DOT__dut__DOT__data_ready_toggle;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_spi_slave__DOT__clk__0;
+    CData/*0:0*/ __Vtrigprevexpr___TOP__tb_spi_slave__DOT__cs_n__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_spi_slave__DOT__rst__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_spi_slave__DOT__sclk__0;
     CData/*0:0*/ __VactContinue;

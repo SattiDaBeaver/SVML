@@ -40,9 +40,9 @@ module top (
     // SPI wires
     // Physical pins: ARDUINO_IO[3:0]
     //   IO[0]  = SCLK
-	 //   IO[1]  = MOSI
-	 //   IO[2]  = MISO
-    //   ~SW[0] = CS_N // currently LOW
+    //   IO[1]  = MOSI
+    //   IO[2]  = MISO
+    //   ~SW[0] = ~SW[0] & ARDUINO_IO[3]; // currently LOW
     
     logic                   sclk;
     logic                   cs_n;
@@ -53,7 +53,7 @@ module top (
     assign sclk            = ARDUINO_IO[0];
     assign mosi            = ARDUINO_IO[1];
 	assign ARDUINO_IO[2]   = miso;
-    assign cs_n            = ~SW[0];
+    assign cs_n            = ~SW[0] & ARDUINO_IO[3];
 
     // Helper assignments
     assign clk = CLOCK_50;
@@ -148,7 +148,7 @@ module vga_spi #(
 
     // Helper assignments
     assign mem_addr         = addr_count;
-    assign spi_dout_debug   = din;
+    assign spi_dout_debug   = dout_spi;
     assign din_spi          = 8'h00;
 
     /* Pixel logic
@@ -165,7 +165,6 @@ module vga_spi #(
             wen        <= 1'b0;
             addr_delay <= 1'b0;
             swap_buf   <= 1'b0;
-            din        <= 0;
         end
         else begin
             wen        <= 1'b0;
@@ -613,28 +612,21 @@ module spi_slave #(
     logic [WIDTH-1:0]       captured_data;
     logic                   data_ready_toggle;
 
-    always_ff @(posedge sclk or posedge rst) begin
-        if (rst) begin
+    always_ff @(posedge sclk or posedge rst or posedge cs_n) begin
+        if (rst || cs_n) begin
             shift_in          <= '0;
             bit_count         <= '0;
             data_ready_toggle <= '0;
             captured_data     <= '0;
         end else begin
-            if (cs_n) begin
-                // CS inactive - reset counter
-                bit_count <= '0;
+            shift_in <= {shift_in[WIDTH-2:0], mosi};
+            
+            if (bit_count == WIDTH - 1) begin
+                captured_data     <= {shift_in[WIDTH-2:0], mosi};
+                data_ready_toggle <= ~data_ready_toggle;
+                bit_count         <= '0;
             end else begin
-                // CS active - shift in data
-                shift_in <= {shift_in[WIDTH-2:0], mosi};
-                
-                if (bit_count == WIDTH - 1) begin
-                    // Received full byte
-                    captured_data     <= {shift_in[WIDTH-2:0], mosi};
-                    data_ready_toggle <= ~data_ready_toggle;
-                    bit_count         <= '0;
-                end else begin
-                    bit_count <= bit_count + 1;
-                end
+                bit_count <= bit_count + 1;
             end
         end
     end

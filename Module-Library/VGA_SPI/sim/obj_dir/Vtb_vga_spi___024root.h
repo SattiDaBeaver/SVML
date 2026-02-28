@@ -61,6 +61,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_vga_spi___024root final : public Verilate
     CData/*0:0*/ __Vdly__tb_vga_spi__DOT__DUT__DOT__SPI__DOT__data_ready_toggle;
     CData/*0:0*/ __VstlFirstIteration;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_vga_spi__DOT__clk__0;
+    CData/*0:0*/ __Vtrigprevexpr___TOP__tb_vga_spi__DOT__cs_n__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_vga_spi__DOT__rst__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_vga_spi__DOT__sclk__0;
     CData/*0:0*/ __VactContinue;

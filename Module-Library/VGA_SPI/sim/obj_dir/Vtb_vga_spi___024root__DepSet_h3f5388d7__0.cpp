@@ -22,6 +22,8 @@ void Vtb_vga_spi___024root___eval_initial(Vtb_vga_spi___024root* vlSelf) {
     Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__2(vlSelf);
     vlSelf->__Vtrigprevexpr___TOP__tb_vga_spi__DOT__clk__0 
         = vlSelf->tb_vga_spi__DOT__clk;
+    vlSelf->__Vtrigprevexpr___TOP__tb_vga_spi__DOT__cs_n__0 
+        = vlSelf->tb_vga_spi__DOT__cs_n;
     vlSelf->__Vtrigprevexpr___TOP__tb_vga_spi__DOT__rst__0 
         = vlSelf->tb_vga_spi__DOT__rst;
     vlSelf->__Vtrigprevexpr___TOP__tb_vga_spi__DOT__sclk__0 
@@ -105,7 +107,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
     vlSelf->__Vm_traceActivity[2U] = 1U;
     VL_WRITEF("=== Test 1: Control byte - align reset ===\n");
     __Vtask_tb_vga_spi__DOT__spi_send__0__data = 0x80U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -217,7 +218,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -289,7 +289,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
     }
     VL_WRITEF("=== Test 2: Pixel bytes, addr_count increment ===\n");
     __Vtask_tb_vga_spi__DOT__spi_send__1__data = 0x1bU;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -401,7 +400,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -469,7 +467,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
     VL_WRITEF("After byte 1: addr_count = %0# (expect 0, addr_delay set)\n",
               17,vlSelf->tb_vga_spi__DOT__addr_count);
     __Vtask_tb_vga_spi__DOT__spi_send__2__data = 0x1bU;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -581,7 +578,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -649,7 +645,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
     VL_WRITEF("After byte 2: addr_count = %0# (expect 1)\n",
               17,vlSelf->tb_vga_spi__DOT__addr_count);
     __Vtask_tb_vga_spi__DOT__spi_send__3__data = 0x3fU;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -761,7 +756,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -829,7 +823,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
     VL_WRITEF("After byte 3: addr_count = %0# (expect 2)\n=== Test 3: Swap buffer command ===\n",
               17,vlSelf->tb_vga_spi__DOT__addr_count);
     __Vtask_tb_vga_spi__DOT__spi_send__4__data = 0x81U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -941,7 +934,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -1008,7 +1000,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
     vlSelf->__Vm_traceActivity[2U] = 1U;
     VL_WRITEF("Swap sent (check swap_buf pulse in waves)\n=== Test 4: Re-align mid stream ===\n");
     __Vtask_tb_vga_spi__DOT__spi_send__5__data = 0x80U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -1120,7 +1111,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -1192,7 +1182,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
     }
     VL_WRITEF("=== Test 5: Rapid fire pixels ===\n");
     __Vtask_tb_vga_spi__DOT__spi_send__6__data = 0U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -1304,7 +1293,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -1340,7 +1328,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                                        127);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_vga_spi__DOT__spi_send__7__data = 0x2aU;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -1452,7 +1439,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -1488,7 +1474,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                                        130);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_vga_spi__DOT__spi_send__7__data = 0x2aU;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -1600,7 +1585,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -1636,7 +1620,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                                        130);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_vga_spi__DOT__spi_send__7__data = 0x2aU;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -1748,7 +1731,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -1784,7 +1766,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                                        130);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_vga_spi__DOT__spi_send__7__data = 0x2aU;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -1896,7 +1877,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -1932,7 +1912,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                                        130);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_vga_spi__DOT__spi_send__7__data = 0x2aU;
-    vlSelf->tb_vga_spi__DOT__cs_n = 0U;
     co_await vlSelf->__VdlySched.delay(0x4e20ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        60);
@@ -2044,7 +2023,6 @@ VL_INLINE_OPT VlCoroutine Vtb_vga_spi___024root___eval_initial__TOP__Vtiming__0(
                                        "../testbench/tb_vga_spi.sv", 
                                        68);
     vlSelf->__Vm_traceActivity[2U] = 1U;
-    vlSelf->tb_vga_spi__DOT__cs_n = 1U;
     co_await vlSelf->__VdlySched.delay(0x9c40ULL, nullptr, 
                                        "../testbench/tb_vga_spi.sv", 
                                        70);
@@ -2589,13 +2567,11 @@ VL_INLINE_OPT void Vtb_vga_spi___024root___nba_sequent__TOP__4(Vtb_vga_spi___024
     Vtb_vga_spi__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_vga_spi___024root___nba_sequent__TOP__4\n"); );
     // Body
-    if (vlSelf->tb_vga_spi__DOT__rst) {
+    if (((IData)(vlSelf->tb_vga_spi__DOT__rst) | (IData)(vlSelf->tb_vga_spi__DOT__cs_n))) {
         vlSelf->__Vdly__tb_vga_spi__DOT__DUT__DOT__SPI__DOT__shift_in = 0U;
         vlSelf->__Vdly__tb_vga_spi__DOT__DUT__DOT__SPI__DOT__bit_count = 0U;
         vlSelf->__Vdly__tb_vga_spi__DOT__DUT__DOT__SPI__DOT__data_ready_toggle = 0U;
         vlSelf->tb_vga_spi__DOT__DUT__DOT__SPI__DOT__captured_data = 0U;
-    } else if (vlSelf->tb_vga_spi__DOT__cs_n) {
-        vlSelf->__Vdly__tb_vga_spi__DOT__DUT__DOT__SPI__DOT__bit_count = 0U;
     } else {
         vlSelf->__Vdly__tb_vga_spi__DOT__DUT__DOT__SPI__DOT__shift_in 
             = ((0xfeU & ((IData)(vlSelf->tb_vga_spi__DOT__DUT__DOT__SPI__DOT__shift_in) 

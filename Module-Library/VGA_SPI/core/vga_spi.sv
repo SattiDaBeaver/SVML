@@ -520,28 +520,21 @@ module spi_slave #(
     logic [WIDTH-1:0]       captured_data;
     logic                   data_ready_toggle;
 
-    always_ff @(posedge sclk or posedge rst) begin
-        if (rst) begin
+    always_ff @(posedge sclk or posedge rst or posedge cs_n) begin
+        if (rst || cs_n) begin
             shift_in          <= '0;
             bit_count         <= '0;
             data_ready_toggle <= '0;
             captured_data     <= '0;
         end else begin
-            if (cs_n) begin
-                // CS inactive - reset counter
-                bit_count <= '0;
+            shift_in <= {shift_in[WIDTH-2:0], mosi};
+            
+            if (bit_count == WIDTH - 1) begin
+                captured_data     <= {shift_in[WIDTH-2:0], mosi};
+                data_ready_toggle <= ~data_ready_toggle;
+                bit_count         <= '0;
             end else begin
-                // CS active - shift in data
-                shift_in <= {shift_in[WIDTH-2:0], mosi};
-                
-                if (bit_count == WIDTH - 1) begin
-                    // Received full byte
-                    captured_data     <= {shift_in[WIDTH-2:0], mosi};
-                    data_ready_toggle <= ~data_ready_toggle;
-                    bit_count         <= '0;
-                end else begin
-                    bit_count <= bit_count + 1;
-                end
+                bit_count <= bit_count + 1;
             end
         end
     end

@@ -44,7 +44,7 @@ VL_ATTR_COLD void Vtb_spi_slave___024root___dump_triggers__act(Vtb_spi_slave___0
         VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge tb_spi_slave.clk)\n");
     }
     if ((2ULL & vlSelf->__VactTriggered.word(0U))) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge tb_spi_slave.rst or posedge tb_spi_slave.sclk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge tb_spi_slave.cs_n or posedge tb_spi_slave.rst or posedge tb_spi_slave.sclk)\n");
     }
     if ((4ULL & vlSelf->__VactTriggered.word(0U))) {
         VL_DBG_MSGF("         'act' region trigger index 2 is active: @(posedge tb_spi_slave.rst or negedge tb_spi_slave.sclk)\n");
@@ -71,7 +71,7 @@ VL_ATTR_COLD void Vtb_spi_slave___024root___dump_triggers__nba(Vtb_spi_slave___0
         VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge tb_spi_slave.clk)\n");
     }
     if ((2ULL & vlSelf->__VnbaTriggered.word(0U))) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge tb_spi_slave.rst or posedge tb_spi_slave.sclk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge tb_spi_slave.cs_n or posedge tb_spi_slave.rst or posedge tb_spi_slave.sclk)\n");
     }
     if ((4ULL & vlSelf->__VnbaTriggered.word(0U))) {
         VL_DBG_MSGF("         'nba' region trigger index 2 is active: @(posedge tb_spi_slave.rst or negedge tb_spi_slave.sclk)\n");
@@ -113,6 +113,7 @@ VL_ATTR_COLD void Vtb_spi_slave___024root___ctor_var_reset(Vtb_spi_slave___024ro
     vlSelf->__Vdly__tb_spi_slave__DOT__dut__DOT__bit_count = VL_RAND_RESET_I(4);
     vlSelf->__Vdly__tb_spi_slave__DOT__dut__DOT__data_ready_toggle = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__clk__0 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__cs_n__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__rst__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__sclk__0 = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {

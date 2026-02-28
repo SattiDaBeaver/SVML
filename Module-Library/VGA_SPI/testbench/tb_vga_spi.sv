@@ -56,7 +56,7 @@ module tb_vga_spi;
     task spi_send(input logic [MEM_WIDTH-1:0] data);
         integer i;
         begin
-            cs_n = 0;
+            // cs_n = 0;
             #(SCLK_PERIOD/2);
             for (i = MEM_WIDTH-1; i >= 0; i--) begin
                 mosi = data[i];
@@ -66,7 +66,7 @@ module tb_vga_spi;
                 sclk = 0;
             end
             #(SCLK_PERIOD/2);
-            cs_n = 1;
+            // cs_n = 1;
             #(SCLK_PERIOD);
         end
     endtask

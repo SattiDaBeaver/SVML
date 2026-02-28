@@ -143,7 +143,7 @@ VL_ATTR_COLD void Vtb_vga_spi___024root___dump_triggers__act(Vtb_vga_spi___024ro
         VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge tb_vga_spi.clk)\n");
     }
     if ((2ULL & vlSelf->__VactTriggered.word(0U))) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge tb_vga_spi.rst or posedge tb_vga_spi.sclk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge tb_vga_spi.cs_n or posedge tb_vga_spi.rst or posedge tb_vga_spi.sclk)\n");
     }
     if ((4ULL & vlSelf->__VactTriggered.word(0U))) {
         VL_DBG_MSGF("         'act' region trigger index 2 is active: @(posedge tb_vga_spi.rst or negedge tb_vga_spi.sclk)\n");
@@ -170,7 +170,7 @@ VL_ATTR_COLD void Vtb_vga_spi___024root___dump_triggers__nba(Vtb_vga_spi___024ro
         VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge tb_vga_spi.clk)\n");
     }
     if ((2ULL & vlSelf->__VnbaTriggered.word(0U))) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge tb_vga_spi.rst or posedge tb_vga_spi.sclk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge tb_vga_spi.cs_n or posedge tb_vga_spi.rst or posedge tb_vga_spi.sclk)\n");
     }
     if ((4ULL & vlSelf->__VnbaTriggered.word(0U))) {
         VL_DBG_MSGF("         'nba' region trigger index 2 is active: @(posedge tb_vga_spi.rst or negedge tb_vga_spi.sclk)\n");
@@ -248,6 +248,7 @@ VL_ATTR_COLD void Vtb_vga_spi___024root___ctor_var_reset(Vtb_vga_spi___024root* 
     vlSelf->__Vdly__tb_vga_spi__DOT__DUT__DOT__SPI__DOT__bit_count = VL_RAND_RESET_I(4);
     vlSelf->__Vdly__tb_vga_spi__DOT__DUT__DOT__SPI__DOT__data_ready_toggle = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_vga_spi__DOT__clk__0 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__tb_vga_spi__DOT__cs_n__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_vga_spi__DOT__rst__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_vga_spi__DOT__sclk__0 = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {

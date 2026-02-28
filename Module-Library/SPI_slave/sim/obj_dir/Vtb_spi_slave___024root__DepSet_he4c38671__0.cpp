@@ -20,6 +20,8 @@ void Vtb_spi_slave___024root___eval_initial(Vtb_spi_slave___024root* vlSelf) {
     Vtb_spi_slave___024root___eval_initial__TOP__Vtiming__1(vlSelf);
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__clk__0 
         = vlSelf->tb_spi_slave__DOT__clk;
+    vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__cs_n__0 
+        = vlSelf->tb_spi_slave__DOT__cs_n;
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__rst__0 
         = vlSelf->tb_spi_slave__DOT__rst;
     vlSelf->__Vtrigprevexpr___TOP__tb_spi_slave__DOT__sclk__0 
@@ -136,13 +138,11 @@ VL_INLINE_OPT void Vtb_spi_slave___024root___nba_sequent__TOP__4(Vtb_spi_slave__
     Vtb_spi_slave__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_spi_slave___024root___nba_sequent__TOP__4\n"); );
     // Body
-    if (vlSelf->tb_spi_slave__DOT__rst) {
+    if (((IData)(vlSelf->tb_spi_slave__DOT__rst) | (IData)(vlSelf->tb_spi_slave__DOT__cs_n))) {
         vlSelf->__Vdly__tb_spi_slave__DOT__dut__DOT__shift_in = 0U;
         vlSelf->__Vdly__tb_spi_slave__DOT__dut__DOT__bit_count = 0U;
         vlSelf->__Vdly__tb_spi_slave__DOT__dut__DOT__data_ready_toggle = 0U;
         vlSelf->tb_spi_slave__DOT__dut__DOT__captured_data = 0U;
-    } else if (vlSelf->tb_spi_slave__DOT__cs_n) {
-        vlSelf->__Vdly__tb_spi_slave__DOT__dut__DOT__bit_count = 0U;
     } else {
         vlSelf->__Vdly__tb_spi_slave__DOT__dut__DOT__shift_in 
             = ((0xfeU & ((IData)(vlSelf->tb_spi_slave__DOT__dut__DOT__shift_in) 

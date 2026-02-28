@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(10M50DAF484) Path("C:/Github/SVML/Quartus_Project/output_files/") File("top.sof") MfrSpec(OpMask(1));
+		Device PartName(10M50DAF484) Path("C:/Github/SVML/quartus_output_files/spi/") File("spi.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

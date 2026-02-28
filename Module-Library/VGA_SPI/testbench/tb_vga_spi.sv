@@ -4,7 +4,7 @@ module tb_vga_spi;
 
     // Parameters
     localparam CLK_PERIOD  = 20;   // 50MHz
-    localparam SCLK_PERIOD = 100;   // 25MHz (well under 45MHz limit)
+    localparam SCLK_PERIOD = 40;   // 25MHz (well under 45MHz limit)
     localparam MEM_WIDTH   = 8;
     localparam RES_X       = 320;
     localparam RES_Y       = 240;

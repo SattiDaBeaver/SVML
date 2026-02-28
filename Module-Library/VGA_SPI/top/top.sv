@@ -165,6 +165,7 @@ module vga_spi #(
             wen        <= 1'b0;
             addr_delay <= 1'b0;
             swap_buf   <= 1'b0;
+            din        <= 0;
         end
         else begin
             wen        <= 1'b0;
@@ -715,5 +716,4 @@ module spi_slave #(
     end
 
 endmodule
-
 

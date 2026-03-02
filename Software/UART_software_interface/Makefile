@@ -6,13 +6,13 @@ else
 endif
 
 # Map numeric code to architecture name and compiler
-ifeq ($(ARCH),9)
+ifeq ($(ARCH),6)
     CXX := clang++
 	ARCH_NAME := ARM64
 else ifeq ($(ARCH),12)
     CXX := clang++
 	ARCH_NAME := ARM64EC
-else ifeq ($(ARCH),6)
+else ifeq ($(ARCH),9)
     CXX := g++
 	ARCH_NAME := AMD64
 else
@@ -23,7 +23,7 @@ endif
 CXXFLAGS := -Wall -std=c++17
 SRC := main.cpp uart.cpp
 HEADER := uart.hpp
-PORT := COM5
+PORT := COM8
 OUT := main
 
 # ===========================================

@@ -57,7 +57,7 @@ int main (int argc, char* argv[]) {
     }
 
     UART uart;
-    int baud = 2000000;    
+    int baud = 1000000;    
     uart.open(argv[1], baud);
 
     uint8_t buffer[HEIGHT][WIDTH];

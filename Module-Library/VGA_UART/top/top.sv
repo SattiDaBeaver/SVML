@@ -246,7 +246,7 @@ module vga_double_buf #(
     input  logic [MEM_WIDTH-1:0]    din,
     input  logic                    wen,
     input  logic                    swap_buf,
-    input  logic                    swap_done,
+    output logic                    swap_done,
     output logic [MEM_WIDTH-1:0]    dout, // unused
 
     // VGA wires

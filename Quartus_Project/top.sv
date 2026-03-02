@@ -1,15 +1,15 @@
 module top (
-    input  logic [9:0] SW,
-    input  logic [1:0] KEY,
-    input  logic       CLOCK_50,
+	input  logic [9:0] SW,
+	input  logic [1:0] KEY,
+	input  logic       CLOCK_50,
 
-    output logic [6:0] HEX5,
-    output logic [6:0] HEX4,
-    output logic [6:0] HEX3,
-    output logic [6:0] HEX2,
-    output logic [6:0] HEX1,
-    output logic [6:0] HEX0,
-    output logic [9:0] LEDR,
+	output logic [6:0] HEX5,
+	output logic [6:0] HEX4,
+	output logic [6:0] HEX3,
+	output logic [6:0] HEX2,
+	output logic [6:0] HEX1,
+	output logic [6:0] HEX0,
+	output logic [9:0] LEDR,
 
     output logic [3:0] VGA_R,
     output logic [3:0] VGA_G,
@@ -20,77 +20,57 @@ module top (
     inout  logic [15:0] ARDUINO_IO
 );
 
-    localparam
-        RES_X     = 320,
-        RES_Y     = 240,
-        MEM_WIDTH = 8;
+	localparam
+		RES_X = 320,
+		RES_Y = 240,
+		MEM_WIDTH = 8;
 
-    // Helper wires
-    logic        clk;
-    logic        rst;
+	// Helper wires
+	logic 			clk;
+	logic			rst;
 
-    logic [3:0]  vga_r;
-    logic [3:0]  vga_g;
-    logic [3:0]  vga_b;
-    logic        h_sync;
-    logic        v_sync;
+	logic [3:0]		vga_r;
+	logic [3:0]		vga_g;
+	logic [3:0]		vga_b;
+	logic			h_sync;
+	logic			v_sync;
 
-    logic [$clog2(RES_X * RES_Y)-1:0] addr_count;
+	logic			rx;
+    logic [31:0]    addr_count;
 
-    // SPI wires
-    // Physical pins: ARDUINO_IO[3:0]
-    //   IO[0]  = SCLK
-    //   IO[1]  = MOSI
-    //   IO[2]  = MISO
-    //   ~SW[0] = ~SW[0] & ARDUINO_IO[3]; // currently LOW
-    
-    logic                   sclk;
-    logic                   cs_n;
-    logic                   mosi;
-    logic                   miso;
-    logic [MEM_WIDTH-1:0]   spi_dout_debug;
+	// Helper assignments
+	assign clk = CLOCK_50;
+	assign rst = ~KEY[0];
 
-    assign sclk            = ARDUINO_IO[0];
-    assign mosi            = ARDUINO_IO[1];
-	assign ARDUINO_IO[2]   = miso;
-    assign cs_n            = ~SW[0] & ARDUINO_IO[3];
+	// Assignments
+	assign LEDR = addr_count[9:0];
+	assign VGA_R = vga_r;
+	assign VGA_G = vga_g;
+	assign VGA_B = vga_b;
+	assign VGA_HS = h_sync;
+	assign VGA_VS = v_sync;
+    assign rx     = ARDUINO_IO[0];
 
-    // Helper assignments
-    assign clk = CLOCK_50;
-    assign rst = ~KEY[0];
-
-    // Assignments
-    assign LEDR  = {sclk, mosi, spi_dout_debug};
-    assign VGA_R = vga_r;
-    assign VGA_G = vga_g;
-    assign VGA_B = vga_b;
-    assign VGA_HS = h_sync;
-    assign VGA_VS = v_sync;
-
-    // Module instantiation
-    vga_spi #(
+	// Module instantiation
+	vga_uart #(
         .RES_X(RES_X),
         .RES_Y(RES_Y),
         .MEM_WIDTH(MEM_WIDTH)
-    ) VGA_SPI (
-        .clk(clk),
+    ) VGA_UART (
+        .clk(CLOCK_50),
         .rst(rst),
-        .sclk(sclk),
-        .cs_n(cs_n),
-        .mosi(mosi),
-        .miso(miso),
+        .rx(rx),
+        .tx(),
         .vga_r(vga_r),
         .vga_g(vga_g),
         .vga_b(vga_b),
         .h_sync(h_sync),
         .v_sync(v_sync),
-        .addr_count(addr_count),
-        .spi_dout_debug(spi_dout_debug)
+        .addr_count(addr_count)
     );
-
 endmodule
 
-module vga_spi #(
+module vga_uart #(
     parameter RES_X = 320,
     parameter RES_Y = 240,
     parameter RES_DIV = 2,
@@ -103,11 +83,9 @@ module vga_spi #(
     input  logic                    clk, 
     input  logic                    rst,
 
-    // SPI wires
-    input  logic                    sclk,
-    input  logic                    cs_n,
-    input  logic                    mosi,
-    output logic                    miso,
+    // UART wires
+    input  logic                    rx,
+    output logic                    tx,
 
     // VGA wires
     output logic [PIXEL_WIDTH-1:0]  vga_r,
@@ -117,8 +95,7 @@ module vga_spi #(
     output logic                    v_sync,
 
     // Debug memory wires
-    output logic [ADDR_WIDTH-1:0]   addr_count,
-    output logic [MEM_WIDTH-1:0]    spi_dout_debug
+    output logic [ADDR_WIDTH-1:0]   addr_count
 );
 
     // Local parameters
@@ -128,8 +105,11 @@ module vga_spi #(
         V_COUNT_MAX = 525,
         H_BITS      = $clog2(H_COUNT_MAX),
         V_BITS      = $clog2(V_COUNT_MAX),
+        CLK_PER_BIT = 50,
         CLK_BITS    = 8,
-        DATA_WIDTH  = MEM_WIDTH;
+        DATA_WIDTH  = MEM_WIDTH,
+        PARITY_BITS = 0,
+        STOP_BITS   = 1;
 
     // Helper wires
     // Memory helper wires
@@ -141,24 +121,17 @@ module vga_spi #(
     logic [MEM_WIDTH-1:0]   dout; // unused
     logic                   addr_delay;
 
-    // SPI helper wires
-    logic [MEM_WIDTH-1:0]   din_spi; // unused
-    logic                   d_valid_spi;
-    logic [MEM_WIDTH-1:0]   dout_spi;
+    // UART helper wires
+    logic                   rx_din;
+    logic [MEM_WIDTH-1:0]   rx_dout;
+    logic                   rx_done;
 
     // Helper assignments
-    assign mem_addr         = addr_count;
-    assign spi_dout_debug   = dout_spi;
-    assign din_spi          = 8'h00;
+    assign rx_din   = rx;
+    assign mem_addr = addr_count;
 
-    /* Pixel logic
-    -  pixel[7] == 1        => control bit
-        -  pixel[0] == 1    => swap buffer
-        -  else             => align counter
-    -  else                 => pixel in RGB
-        -  0b00RRGGBB       => format (6-bits)
-    */ 
-
+    // Memory counter wires
+    
     always_ff @(posedge clk) begin
         if (rst) begin
             addr_count <= 0;
@@ -169,9 +142,9 @@ module vga_spi #(
         else begin
             wen        <= 1'b0;
             swap_buf   <= 1'b0;
-            if (d_valid_spi) begin
-                if (dout_spi[7] == 1'b1) begin   // control bit
-                    case (dout_spi[6:0])
+            if (rx_done) begin
+                if (rx_dout[7] == 1'b1) begin   // control bit
+                    case (rx_dout[6:0])
                         7'h00: begin
                             addr_count  <= 0;
                             wen         <= 1'b0;
@@ -189,7 +162,7 @@ module vga_spi #(
                     endcase
                 end
                 else begin
-                    din         <= dout_spi;
+                    din         <= rx_dout;
                     wen         <= 1'b1;
                     if (addr_count >= MEM_DEPTH - 1) begin
                         addr_count  <= 0;
@@ -212,7 +185,7 @@ module vga_spi #(
 	vga_double_buf #(
         .RES_X(RES_X),
         .RES_Y(RES_Y),
-        .MEM_WIDTH(DATA_WIDTH)
+        .MEM_WIDTH(MEM_WIDTH)
     ) VGA (
         .clk(clk),
         .rst(rst),
@@ -229,18 +202,28 @@ module vga_spi #(
         .v_sync(v_sync)
     );
 
-    spi_slave #(
-        .WIDTH(MEM_WIDTH)
-        ) SPI (
+    uart_wrapper #(
+        .CLK_BITS(CLK_BITS),
+        .DATA_WIDTH(DATA_WIDTH),
+        .PARITY_BITS(PARITY_BITS),
+        .STOP_BITS(STOP_BITS)
+    ) UART (
         .clk(clk),
         .rst(rst),
-        .sclk(sclk),
-        .cs_n(cs_n),
-        .mosi(mosi),
-        .miso(miso),
-        .din(din_spi),
-        .d_valid(d_valid_spi),
-        .dout(dout_spi)
+        .clk_per_bit(CLK_PER_BIT),
+
+        .TX_dataIn(),
+        .TX_en(),
+
+        .TX_out(),
+        .TX_done(),
+        .TX_busy(),
+
+        .RX_dataIn(rx_din),
+
+        .RX_dataOut(rx_dout),
+        .RX_done(rx_done),
+        .RX_parityError()
     );
     
 endmodule
@@ -586,125 +569,322 @@ module dp_ram_sync_read #(
 
 endmodule
 
-module spi_slave #(
-    parameter WIDTH = 8
+module uart_wrapper #(
+    parameter CLK_BITS     = 8, // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
+    parameter DATA_WIDTH   = 8,
+    parameter PARITY_BITS  = 0,
+    parameter STOP_BITS    = 1
 ) (
-    input  logic             clk,      // system clock (50 MHz)
-    input  logic             rst,      // active high reset
+    input  logic                    clk,
+    input  logic                    rst,
 
-    // SPI wires
-    input  logic             sclk,     // SPI clock (up to 45 MHz)
-    input  logic             cs_n,     // chip select (active low)
-    input  logic             mosi,     // master out slave in
-    output logic             miso,     // master in slave out
+    input  logic   [CLK_BITS-1:0]   clk_per_bit,
 
-    // Data wires
-    input  logic [WIDTH-1:0] din,      // data to send to master
-    output logic             d_valid,  // pulse in sys clk domain when new data received
-    output logic [WIDTH-1:0] dout      // received data (stable in sys clk domain)
+    input  logic   [DATA_WIDTH-1:0] TX_dataIn,
+    input  logic                    TX_en,
+
+    input  logic                    RX_dataIn,
+
+    output logic                    TX_out,
+    output logic                    TX_done,
+    output logic                    TX_busy,
+
+    output logic   [DATA_WIDTH-1:0] RX_dataOut,
+    output logic                    RX_done,
+    output logic                    RX_parityError
+);
+    // UART Transmitter Module
+    UART_TX #(
+        .CLK_BITS(CLK_BITS),
+        .DATA_WIDTH(DATA_WIDTH),
+        .PARITY_BITS(PARITY_BITS),
+        .STOP_BITS(STOP_BITS)
+        ) 
+        UART_TX1 ( 
+        .clk(clk),
+        .rst(rst),
+
+        .clk_per_bit(clk_per_bit),
+        .dataIn(TX_dataIn),
+        .TXen(TX_en),
+
+        .TXout(TX_out),
+        .TXdone(TX_done),
+        .busy(TX_busy)
+    );
+
+    // UART Receiver Module
+    UART_RX #(
+        .CLK_BITS(CLK_BITS),
+        .DATA_WIDTH(DATA_WIDTH),
+        .PARITY_BITS(PARITY_BITS),
+        .STOP_BITS(STOP_BITS)
+        )
+        UART_RX1 (
+        .clk(clk),
+        .rst(rst),
+
+        .clk_per_bit(clk_per_bit),
+        .dataIn(RX_dataIn),
+
+        .RXout(RX_dataOut),
+        .RXdone(RX_done),
+        .parityError(RX_parityError)
+    );
+endmodule
+
+module UART_RX #(
+    parameter CLK_BITS = 8,   // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
+    parameter DATA_WIDTH = 8,
+    parameter STOP_BITS = 2,  // either 1 or 2 stop bits
+    parameter PARITY_BITS = 1,
+    parameter PACKET_SIZE = DATA_WIDTH + STOP_BITS + PARITY_BITS + 1
+    // Total Packet Size = DATA_WIDTH + STOP_BITS + 1 Start Bit + 1 Parity Bit
+) ( 
+    input  logic                                clk,
+    input  logic                                rst,
+
+    input  logic    [CLK_BITS - 1 : 0]          clk_per_bit,
+    input  logic                                dataIn,
+
+    output logic    [DATA_WIDTH - 1 : 0]         RXout,
+    output logic                                RXdone,
+    output logic                                parityError
 );
 
-    //==========================================================================
-    // SPI Clock Domain - Shift In (MOSI)
-    //==========================================================================
-    logic [WIDTH-1:0]       shift_in;
-    logic [$clog2(WIDTH):0] bit_count;
-    logic [WIDTH-1:0]       captured_data;
-    logic                   data_ready_toggle;
+    localparam indexBits = $clog2(PACKET_SIZE);
 
-    always_ff @(posedge sclk or posedge rst or posedge cs_n) begin
-        if (rst || cs_n) begin
-            shift_in          <= '0;
-            bit_count         <= '0;
-            data_ready_toggle <= '0;
-            captured_data     <= '0;
-        end else begin
-            shift_in <= {shift_in[WIDTH-2:0], mosi};
-            
-            if (bit_count == WIDTH - 1) begin
-                captured_data     <= {shift_in[WIDTH-2:0], mosi};
-                data_ready_toggle <= ~data_ready_toggle;
-                bit_count         <= '0;
-            end else begin
-                bit_count <= bit_count + 1;
-            end
-        end
+    logic   [indexBits - 1 : 0]     index;
+    logic   [CLK_BITS - 1 : 0]      clkCount;
+
+    logic                           regInMeta;
+    logic                           regIn;
+    logic                           parity;
+
+    logic    [DATA_WIDTH - 1 : 0]    dataOut;
+    logic                           dataDone;
+
+    // Remove Problems due to Metastability
+    always_ff @(posedge clk) begin
+        regInMeta <= dataIn;
+        regIn <= regInMeta;
     end
 
-    //==========================================================================
-    // SPI Clock Domain - Shift Out (MISO) on falling edge
-    //==========================================================================
-    logic [WIDTH-1:0] shift_out;
-    logic             cs_n_prev;
-    
-    always_ff @(negedge sclk or posedge rst) begin
+
+
+    typedef enum logic [1:0] {
+        IDLE,
+        START,
+        RECEIVE,
+        DONE
+    } 
+    state_t;
+
+    state_t state;
+
+    always_ff @(posedge clk) begin
         if (rst) begin
-            shift_out <= '0;
-            cs_n_prev <= 1'b1;
-        end else begin
-            cs_n_prev <= cs_n;
-            
-            // Detect falling edge of cs_n (start of transaction)
-            if (!cs_n && cs_n_prev) begin
-                // Load new data at start of transaction
-                shift_out <= din;
-            end else if (!cs_n) begin
-                // Shift out during transaction
-                shift_out <= {shift_out[WIDTH-2:0], 1'b0};
-            end
+            dataOut <= 0;
+            state <= IDLE;
+            index <= 1'b0;
+            clkCount <= 0;
+            dataDone <= 0;
         end
+        else begin
+            case (state)
+                IDLE: begin
+                    clkCount <= 0;
+                    index <= 0;
+                    dataOut <= 0;
+                    dataDone <= 0;
+
+                    if (regIn == 1'b0) begin    // Start Condition
+                        state <= START;
+                    end
+                    else begin
+                        state <= IDLE;
+                    end
+                end
+
+                START: begin
+                    if (clkCount == ((clk_per_bit - 1) >> 1)) begin
+                        clkCount <= 0;
+                        state <= RECEIVE;
+                    end
+                    else begin
+                        clkCount <= clkCount + 1;
+                        state <= START;
+                    end
+
+                end
+
+                RECEIVE: begin
+
+                    if (clkCount < clk_per_bit - 1) begin
+                        clkCount <= clkCount + 1;
+                        state <= RECEIVE;
+                    end
+
+                    else begin
+                        clkCount <= 0;
+                        if (index < DATA_WIDTH) begin
+                            dataOut[index] <= regIn;
+                            index <= index + 1;
+                            state <= RECEIVE;
+                        end
+                        else if (index == DATA_WIDTH && PARITY_BITS > 0) begin
+                            parity <= regIn;
+                            state <= DONE;
+                        end
+                        else begin
+                            state <= DONE;
+                        end
+                    end
+                end
+
+                DONE: begin
+                    if (clkCount < clk_per_bit - 1) begin
+                        clkCount <= clkCount + 1;
+                        state <= DONE;
+                    end
+                    else begin
+                        clkCount <= 0;
+                        state <= IDLE;
+                        dataDone <= 1'b1;
+                        index <= 0;
+                        RXout <= dataOut;
+                    end
+                end
+
+                default: begin
+                    state <= IDLE;
+                end
+                
+            endcase
+        end 
     end
 
-    assign miso = shift_out[WIDTH-1];
-
-    //==========================================================================
-    // Clock Domain Crossing - Toggle Synchronizer
-    //==========================================================================
-    logic toggle_sync1, toggle_sync2, toggle_sync3;
-
-    always_ff @(posedge clk or posedge rst) begin
-        if (rst) begin
-            toggle_sync1 <= '0;
-            toggle_sync2 <= '0;
-            toggle_sync3 <= '0;
-        end else begin
-            toggle_sync1 <= data_ready_toggle;
-            toggle_sync2 <= toggle_sync1;
-            toggle_sync3 <= toggle_sync2;
+    always_comb begin
+        RXdone = dataDone;
+        if (PARITY_BITS > 0) begin
+            parityError = (^RXout) ^ parity;
+        end
+        else begin
+            parityError = 0;
         end
     end
-
-    //==========================================================================
-    // Clock Domain Crossing - Data Synchronization
-    //==========================================================================
-    logic [WIDTH-1:0] captured_sync1, captured_sync2;
-    
-    always_ff @(posedge clk or posedge rst) begin
-        if (rst) begin
-            captured_sync1 <= '0;
-            captured_sync2 <= '0;
-        end else begin
-            captured_sync1 <= captured_data;
-            captured_sync2 <= captured_sync1;
-        end
-    end
-
-    //==========================================================================
-    // System Clock Domain - Edge Detection and Output
-    //==========================================================================
-    always_ff @(posedge clk or posedge rst) begin
-        if (rst) begin
-            dout    <= '0;
-            d_valid <= 1'b0;
-        end else begin
-            if (toggle_sync2 ^ toggle_sync3) begin
-                // New data available
-                dout    <= captured_data;
-                d_valid <= 1'b1;
-            end else begin
-                d_valid <= 1'b0;
-            end
-        end
-    end
-
 endmodule
+
+module UART_TX #(
+    parameter CLK_BITS = 8,         // bits for adjustable BAUD rate, min BAUD = F_CLK / (2^CLK_BITS)
+    parameter DATA_WIDTH = 8,
+    parameter STOP_BITS = 1,        // either 1 or 2 stop bits
+    parameter PARITY_BITS = 1,      // can be set to 0
+    parameter PACKET_SIZE = DATA_WIDTH + STOP_BITS + PARITY_BITS + 1 
+    // Total Packet Size = DATA_WIDTH + STOP_BITS + 1 Start Bit + 1 Parity Bit
+) ( 
+    input  logic                                clk,
+    input  logic                                rst,
+
+    input  logic      [CLK_BITS - 1 : 0]        clk_per_bit,
+    input  logic      [DATA_WIDTH - 1 : 0]      dataIn,
+    input  logic                                TXen,
+
+    output logic                                TXout,
+    output logic                                TXdone,
+    output logic                                busy
+);
+
+    localparam indexBits = $clog2(PACKET_SIZE);
+
+    logic   [PACKET_SIZE - 1 : 0]       packet;
+    logic                               parityBit;
+    logic   [indexBits - 1 : 0]         index;
+    logic   [CLK_BITS - 1 : 0]          clkCount;
+
+    typedef enum logic [1:0] {
+        IDLE,
+        TRANSMIT,
+        DONE
+    } 
+    state_t;
+
+    state_t state;
+
+    always_comb begin
+        parityBit = ^dataIn;    // 0 for even number of 1's, 1 for odd number of 1's
+    end
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            TXout       <= 1'b1;
+            state       <= IDLE;
+            busy        <= 1'b0;
+            index       <= 1'b0;
+            clkCount    <= 0;
+            TXdone      <= 0;
+        end
+        else begin
+            case (state)
+                IDLE: begin
+                    TXout       <= 1'b1;
+                    index       <= 1'b0;
+                    clkCount    <= 0;
+                    TXdone      <= 0;
+
+                    if (TXen) begin
+                        if (PARITY_BITS > 0) begin
+                            packet <= {{STOP_BITS{1'b1}}, parityBit, dataIn, 1'b0};
+                        end 
+                        else begin
+                            packet <= {{STOP_BITS{1'b1}}, dataIn, 1'b0};
+                        end
+                        //                ^                         ^
+                        //                |                         |
+                        //              Stop                      Start
+                        busy <= 1'b1;
+                        state <= TRANSMIT;
+                    end
+                    else begin
+                        state <= IDLE;
+                    end
+                end
+
+                TRANSMIT: begin
+                    TXout <= packet[index];
+
+                    if (clkCount < clk_per_bit - 1) begin
+                        clkCount <= clkCount + 1;
+                        state <= TRANSMIT;
+                    end
+
+                    else begin
+                        clkCount <= 0;
+                        if (index == PACKET_SIZE - 1) begin
+                            state <= DONE;
+                        end
+                        else begin
+                            index <= index + 1;
+                            state <= TRANSMIT;
+                        end
+                    end
+                end
+
+                DONE: begin
+                    state       <= IDLE;
+                    busy        <= 1'b0;
+                    TXdone      <= 1'b1;
+                    index       <= 1'b0;
+                    clkCount    <= 0;
+                end
+
+                default: begin
+                    state <= IDLE;
+                end
+            endcase
+        end 
+    end
+endmodule
+
+
+

@@ -2,6 +2,7 @@
 #include "uart.hpp"
 #include <windows.h>
 #include <math.h>
+#include <string>
 
 #define WIDTH 320
 #define HEIGHT 240
@@ -77,22 +78,34 @@ int main (int argc, char* argv[]) {
     int drad = 3;
     // return 0;
     while(1) {
-        rad += drad;
-        if (rad > 50) {
-            rad = 50;
-            drad *= -1;
+        // rad += drad;
+        // if (rad > 50) {
+        //     rad = 50;
+        //     drad *= -1;
+        // }
+        // else if (rad < 5) {
+        //     rad = 5;
+        //     drad *= -1;
+        // }
+
+        int val;
+        std::cin >> val;
+        rad = val;
+
+        if (rad > 100) {
+            rad = 100;
         }
         else if (rad < 5) {
             rad = 5;
-            drad *= -1;
         }
+
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 int dx = x - WIDTH / 2;
                 int dy = y - HEIGHT / 2;
 
                 
-                if (sqrt(dx*dx + dy*dy) < rad) {
+                if (dx*dx + dy*dy < rad*rad) {
                     buffer[y][x] = (x + y) % 0x3F;
                 }
                 else {
@@ -140,8 +153,6 @@ int main (int argc, char* argv[]) {
         //     update_frame(buffer, &uart);
         // }
     }
-    
-    Sleep(100);
 
     return 0;
 }

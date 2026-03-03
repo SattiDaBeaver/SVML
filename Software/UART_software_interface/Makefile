@@ -23,7 +23,7 @@ endif
 CXXFLAGS := -Wall -std=c++17
 SRC := main.cpp uart.cpp
 HEADER := uart.hpp
-PORT := COM8
+PORT := COM5
 OUT := main
 
 # ===========================================

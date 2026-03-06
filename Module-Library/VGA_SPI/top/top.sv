@@ -53,7 +53,7 @@ module top (
     assign sclk            = ARDUINO_IO[0];
     assign mosi            = ARDUINO_IO[1];
 	assign ARDUINO_IO[2]   = miso;
-    assign cs_n            = ~SW[0] & ARDUINO_IO[3];
+    assign cs_n            = SW[0] ? (~SW[1] & ARDUINO_IO[3]) : ARDUINO_IO[3];
 
     // Helper assignments
     assign clk = CLOCK_50;

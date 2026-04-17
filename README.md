@@ -1,4 +1,4 @@
-# SystemVerilog-Module-Library-SVML-
+# SystemVerilog Module Library (SVML)
 Collection of SystemVerilog modules 
 
 # Verilator Setup

@@ -303,7 +303,7 @@ module vga_double_buf #(
             end
             if (frame_start) begin
                 if (swap_latch) begin
-                    curr_buffer <= curr_buffer ^ 1; // toggle current bugger
+                    curr_buffer <= curr_buffer ^ 1; // toggle current buffer
                     swap_latch  <= 1'b0;
                     swap_done   <= 1'b1;
                 end
@@ -459,7 +459,7 @@ endmodule
 module dp_ram_sync_read #(
     parameter DATA_WIDTH = 8,
     parameter MEM_DEPTH  = 1024,
-    parameter ADDR_WIDTH = $clog2(MEM_DEPTH)  // 2^10 = 1024 entries
+    parameter ADDR_WIDTH = $clog2(MEM_DEPTH) 
 ) (
     input  logic                    clk,
 
@@ -497,24 +497,21 @@ endmodule
 module spi_slave #(
     parameter WIDTH = 8
 ) (
-    input  logic             clk,      // system clock (50 MHz)
-    input  logic             rst,      // active high reset
+    input  logic             clk,    
+    input  logic             rst,     
 
     // SPI wires
-    input  logic             sclk,     // SPI clock (up to 45 MHz)
-    input  logic             cs_n,     // chip select (active low)
-    input  logic             mosi,     // master out slave in
-    output logic             miso,     // master in slave out
+    input  logic             sclk,     
+    input  logic             cs_n,     
+    input  logic             mosi,     
+    output logic             miso,     
 
     // Data wires
-    input  logic [WIDTH-1:0] din,      // data to send to master
-    output logic             d_valid,  // pulse in sys clk domain when new data received
-    output logic [WIDTH-1:0] dout      // received data (stable in sys clk domain)
+    input  logic [WIDTH-1:0] din,      
+    output logic             d_valid,  
+    output logic [WIDTH-1:0] dout      
 );
 
-    //==========================================================================
-    // SPI Clock Domain - Shift In (MOSI)
-    //==========================================================================
     logic [WIDTH-1:0]       shift_in;
     logic [$clog2(WIDTH):0] bit_count;
     logic [WIDTH-1:0]       captured_data;
@@ -539,9 +536,6 @@ module spi_slave #(
         end
     end
 
-    //==========================================================================
-    // SPI Clock Domain - Shift Out (MISO) on falling edge
-    //==========================================================================
     logic [WIDTH-1:0] shift_out;
     logic             cs_n_prev;
     
@@ -552,12 +546,10 @@ module spi_slave #(
         end else begin
             cs_n_prev <= cs_n;
             
-            // Detect falling edge of cs_n (start of transaction)
+            // Detect falling edge of cs_n 
             if (!cs_n && cs_n_prev) begin
-                // Load new data at start of transaction
                 shift_out <= din;
             end else if (!cs_n) begin
-                // Shift out during transaction
                 shift_out <= {shift_out[WIDTH-2:0], 1'b0};
             end
         end
@@ -565,9 +557,6 @@ module spi_slave #(
 
     assign miso = shift_out[WIDTH-1];
 
-    //==========================================================================
-    // Clock Domain Crossing - Toggle Synchronizer
-    //==========================================================================
     logic toggle_sync1, toggle_sync2, toggle_sync3;
 
     always_ff @(posedge clk or posedge rst) begin
@@ -582,9 +571,6 @@ module spi_slave #(
         end
     end
 
-    //==========================================================================
-    // Clock Domain Crossing - Data Synchronization
-    //==========================================================================
     logic [WIDTH-1:0] captured_sync1, captured_sync2;
     
     always_ff @(posedge clk or posedge rst) begin
@@ -597,9 +583,6 @@ module spi_slave #(
         end
     end
 
-    //==========================================================================
-    // System Clock Domain - Edge Detection and Output
-    //==========================================================================
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             dout    <= '0;
